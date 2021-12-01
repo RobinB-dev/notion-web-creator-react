@@ -1,0 +1,17 @@
+.dashboard {
+  display: flex;
+}
+
+.dashboard section {
+  padding: 0;
+}
+
+.main {
+  width: 70%;
+}
+
+.tabs {
+  height: 300px;
+  width: 300px;
+  background: red;
+}
