@@ -3,7 +3,9 @@ import { useAuth } from "../../contexts/AuthContext"
 import { Outlet, NavLink, useNavigate, Navigate, useLocation } from "react-router-dom"
 import classes from './Dashboard.module.css'
 import Tab from './Tab'
+import IconFolder from '../Icons/Icons'
 
+import ResizePanel from "react-resize-panel-ts";
 
 
 const Dashboard = () => {
@@ -43,7 +45,10 @@ const Dashboard = () => {
           <nav className={classes.tabs}>
             <ul>
               <li>
-                <NavLink to='projects'>Projet</NavLink>
+                <NavLink to='projects'>
+                  <IconFolder fill="red" />
+                  Projet
+                </NavLink>
               </li>
               <li>
                 <NavLink to='customize'>Custo</NavLink>
@@ -54,8 +59,12 @@ const Dashboard = () => {
       <section className={classes.main}>
 
       </section>
-      <section>
-        <Outlet />
+      <section className={classes.toolbar}>
+        <ResizePanel direction="w" handleClass={classes.customHandle}>
+          <div className={classes.resizeContent}>
+              <Outlet />
+          </div>
+        </ResizePanel>
       </section>
     </div>
   )

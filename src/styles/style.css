@@ -5,6 +5,12 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }

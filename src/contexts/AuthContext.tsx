@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }: any) => {
     // return auth.signInWithEmailAndPassword(email, password)
     setIsLogged(true)
     console.log(isLogged);
-    
     // return console.log("login any");
   }
   

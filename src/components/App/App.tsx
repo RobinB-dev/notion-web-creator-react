@@ -10,11 +10,12 @@ import Login from '../Login/Login'
 import Header from '../Header/Header'
 import Homepage from '../Homepage/Homepage'
 import Tab from '../Dashboard/Tab'
+import classes from './App.module.css'
 
 
 const App = () => {
   return (
-    <div className="App">
+    <div className={classes.App}>
         <Router>
           <AuthProvider>
             <Header />
@@ -22,7 +23,6 @@ const App = () => {
               <Route path="/" element={<Homepage />} />
               <Route path='/dashboard' element={<PrivateRoute/>}>
                 <Route path='/dashboard' element={<Dashboard/>}>
-                  {/* <Route path="/" element={<Navigate replace to="/projects" />} /> */}
                   <Route path=':tabType' element={<Tab/>}/>
                 </Route>
               </Route>

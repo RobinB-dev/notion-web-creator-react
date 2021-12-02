@@ -1,5 +1,6 @@
 .dashboard {
   display: flex;
+  height: calc(100% - var(--heightHeader));
 }
 
 .dashboard section {
@@ -7,11 +8,64 @@
 }
 
 .main {
-  width: 70%;
+  width: 100%;
 }
 
 .tabs {
-  height: 300px;
-  width: 300px;
-  background: red;
+  height: 100%;
+  width: 100%;
+}
+
+.tabs ul {
+  display: flex;
+  background: var(--backgroundColor2);
+  width: 70px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs ul li {
+  display: flex;
+}
+
+.tabs ul li a {
+  background: rgba(238, 130, 238, 0.103);
+  padding: 10px;
+  margin: 2px 0;
+  border-radius: 100px;
+  color: var(--textColor1inactive);
+  text-decoration: none;
+}
+
+.tabs ul li a[class="active"] {
+  color: var(--textColor1);
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+}
+
+.toolbar > div {
+  max-width: 500px;
+  min-width: 300px;
+  height: 100%;
+}
+
+.toolbar .resizeContent {
+  width: 100%;
+  display: flex;
+  background: var(--backgroundColor2);
+  height: 100%;
+  position: relative;
+  padding: 10px;
+}
+
+.customHandle {
+  background: var(--resizeHandleColor);
+  width: 10px;
+  height: 40px;
+  border-radius: 100px;
 }

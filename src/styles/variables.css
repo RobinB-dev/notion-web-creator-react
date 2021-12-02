@@ -1,10 +1,11 @@
 :root {
   --navWidth: clamp(9px, 15vw, 150px);
-  --mainMargin: 50px;
   --heightHeader: 70px;
-  --ptSection: calc(80px + var(--heightHeader));
   --accentColor1: #ff5c00;
   --accentColor2: #e3e3e3;
   --textColor1: #fff;
+  --textColor1inactive: #ffffffab;
+  --resizeHandleColor: #000;
   --backgroundColor1: #2f3437;
+  --backgroundColor2: #00000050;
 }
