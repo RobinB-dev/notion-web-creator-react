@@ -1,7 +1,7 @@
 :root {
   --navWidth: clamp(9px, 15vw, 150px);
   --heightHeader: 70px;
-  --accentColor1: #ff5c00;
+  --accentColor1: #ff8787;
   --accentColor2: #e3e3e3;
   --textColor1: #fff;
   --textColor1inactive: #ffffffab;

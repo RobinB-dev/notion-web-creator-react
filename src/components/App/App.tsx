@@ -1,12 +1,12 @@
 import React from 'react';
 import { AuthProvider } from "../../contexts/AuthContext"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import '../../styles/reset.css';
+import 'antd/dist/antd.css';
 import '../../styles/style.css';
 import '../../styles/variables.css';
 import PrivateRoute from "../PrivateRoute"
 import Dashboard from '../Dashboard/Dashboard'
-import Login from '../Login/Login'
 import Header from '../Header/Header'
 import Homepage from '../Homepage/Homepage'
 import Tab from '../Dashboard/Tab'
@@ -26,7 +26,6 @@ const App = () => {
                   <Route path=':tabType' element={<Tab/>}/>
                 </Route>
               </Route>
-              <Route path="/login" element={<Login />} />
             </Routes>
           </AuthProvider>
         </Router>

@@ -21,15 +21,15 @@ const Header = () => {
   }
 
   useEffect(() => {
-    console.log("change is log");
+    // console.log("change is log");
   }, [isLogged])
 
   return (
     <header className={classes.header}>
+      {error && <div className="danger">{error}</div>}
         <Link to="/">
             <img src={logo_app} alt="" />
         </Link>
-        {!isLogged && <Link to="/login">login</Link>}
         {isLogged && 
         <div><Link to="/dashboard/">Dashboard</Link>
         <button className="button-link" onClick={handleLogout}>Log Out</button>

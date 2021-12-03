@@ -9,18 +9,40 @@
 
 .main {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.main .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.main button {
+  margin-top: 50px;
+  padding: 10px;
+  background: var(--backgroundColor2);
+  outline: none;
+  border: 1px solid var(--backgroundColor2);
+  /* color: var(--accentColor1); */
+  color: var(--textColor1);
 }
 
 .tabs {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--backgroundColor2);
 }
 
 .tabs ul {
   display: flex;
-  background: var(--backgroundColor2);
   width: 70px;
-  height: 100%;
+  /* height: 100%; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -31,9 +53,14 @@
 }
 
 .tabs ul li a {
-  background: rgba(238, 130, 238, 0.103);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ee82ee07;
   padding: 10px;
   margin: 2px 0;
+  width: 50px;
+  height: 50px;
   border-radius: 100px;
   color: var(--textColor1inactive);
   text-decoration: none;
@@ -41,6 +68,13 @@
 
 .tabs ul li a[class="active"] {
   color: var(--textColor1);
+}
+
+.tabs ul li a[class="active"] svg.fill path {
+  fill: var(--accentColor1);
+}
+.tabs ul li a[class="active"] svg.stroke path {
+  stroke: var(--accentColor1);
 }
 
 .toolbar {
