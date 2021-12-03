@@ -1,0 +1,105 @@
+.dashboard {
+  display: flex;
+  height: calc(100% - var(--heightHeader));
+}
+
+.dashboard section {
+  padding: 0;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.main .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.main button {
+  margin-top: 50px;
+  padding: 10px;
+  background: var(--backgroundColor2);
+  outline: none;
+  border: 1px solid var(--backgroundColor2);
+  /* color: var(--accentColor1); */
+  color: var(--textColor1);
+}
+
+.tabs {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--backgroundColor2);
+}
+
+.tabs ul {
+  display: flex;
+  width: 70px;
+  /* height: 100%; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs ul li {
+  display: flex;
+}
+
+.tabs ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ee82ee07;
+  padding: 10px;
+  margin: 2px 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  color: var(--textColor1inactive);
+  text-decoration: none;
+}
+
+.tabs ul li a[class="active"] {
+  color: var(--textColor1);
+}
+
+.tabs ul li a[class="active"] svg.fill path {
+  fill: var(--accentColor1);
+}
+.tabs ul li a[class="active"] svg.stroke path {
+  stroke: var(--accentColor1);
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+}
+
+.toolbar > div {
+  max-width: 500px;
+  min-width: 300px;
+  height: 100%;
+}
+
+.toolbar .resizeContent {
+  width: 100%;
+  display: flex;
+  background: var(--backgroundColor2);
+  height: 100%;
+  position: relative;
+  padding: 10px;
+}
+
+.customHandle {
+  background: var(--resizeHandleColor);
+  width: 10px;
+  height: 40px;
+  border-radius: 100px;
+}

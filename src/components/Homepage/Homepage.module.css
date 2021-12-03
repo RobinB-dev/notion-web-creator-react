@@ -1,0 +1,25 @@
+.home {
+  /* background: #9affee50; */
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login a {
+  color: var(--textColor1);
+  text-decoration: none;
+  display: inline-flex;
+  margin-bottom: 10px;
+}
+
+.login img {
+  width: 100%;
+  max-width: 300px;
+}
+
+.login img:hover {
+  transform: scale(1.005);
+}

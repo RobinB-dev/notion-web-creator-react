@@ -1,0 +1,13 @@
+.header {
+  background: var(--backgroundColor2);
+  height: var(--heightHeader);
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--backgroundColor2);
+}
+
+.header img {
+  height: 100%;
+}
