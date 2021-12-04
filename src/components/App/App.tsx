@@ -7,7 +7,6 @@ import '../../styles/style.css';
 import '../../styles/variables.css';
 import PrivateRoute from "../PrivateRoute"
 import Dashboard from '../Dashboard/Dashboard'
-import Header from '../Header/Header'
 import Homepage from '../Homepage/Homepage'
 import Tab from '../Dashboard/Tab'
 import classes from './App.module.css'
@@ -18,7 +17,6 @@ const App = () => {
     <div className={classes.App}>
         <Router>
           <AuthProvider>
-            <Header />
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path='/dashboard' element={<PrivateRoute/>}>
