@@ -17,7 +17,9 @@ export const useAuth = () => {
   return useContext(AuthContext)
 }
 
-type AuthProviderProps = { children: React.ReactNode }
+type AuthProviderProps = { 
+  children: React.ReactNode 
+}
 
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {

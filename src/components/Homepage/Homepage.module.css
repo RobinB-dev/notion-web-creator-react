@@ -1,10 +1,11 @@
 .home,
 .stepSection {
-  background: var(--backgroundColor2);
+  background: var(--backgroundColor1);
 }
 
 .bodyContainer {
-  background: var(--backgroundColor2);
+  background: var(--backgroundColor1);
+  padding: 50px;
 }
 .login {
   display: flex;
@@ -65,8 +66,8 @@ Hero Section
 .heroSectionLogin {
   font-family: "PP Neue Montreal";
   font-weight: 700;
-  color: var(--textColor2);
-  background: var(--backgroundColor1);
+  color: var(--textColor1);
+  background: var(--backgroundColor2);
   font-size: 1.8rem;
   border: 1.5px solid var(--outLineButtonColor);
   padding: 10px;
@@ -74,13 +75,13 @@ Hero Section
 }
 
 .heroSectionLogin:hover {
-  color: var(--textColor2);
+  color: var(--textColor1);
 }
 
 .terms {
   max-width: 300px;
   font-size: 0.7rem;
-  color: var(--textColor2);
+  color: var(--textColor1);
   display: flex;
   flex-direction: row;
   align-items: center;

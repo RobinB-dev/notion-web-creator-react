@@ -1,0 +1,17 @@
+.h1 {
+  font-family: var(--fontFamilyTitle);
+  margin-bottom: 3vmin;
+  font-size: 4rem;
+}
+
+.colorText {
+  color: var(--accentColor1);
+  font-weight: 600;
+}
+
+.subtitle1 {
+  color: var(--textColor1);
+  font-size: 2rem;
+  margin-bottom: 2vmin;
+  line-height: 2.5rem;
+}

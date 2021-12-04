@@ -54,17 +54,21 @@
 }
 
 :root {
-  /* --navWidth: clamp(9px, 15vw, 150px); */
+  --fontFamilyTitle: "PP Neue Montreal";
   --heightHeader: 70px;
   --accentColor1: #ff8787;
+  --accentColor1RGB: 255, 135, 135;
   --accentColor2: #e3e3e3;
-  --textColor1: #ffffff;
-  --textColor2: #0b0b0b;
+  --accentColor3: #eaeaea;
+  --textColor1: #0b0b0b;
+  --textColor2: #ffffff;
   --textColor1inactive: #ffffffab;
-  --resizeHandleColor: #000;
-  --backgroundColor1: #ffffff;
-  --backgroundColor2: #f6f8fa;
+  --backgroundColor1: #f6f8fa;
+  --backgroundColor2: #fff;
   --backgroundColor3: #d5d5d5;
   --backgroundColor4: #fff4f4;
   --outLineButtonColor: #9e9e9e;
+  --backgroundIconHover: #7e7e7e10;
+  --colorBorder: #e8e8e8;
+  --resizeHandleColor: #c7c7c7;
 }
