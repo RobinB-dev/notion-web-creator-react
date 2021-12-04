@@ -23,10 +23,10 @@
   border-radius: 3px;
   font-family: "PP Neue Montreal";
   font-weight: 700;
-  color: var(--textColor2);
+  color: var(--textColor1);
   font-size: 1.2rem;
 }
 
 .loginLink:hover {
-  color: var(--textColor2);
+  color: var(--textColor1);
 }

@@ -4,6 +4,15 @@ import classes from "./Homepage.module.css"
 import Header from '../Header/Header'
 import SelferLogo from "../../assets/images/selferLogo.svg"
 import RoundedImageBlock  from "../Block/RoundedImageBlock/RoundedImageBlock"
+import RowImgText from "../Block/RowImgText/RowImgText"
+
+import featureImg1 from "../../assets/images/featureImg1.svg"
+import featureImg2 from "../../assets/images/featureImg2.svg"
+import featureImg3 from "../../assets/images/featureImg3.svg"
+import featureImg4 from "../../assets/images/featureImg4.svg"
+import featureImg5 from "../../assets/images/featureImg5.svg"
+import featureImg6 from "../../assets/images/featureImg6.svg"
+
 import ImageCaption from "../Block/ImageCaption/ImageCaption"
 import imageCaption1 from "../../assets/images/imageCaptionImg.png"
 import imageCaption2 from "../../assets/images/imageCaptionImg2.png"
@@ -33,9 +42,6 @@ const Homepage = () => {
         </div>
       </section>
       <section>
-        
-      </section>
-      <section>
         <h2 className={classes.templateSectionTitle}>Build from scratch or use our <span className={classes.accentColor}>templates</span>.</h2>
         <div className={classes.templateSectionContainer}>
           <div className={classes.templateSectionLeft}>
@@ -55,6 +61,43 @@ const Homepage = () => {
           <div className={classes.templateSectionRight}>
             <img src={imageCaption1} alt="Blabla"></img>
           </div>
+        </div>
+      </section>
+      <section>
+        <h2 className={classes.toolsSectionTitle}>Use our tools & features to customize your <span className={classes.accentColor}>Notion Page</span>.</h2>
+        <div className={classes.toolsSectionRow}>
+          <RowImgText
+            alt="Bla bla"
+            img={featureImg1}
+            content="Choose your colors"
+          />
+          <RowImgText
+            alt="Bla bla"
+            img={featureImg2}
+            content="Pick your own fonts"
+          />
+          <RowImgText
+            alt="Bla bla"
+            img={featureImg3}
+            content="A 100% Responsie Website"
+          />
+        </div>
+        <div className={classes.toolsSectionRow}>
+          <RowImgText
+            alt="Bla bla"
+            img={featureImg4}
+            content="Change & custom your domain name"
+          />
+          <RowImgText
+            alt="Bla bla"
+            img={featureImg5}
+            content="Optimize your experience with SEO"
+          />
+          <RowImgText
+            alt="Bla bla"
+            img={featureImg6}
+            content="Many more features are waiting for you !"
+          />
         </div>
       </section>
       <section>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { AuthProvider } from "../../contexts/AuthContext"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import '../../styles/reset.css';
 // import 'antd/dist/antd.css';
+import '../../styles/reset.css';
 import '../../styles/style.css';
 import '../../styles/variables.css';
 import PrivateRoute from "../PrivateRoute"

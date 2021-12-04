@@ -4,31 +4,28 @@
 }
 
 .bodyContainer {
-  background: var(--backgroundColor1);
-  padding: 50px;
-}
-.login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.login a {
-  color: var(--textColor1);
-  text-decoration: none;
-  display: inline-flex;
-  margin-bottom: 10px;
-}
-
-.login img {
   width: 100%;
-  max-width: 300px;
+  margin: 0 auto;
+  background: var(--backgroundColor1);
 }
 
-.login img:hover {
-  transform: scale(1.005);
+section {
+  padding: 5vmin 10vmin;
+  margin: 12vmin 0px;
 }
 
+section:first-child {
+  margin-top: 0;
+}
+
+section:nth-child(2) {
+  padding: 10vmin 50px;
+  background: rgba(var(--accentColor1RGB), 0.17);
+}
+
+a {
+  text-decoration: none;
+}
 /******
 
 Hero Section
@@ -54,6 +51,7 @@ Hero Section
   font-family: "PP Neue Montreal";
   font-weight: 700;
   font-size: 3.5rem;
+  margin-bottom: 2vmin;
 }
 
 .heroSectionDescription {
@@ -102,28 +100,6 @@ Hero Section
 .heroSectionLeft {
   max-width: 700px;
 }
-/******
-
-Steps Section
-
-******/
-
-.stepSectionTitle {
-  font-family: "PP Neue Montreal";
-  font-weight: 700;
-  font-size: 2.2rem;
-  margin-bottom: 7vmin;
-}
-
-.accentColor {
-  color: var(--accentColor1);
-}
-.stepSection {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 
 /******
 
@@ -140,7 +116,7 @@ Template Section
 }
 
 .templateSectionContainer {
-  width: 90vw;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -183,6 +159,49 @@ Template Section
 
 /******
 
+Features Section
+
+*******/
+
+.toolsSectionTitle {
+  font-family: "PP Neue Montreal";
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 7vmin;
+}
+
+.toolsSectionRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5vmin 0px;
+}
+
+/******
+
+Steps Section
+
+******/
+
+.stepSectionTitle {
+  font-family: "PP Neue Montreal";
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 7vmin;
+}
+
+.accentColor {
+  color: var(--accentColor1);
+}
+.stepSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/******
+
 Testimonials Section
 
 ******/
@@ -199,6 +218,31 @@ Testimonials Section
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+/******
+
+Row Img Text Component
+
+*******/
+
+.rowImgTextContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 280px;
+}
+
+.rowImgTextContainer p {
+  font-family: "PP Neue Montreal";
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.rowImgTextContainer img {
+  transform: scale(0.8);
+  margin-right: 2vmin;
 }
 /******
 
