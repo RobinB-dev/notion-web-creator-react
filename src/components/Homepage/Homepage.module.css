@@ -108,6 +108,10 @@ Hero Section
   display: flex;
   align-items: center;
 }
+
+.heroSectionRight img {
+  width: 100%;
+}
 .heroSectionLeft {
   max-width: 700px;
 }
