@@ -1,4 +1,5 @@
 .header {
+  position: fixed;
   background: var(--backgroundColor2);
   height: var(--heightHeader);
   padding: 10px 35px;
@@ -19,7 +20,7 @@
 
 .loginLink {
   border: 1px solid var(--outLineButtonColor);
-  padding: 5px 10px;
+  padding: 10px;
   border-radius: 3px;
   font-family: "PP Neue Montreal";
   font-weight: 700;

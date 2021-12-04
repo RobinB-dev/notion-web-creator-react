@@ -1,3 +1,8 @@
+::selection {
+  background-color: var(--accentColor1);
+  color: var(--textColor2);
+}
+
 .home,
 .stepSection {
   background: var(--backgroundColor1);
@@ -15,6 +20,7 @@ section {
 }
 
 section:first-child {
+  padding-top: 100px;
   margin-top: 0;
 }
 
