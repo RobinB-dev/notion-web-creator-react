@@ -6,6 +6,11 @@ import SelferLogo from "../../assets/images/selferLogo.svg"
 import RoundedImageBlock  from "../Block/RoundedImageBlock/RoundedImageBlock"
 import RowImgText from "../Block/RowImgText/RowImgText"
 
+import NotionLogo from "../../assets/images/Notion_app_logo.png"
+
+import templateImg1 from "../../assets/images/imageTemplate1.svg"
+
+
 import featureImg1 from "../../assets/images/featureImg1.svg"
 import featureImg2 from "../../assets/images/featureImg2.svg"
 import featureImg3 from "../../assets/images/featureImg3.svg"
@@ -17,7 +22,9 @@ import ImageCaption from "../Block/ImageCaption/ImageCaption"
 import imageCaption1 from "../../assets/images/imageCaptionImg.png"
 import imageCaption2 from "../../assets/images/imageCaptionImg2.png"
 import imageCaption3 from "../../assets/images/imageCaptionImg3.png"
+
 import imageTesti1 from "../../assets/images/testiImg.png"
+import imageTesti2 from "../../assets/images/testiImg2.png"
 
 
 const Homepage = () => {
@@ -31,11 +38,13 @@ const Homepage = () => {
           <div className={classes.heroSectionObject}></div>
           <div className={classes.heroSectionContainer}>
             <div className={classes.heroSectionLeft}>
-              <h1 className={classes.heroSectionTitle}>Create your website with the Selfer App.</h1>
+              <h1 className={classes.heroSectionTitle}>Create your website with the Selfer App</h1>
               <h3 className={classes.heroSectionDescription}>A quick stop between Notion and the web, to make your pages 
               <span className={classes.accentColor}> stand out</span>.</h3>
-              <a className={classes.heroSectionLogin} href={`${process.env.REACT_APP_BASE_URL}/oauth`}><span className={classes.accentColor}>Sign in with</span> Notion</a>
-              <div className={classes.terms}><span className={classes.boldStar}>*</span>We only need you to sign in using Notion so you can access your pages, and start building !</div>
+              <a className={classes.heroSectionLogin} href={`${process.env.REACT_APP_BASE_URL}/oauth`}>
+                <img src={NotionLogo}></img>
+                <span className={classes.accentColor}>Sign in with</span>Notion
+              </a>
             </div>
             <div className={classes.heroSectionRight}>
               <img src={imageCaption1} alt="Blabla"></img>
@@ -43,33 +52,33 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className={classes.coloredSection}>
         <div className={classes.megaContainer}>
-          <h2 className={classes.templateSectionTitle}>Build from scratch or use our <span className={classes.accentColor}>templates</span>.</h2>
+          <h2 className={classes.templateSectionTitle}>Build from scratch or use our <span className={classes.accentColor}>templates</span></h2>
           <div className={classes.templateSectionContainer}>
-            <div className={classes.templateSectionLeft}>
-              <div className={classes.templateLeftCol}>
-                <div className={classes.templateLeftRow}>
-                  <img src={imageCaption1} alt="Blabla"></img>
-                  <img src={imageCaption1} alt="Blabla"></img>
-                  <img src={imageCaption1} alt="Blabla"></img>
-                </div>
-                <div className={classes.templateLeftRow}>
-                  <img src={imageCaption1} alt="Blabla"></img>
-                  <img src={imageCaption1} alt="Blabla"></img>
-                  <img src={imageCaption1} alt="Blabla"></img>
-                </div>
+              <div className={classes.templateRow}>
+                <ImageCaption
+                  src={templateImg1}
+                  alt="Image Caption 1"
+                  content="Edit on Notion"
+                />
+                <ImageCaption
+                  src={templateImg1}
+                  alt="Image Caption 1"
+                  content="Customize on Selfer"
+                />
+                <ImageCaption
+                  src={templateImg1}
+                  alt="Image Caption 1"
+                  content="Upload your website"
+                />
               </div>
-            </div>
-            <div className={classes.templateSectionRight}>
-              <img src={imageCaption1} alt="Blabla"></img>
-            </div>
           </div>
         </div>
       </section>
       <section>
         <div className={classes.megaContainer}>
-          <h2 className={classes.toolsSectionTitle}>Use our tools & features to customize your <span className={classes.accentColor}>Notion Page</span>.</h2>
+          <h2 className={classes.toolsSectionTitle}>Use our tools & features to customize your <span className={classes.accentColor}>Notion Page</span></h2>
           <div className={classes.toolsSectionRow}>
             <RowImgText
               alt="Bla bla"
@@ -106,7 +115,7 @@ const Homepage = () => {
           </div>          
         </div>
       </section>
-      <section>
+      <section className={classes.coloredSection}>
         <div className={classes.megaContainer}>
           <h2 className={classes.stepSectionTitle}>From scratch to the end, always here to <span className={classes.accentColor}>help you</span></h2>
           <div className={classes.stepSection}>
@@ -139,10 +148,10 @@ const Homepage = () => {
               name="Nolwenn, 32 ans"
             />
             <RoundedImageBlock
-              img={imageTesti1}
+              img={imageTesti2}
               alt="Blabla"
-              content="Des amis voulaient m'aider à faire mon site de photographie, mais pas besoin. Parce qu'avec Selfer, je sais le faire :)"
-              name="Nolwenn, 32 ans"
+              content="Je voulais faire mon portfolio mais vazy trop la flemme de coder, je passe mon temps à manger pas le temps pour ça. Cimer Selfer"
+              name="Solhimhan H8al Halhabhy3, 20 ans"
             />
             <RoundedImageBlock
               img={imageTesti1}
