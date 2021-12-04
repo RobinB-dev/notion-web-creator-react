@@ -32,6 +32,11 @@ section:nth-child(2) {
 a {
   text-decoration: none;
 }
+
+.megaContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 /******
 
 Hero Section
@@ -62,8 +67,8 @@ Hero Section
 
 .heroSectionDescription {
   font-family: "PP Neue Montreal";
-  font-weight: 500;
-  font-size: 1.8rem;
+  font-weight: 300;
+  font-size: 2rem;
   margin-bottom: 5vmin;
 }
 
@@ -139,7 +144,8 @@ Template Section
 .templateLeftRow {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  justify-content: center;
+  /* flex-wrap: wrap; */
 }
 
 .templateLeftRow img {
@@ -198,11 +204,12 @@ Steps Section
 
 .accentColor {
   color: var(--accentColor1);
+  font-weight: 700;
 }
 .stepSection {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -223,7 +230,7 @@ Testimonials Section
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 /******
@@ -259,7 +266,8 @@ ImageCaption Component
 .imageCaptionContainer {
   display: flex;
   flex-direction: column;
-  max-width: 480px;
+  max-width: 380px;
+  margin: 10px;
 }
 
 .imageCaptionContainer img {
@@ -286,8 +294,9 @@ Rounded Image Block Component
 .RoundedImageBlockContainer {
   display: flex;
   flex-direction: column;
-  max-width: 510px;
+  max-width: 380px;
   align-items: center;
+  margin: 10px;
 }
 
 .RoundedImageBlockContainer img {
@@ -304,10 +313,12 @@ Rounded Image Block Component
   align-items: center;
   justify-content: center;
   background: var(--backgroundColor4);
+  border-radius: 5px;
 }
 
 .RoundedImageBlockContainer p {
   text-align: center;
+  padding: 2vmin;
   padding-top: 5vmin;
   border-radius: 10px;
   font-family: "PP Neue Montreal";
