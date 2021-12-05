@@ -6,7 +6,7 @@ import 'antd/dist/antd.css';
 import '../../styles/style.css';
 import '../../styles/variables.css';
 import PrivateRoute from "../PrivateRoute"
-import Dashboard from '../Dashboard/Dashboard'
+import {Dashboard} from '../Dashboard/Dashboard'
 import Header from '../Header/Header'
 import Homepage from '../Homepage/Homepage'
 import Tab from '../Dashboard/Tab'
