@@ -3,8 +3,8 @@
   --card-padding: 1em;
   --card-radius: 0.5em;
   --color-gray: #e2ebf6;
-  --color-dark-gray: #c4d1e1;
-  --radio-border-width: 2px;
+  --color-dark-gray: #dadadaab;
+  --radio-border-width: 0.2vmin;
   --radio-size: 1.5em;
 }
 
@@ -14,7 +14,7 @@
   position: relative;
 }
 .card:hover {
-  box-shadow: 0px 0px 2vmin rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 2vmin rgba(0, 0, 0, 0.08);
 }
 
 .radio {
@@ -65,7 +65,7 @@
 }
 
 .cardContent {
-  border: 2px solid var(--colorBorder);
+  border: 0.2vmin solid var(--colorBorder);
   border-radius: 1vmin;
   cursor: pointer;
   display: flex;
@@ -77,6 +77,7 @@
 .cardContent img {
   height: 30vmin;
   width: 30vmin;
+  object-fit: cover;
   border-radius: 1vmin;
   overflow: hidden;
   background: whitesmoke;
@@ -88,7 +89,7 @@
   padding: 0.5vmin 1vmin;
   border-radius: 1vmin;
   margin-top: 1vmin;
-  border: 1px solid var(--colorBorder);
+  border: 0.1vmin solid var(--colorBorder);
   font-weight: 500;
 }
 
@@ -103,11 +104,11 @@
 .radio:checked ~ .cardContent h4 {
   color: var(--accentColor1);
   font-weight: bolder;
-  box-shadow: 2px 2px 1px rgba(var(--accentColor1RGB), 0.3);
+  box-shadow: 0.2vmin 0.2vmin 0.1vmin rgba(var(--accentColor1RGB), 0.3);
 }
 
 .radio:focus ~ .cardContent {
-  box-shadow: 0 0 0 2px var(--color-dark-gray);
+  box-shadow: 0 0 0 0.2vmin var(--color-dark-gray);
 }
 
 .radio:disabled ~ .cardContent {

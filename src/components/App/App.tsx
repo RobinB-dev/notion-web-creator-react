@@ -1,7 +1,7 @@
 import React from 'react';
 import { AuthProvider } from "../../contexts/AuthContext"
+import { DataProvider } from '../../contexts/DataContext'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-// import 'antd/dist/antd.css';
 import '../../styles/reset.css';
 import '../../styles/style.css';
 import '../../styles/variables.css';
@@ -16,14 +16,16 @@ const App = () => {
     <div className={classes.App}>
         <Router>
           <AuthProvider>
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path='/dashboard' element={<PrivateRoute/>}>
-                <Route path='/dashboard' element={<Dashboard/>}>
-                  <Route path=':tabType' element={<Tab/>}/>
+            <DataProvider>
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path='/dashboard' element={<PrivateRoute/>}>
+                  <Route path='/dashboard' element={<Dashboard/>}>
+                    <Route path=':tabType' element={<Tab/>}/>
+                  </Route>
                 </Route>
-              </Route>
-            </Routes>
+              </Routes>
+            </DataProvider>
           </AuthProvider>
         </Router>
     </div>

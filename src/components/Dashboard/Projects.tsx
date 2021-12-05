@@ -48,6 +48,7 @@ export const ProjectsToolBar = () => {
     return (
         <>
             <h2 className={classes.colorH2}>Need a hand ?</h2>
+            <div className={classes.divider}></div>
             <p>Don’t forget to add pages to your workspace before creating a new project !</p>
             <ol>
                 <li><span>Go to&nbsp;<a href="https://www.notion.so/">Notion</a></span></li>

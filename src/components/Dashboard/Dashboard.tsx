@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 import { Outlet, NavLink, useNavigate, useLocation, useParams, Link } from "react-router-dom"
 import classes from './Dashboard.module.css'
 import { IconFolder, IconCustom, IconUpload, IconLogout, IconRefresh } from '../Icons/Icons'
 import { ProjectsMain, ProjectsToolBar} from './Projects'
 import { CustomizeMain, CustomizeToolBar} from './Customize'
+import { UploadMain, UploadToolBar} from './Upload'
 import ResizePanel from "react-resize-panel-ts";
 import logo_app from "../../assets/images/logo_app_r.svg"
+import DataContext from '../../contexts/DataContext'
 
 import { getJsonTest } from '../../api/index'
 import { message } from 'antd';
+import 'antd/lib/message/style/index.css'
 import { ColorText } from "../Blocks/Headings"
 
 export const Dashboard = () => {
@@ -19,6 +22,7 @@ export const Dashboard = () => {
   const location = useLocation();
   const defaultPath = "dashboard"
   let params = useParams();
+
 
   async function handleLogout() {
     setError("ici")
@@ -44,6 +48,7 @@ export const Dashboard = () => {
   // if (location.pathname.slice(- defaultPath.length) === defaultPath) {
   //   navigate("projects")
   // }
+  
 
   return (
     <div className={classes.dashboard}>
@@ -51,7 +56,7 @@ export const Dashboard = () => {
           {error && <div className="alert-danger">{error}</div>}
           <nav className={classes.tabs}>
           <Link to="/">
-              <img src={logo_app} alt="" />
+              <img src={logo_app} className={classes.logoApp} alt="Logo Selfer" />
           </Link>
             <ul>
               <li>
@@ -82,26 +87,29 @@ export const Dashboard = () => {
 
 
 export const Tab = () => {
-  const [jsonTest, setJsonTest] = useState("Fetching")
   const navigate = useNavigate();
   const { tabType } = useParams();
+  const dataCtx = useContext(DataContext);
   const key = 'updatable';
 
   const fetchPages = async () => {
-    setJsonTest("load");
     message.loading({ content: 'Loading...', key });
     const jsondata = await getJsonTest()
     message.success({ content: 'Loaded!', key, duration: 2 });
-    console.log("ici ",jsondata);
+    // console.log("ici ",jsondata);
+    dataCtx.setNotionData(jsondata)
     
-    // setJsonTest(jsondata);
-    setJsonTest(jsondata[13]);
   };
+
+  useEffect(() => {
+    fetchPages()
+  }, [])
 
 
   return (
     <>
       <section className={classes.main}>
+        <div className={classes.mainChild}>
             <header>
               <button>My cool site</button>
               <p>Welcome back&nbsp;<ColorText>User</ColorText></p>
@@ -113,14 +121,16 @@ export const Tab = () => {
             <div className={classes.content}>
               {tabType === "projects" && <ProjectsMain />}
               {tabType === "customize" && <CustomizeMain />}
-              {/* {tabType === "upload" && <ProjectsMain />} */}
+              {tabType === "upload" && <UploadMain />}
           </div>
+        </div>
       </section>
       <section className={classes.toolbar}>
           <ResizePanel direction="w" handleClass={classes.customHandle}>
               <div className={classes.resizeContent}>
                 {tabType === "projects" && <ProjectsToolBar />}
                 {tabType === "customize" && <CustomizeToolBar />}
+                {tabType === "upload" && <UploadToolBar />}
               </div>
           </ResizePanel>
       </section>

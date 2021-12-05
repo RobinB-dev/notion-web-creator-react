@@ -1,6 +1,8 @@
 .dashboard {
   display: flex;
   height: 100%;
+  overflow: hidden;
+  background: var(--backgroundColor1);
 }
 
 .dashboard section {
@@ -16,6 +18,11 @@
   align-items: center;
   background: var(--backgroundColor2);
   padding: 1vmin 1vmin 5vmin;
+}
+
+.tabs .logoApp {
+  width: 8vmin;
+  height: 8vmin;
 }
 
 .tabs ul {
@@ -39,12 +46,18 @@
   margin: 2vmin 0;
   width: 7vmin;
   height: 7vmin;
-  border-radius: 100px;
+  border-radius: 100vmax;
   color: var(--textColor1inactive);
   text-decoration: none;
 }
 .tabs ul li a:hover {
   background: var(--backgroundIconHover);
+}
+
+.tabs ul li a svg {
+  height: 100%;
+  width: 100%;
+  padding: 1vmin;
 }
 
 .tabs ul li a[class="active"] {
@@ -69,6 +82,12 @@
   justify-content: center;
   align-items: center;
 }
+
+.tabs button svg {
+  width: 3vmin;
+  height: 3vmin;
+}
+
 .tabs button:hover {
   background: var(--backgroundIconHover);
 }
@@ -77,7 +96,7 @@
   font-family: var(--fontFamilyTitle);
   color: var(--accentColor1);
   font-size: 2rem;
-  margin-bottom: 2vmin;
+  /* margin-bottom: 2vmin; */
   font-weight: 600;
 }
 
@@ -91,10 +110,25 @@
 /********** MAIN **********/
 
 .dashboard .main {
+  position: relative;
+  width: 100%;
+  transform: scale(1);
+}
+
+.mainChild {
   width: 100%;
   padding: 8vmin;
-  position: relative;
-  transform: scale(1);
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.dashboard .mainChild::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboard .mainChild {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .main header {
@@ -103,9 +137,17 @@
   align-items: center;
   justify-content: space-between;
   /* width: 100%; */
-  top: 2vmin;
-  right: 8vmin;
-  left: 8vmin;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 2vmin 8vmin 4vmin;
+  /* background: red; */
+  /* background: rgb(246, 248, 250); */
+  /* background: linear-gradient(
+    180deg,
+    rgba(246, 248, 250, 0.5) 50%,
+    rgba(246, 248, 250, 0) 100%
+  ); */
 }
 
 .main .content {
@@ -114,15 +156,21 @@
 }
 
 .main button {
-  /* margin-top: 50px; */
-  padding: 10px;
+  padding: 1vmin 1.2vmin;
   outline: none;
   background: var(--backgroundColor2);
-  border: 1px solid var(--colorBorder);
+  border: 0.1vmin solid var(--colorBorder);
   /* color: var(--accentColor1); */
   color: var(--textColor1);
   display: flex;
   align-items: center;
+  font-size: 1rem;
+  min-height: 4.4vmin;
+}
+
+.main button svg {
+  height: 2vmin;
+  width: 2vmin;
 }
 
 .main button span {
@@ -135,10 +183,10 @@
   margin-top: 3vmin;
 }
 
-.textContainer .divider {
+.divider {
   width: 100%;
-  height: 1px;
-  margin: 4vmin 0;
+  height: 0.1vmin;
+  margin: 2vmin 0;
   background: var(--accentColor3);
 }
 
@@ -196,15 +244,23 @@
   padding: 4vmin;
 }
 
+.toolbar:hover .customHandle {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
 .customHandle {
   background: var(--resizeHandleColor);
-  width: 10px;
-  height: 40px;
-  border-radius: 100px;
+  width: 0.8vmin;
+  height: 6vmin;
+  transition: opacity 0.5s;
+  opacity: 0.5;
+  border-radius: 100vmax;
 }
 
 .toolbar p {
   margin-bottom: 2vmin;
+  line-height: 2vmin;
 }
 
 .toolbar ol {
@@ -244,13 +300,62 @@
   color: var(--accentColor1);
   font-size: 1.3em;
   content: counter(list-item);
-  border: 1px solid var(--colorBorder);
+  border: 0.1vmin solid var(--colorBorder);
   width: 4vmin;
   height: 4vmin;
-  border-radius: 5px;
+  border-radius: 1vmin;
 }
 
 .toolbar ol > li a {
   color: var(--accentColor1);
   text-decoration: underline;
+}
+
+/********** CUSTOMIZE **********/
+
+.notionPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem;
+  background: var(--backgroundColor2);
+}
+
+.notionPage img {
+  width: 100%;
+}
+
+.collapseContainer {
+  margin: 3vmin -4vmin 0;
+}
+
+.collapseContainer > div:nth-child(1) .collapsePanel {
+  border-bottom: 0.1vmin solid var(--colorBorder);
+}
+
+.collapseContainer > div:nth-child(1) {
+  border: none;
+  border-top: 0.1vmin solid var(--colorBorder);
+}
+
+.collapsePanel > div:nth-child(1) {
+  font-size: 1.3rem;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  background: var(--backgroundColor2);
+  font-weight: 500;
+  font-family: var(--fontFamilyTitle);
+}
+
+.collapsePanel > div:nth-child(2) {
+  border: none;
+  border-top: 0.1vmin solid var(--colorBorder);
+}
+
+.collapsePanel > div:nth-child(1):hover {
+  background: var(--backgroundColor1);
+}
+
+.collapsePanel > div:nth-child(1) > div:nth-child(1) > span {
+  font-size: 1.6rem !important;
+  color: var(--accentColor1) !important;
 }

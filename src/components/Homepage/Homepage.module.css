@@ -14,22 +14,22 @@
   background: var(--backgroundColor1);
 }
 
-section {
+.bodyContainer section {
   padding: 5vmin 10vmin;
   margin: 12vmin 0px;
 }
 
-section:first-child {
+.bodyContainer section:first-child {
   padding-top: 100px;
   margin-top: 0;
 }
 
-section:nth-child(2) {
+.bodyContainer section:nth-child(2) {
   padding: 10vmin 50px;
   background: rgba(var(--accentColor1RGB), 0.17);
 }
 
-a {
+.bodyContainer a {
   text-decoration: none;
 }
 
