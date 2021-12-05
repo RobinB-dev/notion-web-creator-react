@@ -1,16 +1,16 @@
 import React from 'react';
 import { AuthProvider } from "../../contexts/AuthContext"
+import { DataProvider } from '../../contexts/DataContext'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import PrivateRoute from "../PrivateRoute"
+import { Dashboard, Tab } from '../Dashboard/Dashboard'
+import Homepage from '../Homepage/Homepage'
+import classes from './App.module.css'
+
 import '../../styles/reset.css';
 import 'antd/dist/antd.css';
 import '../../styles/style.css';
 import '../../styles/variables.css';
-import PrivateRoute from "../PrivateRoute"
-import Dashboard from '../Dashboard/Dashboard'
-import Header from '../Header/Header'
-import Homepage from '../Homepage/Homepage'
-import Tab from '../Dashboard/Tab'
-import classes from './App.module.css'
 
 
 const App = () => {
@@ -18,15 +18,16 @@ const App = () => {
     <div className={classes.App}>
         <Router>
           <AuthProvider>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path='/dashboard' element={<PrivateRoute/>}>
-                <Route path='/dashboard' element={<Dashboard/>}>
-                  <Route path=':tabType' element={<Tab/>}/>
+            <DataProvider>
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path='/dashboard' element={<PrivateRoute/>}>
+                  <Route path='/dashboard' element={<Dashboard/>}>
+                    <Route path=':tabType' element={<Tab/>}/>
+                  </Route>
                 </Route>
-              </Route>
-            </Routes>
+              </Routes>
+            </DataProvider>
           </AuthProvider>
         </Router>
     </div>

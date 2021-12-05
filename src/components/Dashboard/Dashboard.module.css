@@ -1,32 +1,12 @@
 .dashboard {
   display: flex;
-  height: calc(100% - var(--heightHeader));
+  height: 100%;
+  overflow: hidden;
+  background: var(--backgroundColor1);
 }
 
 .dashboard section {
   padding: 0;
-}
-
-.main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-.main .content {
-  display: flex;
-  flex-direction: column;
-}
-
-.main button {
-  margin-top: 50px;
-  padding: 10px;
-  background: var(--backgroundColor2);
-  outline: none;
-  border: 1px solid var(--backgroundColor2);
-  /* color: var(--accentColor1); */
-  color: var(--textColor1);
 }
 
 .tabs {
@@ -37,11 +17,17 @@
   justify-content: space-between;
   align-items: center;
   background: var(--backgroundColor2);
+  padding: 1vmin 1vmin 5vmin;
+}
+
+.tabs .logoApp {
+  width: 8vmin;
+  height: 8vmin;
 }
 
 .tabs ul {
   display: flex;
-  width: 70px;
+  width: 8vmin;
   /* height: 100%; */
   flex-direction: column;
   justify-content: center;
@@ -56,14 +42,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ee82ee07;
-  padding: 10px;
-  margin: 2px 0;
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
+  padding: 1vmin;
+  margin: 2vmin 0;
+  width: 7vmin;
+  height: 7vmin;
+  border-radius: 100vmax;
   color: var(--textColor1inactive);
   text-decoration: none;
+}
+.tabs ul li a:hover {
+  background: var(--backgroundIconHover);
+}
+
+.tabs ul li a svg {
+  height: 100%;
+  width: 100%;
+  padding: 1vmin;
 }
 
 .tabs ul li a[class="active"] {
@@ -77,29 +71,303 @@
   stroke: var(--accentColor1);
 }
 
+.tabs button {
+  background: none;
+  border-radius: 100vmax;
+  outline: none;
+  border: none;
+  width: 7vmin;
+  height: 7vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs button svg {
+  width: 3vmin;
+  height: 3vmin;
+}
+
+.tabs button:hover {
+  background: var(--backgroundIconHover);
+}
+
+.colorH2 {
+  font-family: var(--fontFamilyTitle);
+  color: var(--accentColor1);
+  font-size: 2rem;
+  /* margin-bottom: 2vmin; */
+  font-weight: 600;
+}
+
+.colorH3 {
+  color: var(--accentColor1);
+  font-size: 1.7rem;
+  margin-bottom: 2vmin;
+  font-weight: 500;
+}
+
+/********** MAIN **********/
+
+.dashboard .main {
+  position: relative;
+  width: 100%;
+  transform: scale(1);
+}
+
+.mainChild {
+  width: 100%;
+  padding: 8vmin;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.dashboard .mainChild::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboard .mainChild {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.main header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* width: 100%; */
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 2vmin 8vmin 4vmin;
+  /* background: red; */
+  /* background: rgb(246, 248, 250); */
+  /* background: linear-gradient(
+    180deg,
+    rgba(246, 248, 250, 0.5) 50%,
+    rgba(246, 248, 250, 0) 100%
+  ); */
+}
+
+.main .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.main button {
+  padding: 1vmin 1.2vmin;
+  outline: none;
+  background: var(--backgroundColor2);
+  border: 0.1vmin solid var(--colorBorder);
+  /* color: var(--accentColor1); */
+  color: var(--textColor1);
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  min-height: 4.4vmin;
+}
+
+.main button svg {
+  height: 2vmin;
+  width: 2vmin;
+}
+
+.main button span {
+  margin-left: 1vmin;
+}
+
+.textContainer {
+  max-width: 70vmin;
+  width: 100%;
+  margin-top: 3vmin;
+}
+
+.divider {
+  width: 100%;
+  height: 0.1vmin;
+  margin: 2vmin 0;
+  background: var(--accentColor3);
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  position: relative;
+  min-height: 40vmin;
+}
+
+.overflowScroll {
+  grid-gap: var(--card-padding);
+  position: absolute;
+  /* top: 0; */
+  /* bottom: 0; */
+  left: 0;
+  right: 0;
+  overflow-x: scroll;
+  display: flex;
+  padding: 2vmin 0;
+  width: 100%;
+}
+
+.overflowScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.overflowScroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/********** TOOLBAR **********/
+
 .toolbar {
   display: flex;
   align-items: flex-end;
+  padding: 1vmin 4vmin;
 }
 
 .toolbar > div {
-  max-width: 500px;
-  min-width: 300px;
+  max-width: 60vmin;
+  min-width: 40vmin;
+  width: 100%;
   height: 100%;
 }
 
 .toolbar .resizeContent {
   width: 100%;
   display: flex;
+  flex-direction: column;
   background: var(--backgroundColor2);
   height: 100%;
   position: relative;
-  padding: 10px;
+  padding: 4vmin;
+}
+
+.toolbar:hover .customHandle {
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 
 .customHandle {
   background: var(--resizeHandleColor);
-  width: 10px;
-  height: 40px;
-  border-radius: 100px;
+  width: 0.8vmin;
+  height: 6vmin;
+  transition: opacity 0.5s;
+  opacity: 0.5;
+  border-radius: 100vmax;
+}
+
+.toolbar p {
+  margin-bottom: 2vmin;
+  line-height: 2vmin;
+  font-size: 1rem;
+}
+
+.toolbar ol {
+  /* list-style-type: number; */
+  list-style-position: inside;
+}
+
+.toolbar ol > li {
+  margin-bottom: 3vmin;
+  min-height: 5vmin;
+  padding-left: 6vmin;
+  position: relative;
+}
+
+.toolbar ol > li > span {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: inherit;
+}
+
+.toolbar ol > li::marker {
+  /* color: var(--accentColor1); */
+  font-size: 1.5em;
+  /* content: counter(list-item); */
+}
+
+.toolbar ol > li::before {
+  content: "";
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accentColor1);
+  font-size: 1.3em;
+  content: counter(list-item);
+  border: 0.1vmin solid var(--colorBorder);
+  width: 4vmin;
+  height: 4vmin;
+  border-radius: 1vmin;
+}
+
+.toolbar ol > li a {
+  color: var(--accentColor1);
+  text-decoration: underline;
+}
+
+/********** CUSTOMIZE **********/
+
+.notionPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem;
+  background: var(--backgroundColor2);
+}
+
+.notionPage img {
+  width: 100%;
+}
+
+.collapseContainer {
+  margin: 3vmin -4vmin 0;
+}
+
+.collapseContainer > div:nth-child(1) .collapsePanel {
+  border-bottom: 0.1vmin solid var(--colorBorder);
+}
+
+.collapseContainer > div:nth-child(1) {
+  border: none;
+  border-top: 0.1vmin solid var(--colorBorder);
+}
+
+.collapsePanel > div:nth-child(1) {
+  font-size: 1.3rem;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  background: var(--backgroundColor2);
+  font-weight: 500;
+  font-family: var(--fontFamilyTitle);
+}
+
+.collapsePanel > div:nth-child(2) {
+  border: none;
+  border-top: 0.1vmin solid var(--colorBorder);
+}
+
+.collapsePanel > div:nth-child(2) > div:first-child {
+  padding: 1vmin 4vmin;
+}
+
+.collapsePanel > div:nth-child(1):hover {
+  background: var(--backgroundColor1);
+}
+
+.collapsePanel > div:nth-child(1) > div:nth-child(1) > span {
+  font-size: 1.6rem !important;
+  color: var(--accentColor1) !important;
+}
+
+/********** SELECT **********/
+
+.selectFont {
+  background: red;
 }

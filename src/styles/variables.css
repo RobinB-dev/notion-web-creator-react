@@ -1,11 +1,74 @@
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../assets/fonts/PPNeueMontreal-Medium.woff2") format("woff2"),
+    url("../assets/fonts/PPNeueMontreal-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../assets/fonts/PPNeueMontreal-Italic.woff2") format("woff2"),
+    url("../assets/fonts/PPNeueMontreal-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../assets/fonts/PPNeueMontreal-SemiBoldItalic.woff2")
+      format("woff2"),
+    url("../assets/fonts/PPNeueMontreal-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../assets/fonts/PPNeueMontreal-Book.woff2") format("woff2"),
+    url("../assets/fonts/PPNeueMontreal-Book.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../assets/fonts/PPNeueMontreal-Thin.woff2") format("woff2"),
+    url("../assets/fonts/PPNeueMontreal-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../assets/fonts/PPNeueMontreal-Bold.woff2") format("woff2"),
+    url("../assets/fonts/PPNeueMontreal-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --navWidth: clamp(9px, 15vw, 150px);
+  --fontFamilyTitle: "PP Neue Montreal";
   --heightHeader: 70px;
   --accentColor1: #ff8787;
+  --accentColor1RGB: 255, 135, 135;
   --accentColor2: #e3e3e3;
-  --textColor1: #fff;
+  --accentColor3: #eaeaea;
+  --textColor1: #0b0b0b;
+  --textColor2: #ffffff;
   --textColor1inactive: #ffffffab;
-  --resizeHandleColor: #000;
-  --backgroundColor1: #2f3437;
-  --backgroundColor2: #00000050;
+  --backgroundColor1: #f6f8fa;
+  --backgroundColor2: #fff;
+  --backgroundColor3: #d5d5d5;
+  --backgroundColor4: #fff4f4;
+  --outLineButtonColor: #9e9e9e;
+  --backgroundIconHover: #7e7e7e10;
+  --colorBorder: #e8e8e8;
+  --resizeHandleColor: #c7c7c7;
 }

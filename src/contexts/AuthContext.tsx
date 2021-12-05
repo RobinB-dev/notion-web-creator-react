@@ -17,12 +17,14 @@ export const useAuth = () => {
   return useContext(AuthContext)
 }
 
-type AuthProviderProps = { children: React.ReactNode }
+type AuthProviderProps = { 
+  children: React.ReactNode 
+}
 
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [isLogged, setIsLogged] = useState(Boolean)
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -31,19 +33,20 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLogged(true)
     console.log(isLogged);
     navigate("/dashboard")
+    return;
   }
   
   const logout = () => {
     setIsLogged(false)
     localStorage.clear();
-    // return;
+    return;
   }
 
   useEffect(() => {
-
       const frontT = searchParams.get("frontToken")
 
       if (frontT) {
+        console.log("set token ");
         localStorage.setItem('frontToken', frontT)
         // login()
       } else {
@@ -51,15 +54,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       
       if (localStorage.getItem('frontToken')) {
-        console.log("ya local");
+        setLoading(false)
         login()
       } else {
         logout()
-        console.log("ya pas");
+      }
+
+      if (frontT === "temporary fix") {
+        setSearchParams("")
       }
     
     return;
-  }, [])
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
 
   const value = {
     currentUser,

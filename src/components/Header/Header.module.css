@@ -1,13 +1,33 @@
 .header {
+  position: fixed;
   background: var(--backgroundColor2);
   height: var(--heightHeader);
-  padding: 10px;
+  padding: 10px 35px;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid var(--backgroundColor2);
 }
 
 .header img {
   height: 100%;
+}
+
+.accentColor {
+  color: var(--accentColor1);
+}
+
+.loginLink {
+  border: 1px solid var(--outLineButtonColor);
+  padding: 10px;
+  border-radius: 3px;
+  font-family: "PP Neue Montreal";
+  font-weight: 700;
+  color: var(--textColor1);
+  font-size: 1.2rem;
+}
+
+.loginLink:hover {
+  color: var(--textColor1);
 }
