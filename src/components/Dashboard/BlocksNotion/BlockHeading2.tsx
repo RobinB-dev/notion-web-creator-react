@@ -11,7 +11,7 @@ const BlockHeading2 = (props: BlockHeading2Props) => {
     return (
         <>
             <div className={classes.heading2Contain}>
-                <DataBlock id={props.block.id}>
+                <DataBlock id={props.block.id} block={props.block}>
                     <h2 className={classes.heading2}>{props.block.content}</h2>
                 </DataBlock>
             </div>

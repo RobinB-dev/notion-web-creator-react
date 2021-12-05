@@ -11,7 +11,7 @@ const BlockImage = (props: BlockHeading1Props) => {
     return (
         <>
             <div className={classes.blockImageContain}>
-                <DataBlock id={props.block.id}>
+                <DataBlock id={props.block.id} block={props.block}>
                     <img className={classes.blockImage} src={props.block.url} alt="" />
                 </DataBlock>
             </div>

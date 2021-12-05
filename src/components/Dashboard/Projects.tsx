@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import classes from './Dashboard.module.css'
-import ResizePanel from "react-resize-panel-ts";
-import { useNavigate } from "react-router-dom"
 import { Heading1, ColorText, Subtitle1 } from '../Blocks/Headings'
 import ProjectCard from "./ProjectCard";
 

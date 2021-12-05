@@ -225,6 +225,7 @@
 .toolbar {
   display: flex;
   align-items: flex-end;
+  padding: 1vmin 4vmin;
 }
 
 .toolbar > div {
@@ -261,6 +262,7 @@
 .toolbar p {
   margin-bottom: 2vmin;
   line-height: 2vmin;
+  font-size: 1rem;
 }
 
 .toolbar ol {
@@ -351,6 +353,10 @@
   border-top: 0.1vmin solid var(--colorBorder);
 }
 
+.collapsePanel > div:nth-child(2) > div:first-child {
+  padding: 1vmin 4vmin;
+}
+
 .collapsePanel > div:nth-child(1):hover {
   background: var(--backgroundColor1);
 }
@@ -358,4 +364,10 @@
 .collapsePanel > div:nth-child(1) > div:nth-child(1) > span {
   font-size: 1.6rem !important;
   color: var(--accentColor1) !important;
+}
+
+/********** SELECT **********/
+
+.selectFont {
+  background: red;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react"
 import { useAuth } from "../../contexts/AuthContext"
-import { Outlet, NavLink, useNavigate, useLocation, useParams, Link } from "react-router-dom"
+import { Outlet, NavLink, useNavigate, useParams, Link } from "react-router-dom"
 import classes from './Dashboard.module.css'
 import { IconFolder, IconCustom, IconUpload, IconLogout, IconRefresh } from '../Icons/Icons'
 import { ProjectsMain, ProjectsToolBar} from './Projects'
@@ -19,9 +19,10 @@ export const Dashboard = () => {
   const [error, setError] = useState("")
   const { logout } = useAuth()
   const navigate = useNavigate();
-  const location = useLocation();
-  const defaultPath = "dashboard"
-  let params = useParams();
+
+  // const location = useLocation();
+  // const defaultPath = "dashboard"
+  // let params = useParams();
 
 
   async function handleLogout() {
@@ -87,7 +88,6 @@ export const Dashboard = () => {
 
 
 export const Tab = () => {
-  const navigate = useNavigate();
   const { tabType } = useParams();
   const dataCtx = useContext(DataContext);
   const key = 'updatable';

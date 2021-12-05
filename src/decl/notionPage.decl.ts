@@ -7,3 +7,9 @@ export type NotionBlock = {
   childrens?: string;
 }
 
+export type BlockText = {
+  fontFamily: string
+  fontWeight: number
+  fontSize: number
+  fontAlign: string
+}

@@ -33,19 +33,20 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLogged(true)
     console.log(isLogged);
     navigate("/dashboard")
+    return;
   }
   
   const logout = () => {
     setIsLogged(false)
     localStorage.clear();
-    // return;
+    return;
   }
 
   useEffect(() => {
-
       const frontT = searchParams.get("frontToken")
 
       if (frontT) {
+        console.log("set token ");
         localStorage.setItem('frontToken', frontT)
         // login()
       } else {
@@ -53,15 +54,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       
       if (localStorage.getItem('frontToken')) {
-        console.log("ya local");
         login()
       } else {
         logout()
-        console.log("ya pas");
       }
     
     return;
-  }, [])
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
 
   const value = {
     currentUser,

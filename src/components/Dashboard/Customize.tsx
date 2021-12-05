@@ -1,6 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import DataContext from '../../contexts/DataContext';
-import CreateBlock from './BlocksNotion/CreateBlock'
+import { CreateBlock, testObj } from './BlocksNotion/CreateBlock'
+import FontPicker from './BlocksNotion/FontPicker'
+import ToolText from './ToolBar/ToolText'
+import HidePanel from './ToolBar/HidePanel'
 
 import { NotionBlock } from "../../decl/notionPage.decl";
 import { Collapse } from 'antd';
@@ -9,11 +12,8 @@ import classes from './Dashboard.module.css'
 import 'antd/lib/collapse/style/index.css'
 
 const { Panel } = Collapse;
-function callback(key: any) {
-    console.log(key);
-  }
   
-const text = `
+const textDrop = `
 A dog is a type of domesticated animal.
 Known for its loyalty and faithfulness,
 it can be found as a welcome guest in many households across the world.
@@ -21,23 +21,12 @@ it can be found as a welcome guest in many households across the world.
 
 
 export const CustomizeMain = () => {
-    const dataCtx = useContext(DataContext);
-
-  // objSearchFromKey
-  function testObj (o: object, search: string) {
-    for (const [key, value] of Object.entries(o)) {
-      // console.log(`${key} => ${value}`);
-      if (key === search) {
-        return value
-      }
-      
-    }
-  }
+  const dataCtx = useContext(DataContext);
 
   const DataPage = (o: object) => {
     if (testObj(o, "obj") === "page") {
-      const pageName = testObj(o, "name");
-      console.log("name : ", pageName);
+      // const pageName = testObj(o, "name");
+      // console.log("name : ", pageName);
       return testObj(o, "childrens")
     }
   }
@@ -54,12 +43,33 @@ export const CustomizeMain = () => {
     );
 };
 
+
+export const menuToolBar = {
+  heading1: "text",
+  heading2: "text",
+  heading3: "text",
+  callout: 'block',
+  img: 'image',
+};
+
 export const CustomizeToolBar = () => {
+  const dataCtx = useContext(DataContext);
+  const BlockType:string | undefined = testObj(menuToolBar, testObj(dataCtx.activeBlock, "obj"));
+  // const BlockObj = testObj(dataCtx.activeBlock, "obj")
+
+
+  console.log(typeof BlockType);
+  
+
+  useEffect(() => {
+  }, [dataCtx.activeBlock])
+
     return (
         <>
             <h2 className={classes.colorH2}>Customization</h2>
             <div className={classes.divider}></div>
             <p>You can edit the looks of your page here ! <br></br>Click on a category to open it, change the values and see how your page will look in real time !</p>
+            <p>{BlockType}</p>
             <div className={classes.collapseContainer}>
                 <Collapse
                     bordered={true}
@@ -67,15 +77,30 @@ export const CustomizeToolBar = () => {
                     expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : -90} />}
                     className={classes.myCollapse}
                 >
-                    <Panel header="Theme" key="1" className={classes.collapsePanel}>
-                    <p>{text}</p>
-                    </Panel>
+                  <HidePanel display={["text", "block"]}>
+                      <Panel header="Theme" key="1" className={classes.collapsePanel}>
+                        <FontPicker />
+                      </Panel>
+                  </HidePanel>
                     <Panel header="Text" key="2" className={classes.collapsePanel}>
-                    <p>{text}</p>
+                      <p>{textDrop}</p>
+                      <ToolText bloctype={BlockType} />
                     </Panel>
-                    <Panel header="Colors" key="3" className={classes.collapsePanel}>
-                    <p>{text}</p>
-                    </Panel>
+                    {BlockType === "text" &&
+                      <Panel header="Text" key="3" className={classes.collapsePanel}>
+                      <p>{textDrop}</p>
+                      </Panel>
+                    }
+                    {(BlockType === "text" || BlockType === "block") &&
+                      <Panel header="Colors" key="4" className={classes.collapsePanel}>
+                      <p>{textDrop}</p>
+                      </Panel>
+                    }
+                    {(BlockType === "image" || BlockType === "block") &&
+                      <Panel header="Block" key="5" className={classes.collapsePanel}>
+                      <p>{textDrop}</p>
+                      </Panel>
+                    }
                 </Collapse>
             </div>
         </>

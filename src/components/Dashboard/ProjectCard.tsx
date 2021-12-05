@@ -12,7 +12,7 @@ const ProjectCard = ( props: ProjectCardProps) => {
         <label className={sliderCss.card}>
             <input name="plan" className={sliderCss.radio} type="radio"/>
             <span className={sliderCss.cardContent}>
-                <img src={props.src} alt="Image cover project" />
+                <img src={props.src} alt="Cover project" />
                 <h4>{props.title}</h4>
             </span>
         </label>

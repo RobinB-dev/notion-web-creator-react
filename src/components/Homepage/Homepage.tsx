@@ -1,8 +1,6 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import classes from "./Homepage.module.css"
 import Header from '../Header/Header'
-import SelferLogo from "../../assets/images/selferLogo.svg"
 import RoundedImageBlock  from "../Block/RoundedImageBlock/RoundedImageBlock"
 import RowImgText from "../Block/RowImgText/RowImgText"
 
@@ -42,7 +40,7 @@ const Homepage = () => {
               <h3 className={classes.heroSectionDescription}>A quick stop between Notion and the web, to make your pages 
               <span className={classes.accentColor}> stand out</span>.</h3>
               <a className={classes.heroSectionLogin} href={`${process.env.REACT_APP_BASE_URL}/oauth`}>
-                <img src={NotionLogo}></img>
+                <img src={NotionLogo} alt="logo Notion"></img>
                 <span className={classes.accentColor}>Sign in with</span>Notion
               </a>
             </div>
