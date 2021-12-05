@@ -24,7 +24,7 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [isLogged, setIsLogged] = useState(Boolean)
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -54,9 +54,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       
       if (localStorage.getItem('frontToken')) {
+        setLoading(false)
         login()
       } else {
         logout()
+      }
+
+      if (frontT === "temporary fix") {
+        setSearchParams("")
       }
     
     return;

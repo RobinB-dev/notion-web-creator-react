@@ -38,6 +38,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     navigate("projects")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   // console.log({params.tabType});
@@ -103,6 +104,7 @@ export const Tab = () => {
 
   useEffect(() => {
     fetchPages()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
