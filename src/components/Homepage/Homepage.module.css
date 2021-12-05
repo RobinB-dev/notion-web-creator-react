@@ -3,11 +3,6 @@
   color: var(--textColor2);
 }
 
-.home,
-.stepSection {
-  background: var(--backgroundColor1);
-}
-
 .bodyContainer {
   width: 100%;
   margin: 0 auto;
@@ -16,7 +11,7 @@
 
 .bodyContainer section {
   padding: 5vmin 10vmin;
-  margin: 12vmin 0px;
+  margin: 6vmin 0px;
 }
 
 .bodyContainer section:first-child {
@@ -81,27 +76,24 @@ Hero Section
   border: 1.5px solid var(--outLineButtonColor);
   padding: 10px;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  max-width: 320px;
+  margin-bottom: 5vmin;
 }
 
+.heroSectionLogin img {
+  width: 5vmin;
+  height: 5vmin;
+  margin-right: 10px;
+}
+
+.heroSectionLogin span {
+  margin-right: 5px;
+}
 .heroSectionLogin:hover {
   color: var(--textColor1);
-}
-
-.terms {
-  max-width: 300px;
-  font-size: 0.7rem;
-  color: var(--textColor1);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  line-height: 1.1;
-}
-
-.boldStar {
-  font-family: "PP Neue Montreal";
-  font-weight: 700;
-  font-size: 4rem;
-  color: var(--accentColor1);
 }
 
 .heroSectionRight {
@@ -140,18 +132,22 @@ Template Section
   justify-content: center;
 }
 
-.templateLeftCol {
-  display: flex;
-  flex-direction: column;
-}
-
-.templateLeftRow {
+.templateRow {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  /* flex-wrap: wrap; */
 }
 
+.templateRow img {
+  object-fit: contain !important;
+}
+
+.templateRow h3 {
+  text-align: center !important;
+}
+
+.templateRow .imageCaptionContainer {
+  margin: 10px 40px !important;
+}
 .templateLeftRow img {
   margin: 1vmin;
   width: 160px;
@@ -328,6 +324,7 @@ Rounded Image Block Component
   font-family: "PP Neue Montreal";
   font-weight: 700;
   font-size: 1.1rem;
+  line-height: 2.2vh;
 }
 
 .RoundedImageBlockContainer span {
