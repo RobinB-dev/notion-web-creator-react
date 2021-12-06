@@ -9,7 +9,6 @@ type BlockHeading1Props = {
     block: any
 }
 
-let styleStore = [{id:"dzeiuln", fontFam:"red"}];
 const BlockHeading1 = (props: BlockHeading1Props) => {
     const dataCtx = useContext(DataContext);
     // const [myFont, setMyFont] = useState("Roboto")
@@ -34,7 +33,7 @@ const BlockHeading1 = (props: BlockHeading1Props) => {
     useEffect(() => {
         console.log("refresh ");
         
-    }, [dataCtx.font])
+    }, [dataCtx.font, props.block.id, BlockId])
 
     console.log('ezrzerezrzer', props.block.id);
     

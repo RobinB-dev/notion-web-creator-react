@@ -17,7 +17,7 @@ import { ColorText } from "../Blocks/Headings"
 
 export const Dashboard = () => {
   const [error, setError] = useState("")
-  const { logout } = useAuth()
+  const { isLogged, logout } = useAuth()
   const navigate = useNavigate();
 
   // const location = useLocation();
@@ -30,7 +30,7 @@ export const Dashboard = () => {
 
     try {
       await logout()
-      navigate("/login")
+      navigate("/")
     } catch {
       setError("Failed to log out")
     }
@@ -39,7 +39,7 @@ export const Dashboard = () => {
   useEffect(() => {
     navigate("projects")
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [navigate])
   
   // console.log({params.tabType});
   
