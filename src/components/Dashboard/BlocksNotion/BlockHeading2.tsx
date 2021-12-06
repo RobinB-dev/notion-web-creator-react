@@ -13,8 +13,6 @@ const BlockHeading2 = (props: BlockHeading2Props) => {
     const [MyFont, setMyFont] = useState("PP Neue Montreal")
     const dataCtx = useContext(DataContext);
     const BlockId = testObj(dataCtx.activeBlock, "id")
-
-    const BlockId = testObj(dataCtx.activeBlock, "id")
     
     let newNumber = {id:BlockId, fontFam:dataCtx.font};
     let obj = dataCtx.styleStore.find((o: { id: string; }) => o.id === BlockId);

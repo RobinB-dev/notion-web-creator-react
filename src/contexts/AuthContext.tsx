@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = () => {
     setIsLogged(true)
     console.log(isLogged);
-    navigate("/dashboard/projects")
+    navigate("/")
     return;
   }
   
