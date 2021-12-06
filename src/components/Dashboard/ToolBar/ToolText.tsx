@@ -13,25 +13,25 @@ const ToolText = ({ bloctype }: ToolTextProps ) => {
     
     return (
         <>
-            {((activeObj === "heading1") || (bloctype === "general")) &&
+            {((activeObj === "heading_1") || (bloctype === "general")) &&
                 <div>
                     <h3>Heading 1</h3>
                     <FontPicker />
                 </div>
             }
-            {((activeObj === "heading2") || (bloctype === "general")) &&
+            {((activeObj === "heading_2") || (bloctype === "general")) &&
                 <div>
                     <h3>Heading 2</h3>
                     <FontPicker />
                 </div>
             }
-            {((activeObj === "heading3") || (bloctype === "general")) &&
+            {((activeObj === "heading_3") || (bloctype === "general")) &&
                 <div>
                     <h3>Heading 3</h3>
                     <FontPicker />
                 </div>
             }
-            {((activeObj === "text") || (bloctype === "general")) &&
+            {((activeObj === "paragraph") || (bloctype === "general")) &&
                 <div>
                     <h3>Heading 3</h3>
                     <FontPicker />

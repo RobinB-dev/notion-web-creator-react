@@ -48,6 +48,7 @@ export const menuToolBar = {
   heading_3: "text",
   callout: 'block',
   image: 'image',
+  paragraph: 'text',
   general: 'general',
 };
 
