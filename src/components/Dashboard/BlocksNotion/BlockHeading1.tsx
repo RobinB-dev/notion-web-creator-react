@@ -10,8 +10,8 @@ type BlockHeading1Props = {
 }
 
 const BlockHeading1 = (props: BlockHeading1Props) => {
+    const [MyFont, setMyFont] = useState("PP Neue Montreal")
     const dataCtx = useContext(DataContext);
-    // const [myFont, setMyFont] = useState("Roboto")
 
     const BlockId = testObj(dataCtx.activeBlock, "id")
     
@@ -25,24 +25,24 @@ const BlockHeading1 = (props: BlockHeading1Props) => {
             dataCtx.setStyleStore([...dataCtx.styleStore, newNumber])
         } else {
             obj.fontFam = dataCtx.font
-            // setMyFont (dataCtx.font)
         }
     }
-
-
+    
+    
     useEffect(() => {
         console.log("refresh ");
+        if (props.block.id === BlockId) {
+            setMyFont (dataCtx.font)
+        }
         
     }, [dataCtx.font, props.block.id, BlockId])
 
-    console.log('ezrzerezrzer', props.block.id);
-    
 
     return (
         <>
             <div className={classes.heading1Contain}>
                 <DataBlock id={props.block.id} block={props.block}>
-                    <h1 className={classes.heading1} style={{fontFamily: dataCtx.font}}>{props.block.content}</h1>
+                    <h1 className={classes.heading1} style={{fontFamily: MyFont}}>{props.block.content}</h1>
                 </DataBlock>
             </div>
         </>
