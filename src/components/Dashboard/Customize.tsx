@@ -1,9 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import DataContext from '../../contexts/DataContext';
 import { CreateBlock, testObj } from './BlocksNotion/CreateBlock'
-import FontPicker from './BlocksNotion/FontPicker'
 import ToolText from './ToolBar/ToolText'
-import HidePanel from './ToolBar/HidePanel'
 
 import { NotionBlock } from "../../decl/notionPage.decl";
 import { Collapse } from 'antd';
@@ -45,24 +43,35 @@ export const CustomizeMain = () => {
 
 
 export const menuToolBar = {
-  heading1: "text",
-  heading2: "text",
-  heading3: "text",
+  heading_1: "text",
+  heading_2: "text",
+  heading_3: "text",
   callout: 'block',
-  img: 'image',
+  image: 'image',
+  general: 'general',
 };
 
 export const CustomizeToolBar = () => {
   const dataCtx = useContext(DataContext);
-  const BlockType:string | undefined = testObj(menuToolBar, testObj(dataCtx.activeBlock, "obj"));
+  let BlockType:string | undefined = testObj(menuToolBar, testObj(dataCtx.activeBlock, "obj"));
   // const BlockObj = testObj(dataCtx.activeBlock, "obj")
 
 
-  console.log(typeof BlockType);
+  (BlockType === undefined) && (BlockType = "general")
+  
   
 
   useEffect(() => {
   }, [dataCtx.activeBlock])
+
+  const checkType = (blockType: any, testType: any) => {
+    for (let i = 0; i < testType.length; i++) {
+      if (testType[i] === blockType) {
+        return true
+      }
+    };
+    return false
+  }
 
     return (
         <>
@@ -74,30 +83,24 @@ export const CustomizeToolBar = () => {
                 <Collapse
                     bordered={true}
                     defaultActiveKey={['1']}
-                    expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : -90} />}
+                    expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? -90 : 90} />}
                     className={classes.myCollapse}
                 >
-                  <HidePanel display={["text", "block"]}>
-                      <Panel header="Theme" key="1" className={classes.collapsePanel}>
-                        <FontPicker />
-                      </Panel>
-                  </HidePanel>
-                    <Panel header="Text" key="2" className={classes.collapsePanel}>
+                    <Panel header="Theme" key="1" className={classes.collapsePanel}>
                       <p>{textDrop}</p>
-                      <ToolText bloctype={BlockType} />
                     </Panel>
-                    {BlockType === "text" &&
-                      <Panel header="Text" key="3" className={classes.collapsePanel}>
+                    {checkType(BlockType, ["text","general"]) &&
+                      <Panel header="Text" key="2" className={classes.collapsePanel}>
+                        <ToolText bloctype={BlockType} />
+                      </Panel>
+                    }
+                    {checkType(BlockType, ["text","block","general"]) &&
+                      <Panel header="Colors" key="3" className={classes.collapsePanel}>
                       <p>{textDrop}</p>
                       </Panel>
                     }
-                    {(BlockType === "text" || BlockType === "block") &&
-                      <Panel header="Colors" key="4" className={classes.collapsePanel}>
-                      <p>{textDrop}</p>
-                      </Panel>
-                    }
-                    {(BlockType === "image" || BlockType === "block") &&
-                      <Panel header="Block" key="5" className={classes.collapsePanel}>
+                    {checkType(BlockType, ["image","block","general"]) &&
+                      <Panel header="Block" key="4" className={classes.collapsePanel}>
                       <p>{textDrop}</p>
                       </Panel>
                     }

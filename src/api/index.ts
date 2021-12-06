@@ -7,7 +7,7 @@ export const getJsonTest = async (): Promise<any> => {
   
   try {
     const res = await axios.get(
-      `${process.env.REACT_APP_BASE_URL2}/data.json`
+      `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
       
       );
     return res.data;

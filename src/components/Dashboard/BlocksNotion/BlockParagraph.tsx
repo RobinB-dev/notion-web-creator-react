@@ -2,22 +2,21 @@ import React from 'react';
 import classes from './BlocksNotion.module.css'
 import DataBlock from './DataBlock';
 
-type BlockHeading1Props = {
+type BlockParagraphProps = {
     key: number,
     block: any
 }
 
-const BlockImage = (props: BlockHeading1Props) => {
-    
+const BlockParagraph = (props: BlockParagraphProps) => {
     return (
         <>
-            <div className={classes.blockImageContain}>
+            <div className={classes.blockParagraphContain}>
                 <DataBlock id={props.block.id} block={props.block}>
-                    <img className={classes.blockImage} src={props.block.content} alt="" />
+                    <p>{props.block.content}</p>
                 </DataBlock>
             </div>
         </>
     );
 };
 
-export default BlockImage;
+export default BlockParagraph;

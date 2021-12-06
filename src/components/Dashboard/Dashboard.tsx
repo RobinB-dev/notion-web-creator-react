@@ -97,8 +97,8 @@ export const Tab = () => {
     message.loading({ content: 'Loading...', key });
     const jsondata = await getJsonTest()
     message.success({ content: 'Loaded!', key, duration: 2 });
-    // console.log("ici ",jsondata);
-    dataCtx.setNotionData(jsondata)
+    console.log("ici ",jsondata[0]);
+    dataCtx.setNotionData(jsondata[0])
     
   };
 
