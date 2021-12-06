@@ -17,7 +17,7 @@ import { ColorText } from "../Blocks/Headings"
 
 export const Dashboard = () => {
   const [error, setError] = useState("")
-  const { isLogged, logout } = useAuth()
+  const { logout } = useAuth()
   const navigate = useNavigate();
 
   // const location = useLocation();

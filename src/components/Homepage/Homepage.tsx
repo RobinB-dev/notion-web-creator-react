@@ -5,8 +5,10 @@ import RoundedImageBlock  from "../Block/RoundedImageBlock/RoundedImageBlock"
 import RowImgText from "../Block/RowImgText/RowImgText"
 
 import NotionLogo from "../../assets/images/Notion_app_logo.png"
-
+import ImageCaption from "../Block/ImageCaption/ImageCaption"
 import templateImg1 from "../../assets/images/imageTemplate1.svg"
+import templateImg2 from "../../assets/images/imageTemplate2.svg"
+import templateImg3 from "../../assets/images/imageTemplate3.svg"
 
 
 import featureImg1 from "../../assets/images/featureImg1.svg"
@@ -16,14 +18,15 @@ import featureImg4 from "../../assets/images/featureImg4.svg"
 import featureImg5 from "../../assets/images/featureImg5.svg"
 import featureImg6 from "../../assets/images/featureImg6.svg"
 
-import ImageCaption from "../Block/ImageCaption/ImageCaption"
+
+import HeroSectionImg from "../../assets/images/heroSectionImg.png";
 import imageCaption1 from "../../assets/images/imageCaptionImg.png"
 import imageCaption2 from "../../assets/images/imageCaptionImg2.png"
 import imageCaption3 from "../../assets/images/imageCaptionImg3.png"
 
 import imageTesti1 from "../../assets/images/testiImg.png"
 import imageTesti2 from "../../assets/images/testiImg2.png"
-
+import imageTesti3 from "../../assets/images/testiImg3.png"
 
 const Homepage = () => {
 
@@ -45,29 +48,29 @@ const Homepage = () => {
               </a>
             </div>
             <div className={classes.heroSectionRight}>
-              <img src={imageCaption1} alt="Blabla"></img>
+              <img src={HeroSectionImg} alt="img caption"></img>
             </div>
           </div>
         </div>
       </section>
       <section className={classes.coloredSection}>
         <div className={classes.megaContainer}>
-          <h2 className={classes.templateSectionTitle}>Build from scratch or use our <span className={classes.accentColor}>templates</span></h2>
+          <h2 className={classes.templateSectionTitle}>From a Notion page to your own website in a<span className={classes.accentColor}>few steps</span> !</h2>
           <div className={classes.templateSectionContainer}>
               <div className={classes.templateRow}>
                 <ImageCaption
                   src={templateImg1}
                   alt="Image Caption 1"
-                  content="Edit on Notion"
+                  content="Edit content on Notion"
                 />
                 <ImageCaption
-                  src={templateImg1}
-                  alt="Image Caption 1"
+                  src={templateImg2}
+                  alt="Image Caption 2"
                   content="Customize on Selfer"
                 />
                 <ImageCaption
-                  src={templateImg1}
-                  alt="Image Caption 1"
+                  src={templateImg3}
+                  alt="Image Caption 3"
                   content="Upload your website"
                 />
               </div>
@@ -79,34 +82,34 @@ const Homepage = () => {
           <h2 className={classes.toolsSectionTitle}>Use our tools & features to customize your <span className={classes.accentColor}>Notion Page</span></h2>
           <div className={classes.toolsSectionRow}>
             <RowImgText
-              alt="Bla bla"
+              alt="Tools Images"
               img={featureImg1}
               content="Choose your colors"
             />
             <RowImgText
-              alt="Bla bla"
+              alt="Tools Images"
               img={featureImg2}
               content="Pick your own fonts"
             />
             <RowImgText
-              alt="Bla bla"
+              alt="Tools Images"
               img={featureImg3}
               content="A 100% Responsie Website"
             />
           </div>
           <div className={classes.toolsSectionRow}>
             <RowImgText
-              alt="Bla bla"
+              alt="Tools Images"
               img={featureImg4}
               content="Change & custom your domain name"
             />
             <RowImgText
-              alt="Bla bla"
+              alt="Tools Images"
               img={featureImg5}
               content="Optimize your experience with SEO"
             />
             <RowImgText
-              alt="Bla bla"
+              alt="Tools Images"
               img={featureImg6}
               content="Many more features are waiting for you !"
             />
@@ -120,17 +123,17 @@ const Homepage = () => {
           <ImageCaption
             src={imageCaption1}
             alt="Image Caption 1"
-            content="Create your project on Notion or start with one of our template"
+            content="Create your page on Notion"
           />
           <ImageCaption
             src={imageCaption2}
             alt="Image Caption 2"
-            content="Link Selfer and Notion by connect yourself on the site"
+            content="Link Selfer and Notion"
           />
           <ImageCaption
             src={imageCaption3}
             alt="Image Caption 3"
-            content="You can now custom your project by entering the edition mode"
+            content="Customize your project in edition mode"
           />
           </div>
         </div>
@@ -141,21 +144,21 @@ const Homepage = () => {
           <div className={classes.testimonialsContainer}>
             <RoundedImageBlock
               img={imageTesti1}
-              alt="Blabla"
+              alt="Testimonials Image"
               content="Des amis voulaient m'aider à faire mon site de photographie, mais pas besoin. Parce qu'avec Selfer, je sais le faire :)"
               name="Nolwenn, 32 ans"
             />
             <RoundedImageBlock
               img={imageTesti2}
-              alt="Blabla"
-              content="Je voulais faire mon portfolio mais vazy trop la flemme de coder, je passe mon temps à manger pas le temps pour ça. Cimer Selfer"
-              name="Solhimhan H8al Halhabhy3, 20 ans"
+              alt="Testimonials Image"
+              content="Je voulais faire mon portfolio mais je n'ai vraiment pas le temps d'apprendre à coder. Cimer Selfer !"
+              name="Benoît, 20 ans"
             />
             <RoundedImageBlock
-              img={imageTesti1}
-              alt="Blabla"
-              content="Des amis voulaient m'aider à faire mon site de photographie, mais pas besoin. Parce qu'avec Selfer, je sais le faire :)"
-              name="Nolwenn, 32 ans"
+              img={imageTesti3}
+              alt="Testimonials Image"
+              content="Je prends tout le temps des notes avec Notion, et maintenant je peux facilement mettre mon travail en ligne, et le rendre beau !"
+              name="José, 25 ans"
             />
           </div>
         </div>

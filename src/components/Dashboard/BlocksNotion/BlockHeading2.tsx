@@ -48,7 +48,3 @@ const BlockHeading2 = (props: BlockHeading2Props) => {
 };
 
 export default BlockHeading2;
-
-function setMyFont(font: string) {
-    throw new Error('Function not implemented.');
-}
