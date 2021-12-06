@@ -92,17 +92,27 @@ export const Tab = () => {
   const { tabType } = useParams();
   const dataCtx = useContext(DataContext);
   const key = 'updatable';
+  const [loading, setLoading] = useState(false)
 
-  const fetchPages = async () => {
-    message.loading({ content: 'Loading...', key });
-    const jsondata = await getJsonTest()
-    message.success({ content: 'Loaded!', key, duration: 2 });
-    console.log("ici ",jsondata[0]);
-    dataCtx.setNotionData(jsondata[0])
-    
-  };
 
+  
   useEffect(() => {
+    const fetchPages = async () => {
+      message.loading({ content: 'Loading...', key });
+      try {
+        setLoading(true)
+        await getJsonTest()
+        const jsondata = await getJsonTest()
+        console.log("site.json ",jsondata[0]);
+        message.success({ content: 'Loaded!', key, duration: 2 });
+        dataCtx.setNotionData(jsondata[0])
+      } catch {
+        console.log("Failed to log out")
+        console.log(loading);
+        
+      }
+      setLoading(false)
+    }
     fetchPages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -110,12 +120,14 @@ export const Tab = () => {
 
   return (
     <>
+    {!loading &&
+    <>
       <section className={classes.main}>
         <div className={classes.mainChild}>
             <header>
               <button>My cool site</button>
               <p>Welcome back&nbsp;<ColorText>User</ColorText></p>
-              <button onClick={fetchPages}>
+              <button>
                 <IconRefresh colorType={"fill"} />
                 <span>Reload</span>
               </button>
@@ -136,6 +148,8 @@ export const Tab = () => {
               </div>
           </ResizePanel>
       </section>
+      </>
+      }
     </>
   )
 }

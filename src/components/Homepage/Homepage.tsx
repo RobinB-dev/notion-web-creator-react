@@ -48,7 +48,7 @@ const Homepage = () => {
               </a>
             </div>
             <div className={classes.heroSectionRight}>
-              <img src={HeroSectionImg} alt="img caption"></img>
+              <img src={templateImg1} alt="img caption"></img>
             </div>
           </div>
         </div>
