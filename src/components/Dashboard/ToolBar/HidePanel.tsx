@@ -2,6 +2,10 @@ import React, { useContext } from 'react';
 import DataContext from '../../../contexts/DataContext';
 import { testObj } from '../BlocksNotion/CreateBlock';
 import { menuToolBar } from '../Customize';
+import { Collapse } from 'antd';
+import classes from '../Dashboard.module.css'
+
+const { Panel } = Collapse;
 
 type HidePanelProps = {
     children: React.ReactNode;
@@ -17,9 +21,9 @@ const HidePanel = ( { children, display }: HidePanelProps ) => {
     
     
     return (
-        <div>
-            {children}
-        </div>
+        <>
+
+        </>
     );
 };
 

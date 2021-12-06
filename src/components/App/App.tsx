@@ -9,8 +9,9 @@ import classes from './App.module.css'
 
 import '../../styles/reset.css';
 import 'antd/dist/antd.css';
-import '../../styles/style.css';
 import '../../styles/variables.css';
+import '../../styles/fonts.css';
+import '../../styles/style.css';
 
 
 const App = () => {

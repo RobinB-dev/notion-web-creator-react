@@ -5,12 +5,18 @@ type DataContextProps = {
     setNotionData?: any;
     activeBlock: object;
     setActiveBlock?: any;
+    styleStore: any;
+    setStyleStore?: any;
+    font: string;
+    setFont?: any;
     updateNotionData?: () => void;
   }
   
   const defaultState = {
     notionData: {obj: "ici"},
-    activeBlock: {}
+    activeBlock: {},
+    font: '',
+    styleStore: [{id:"dzeiuln", fontFam:"red"},{id:"dzeiuln", fontFam:"red"}],
   };
   
 const DataContext = createContext<DataContextProps>(defaultState);
@@ -18,6 +24,14 @@ const DataContext = createContext<DataContextProps>(defaultState);
   export const DataProvider: React.FC = ({ children }) => {
     const [notionData, setNotionData] = useState(defaultState.notionData);
     const [activeBlock, setActiveBlock] = useState(defaultState.activeBlock);
+    const [font, setFont] = useState(defaultState.font);
+    const [styleStore, setStyleStore] = useState(defaultState.styleStore);
+  //   const [data, setData] = useState({
+  //     address:{
+  //       0:{},
+  //       1:{},
+  //     }
+  //  })
 
     // console.log('my : ', activeBlock);
     
@@ -34,6 +48,10 @@ const DataContext = createContext<DataContextProps>(defaultState);
           setNotionData,
           activeBlock,
           setActiveBlock,
+          font,
+          setFont,
+          styleStore,
+          setStyleStore
         }}
       >
         {children}

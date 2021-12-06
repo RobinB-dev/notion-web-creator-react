@@ -17,7 +17,6 @@ const DataBlock = ( { children, id, block}:DataBlockProps ) => {
         e.stopPropagation();
         setActive(!active)
         !active ? dataCtx.setActiveBlock(block) : dataCtx.setActiveBlock({});
-        console.log(dataCtx.activeBlock);
     }
     
     useEffect(() => {
@@ -27,7 +26,7 @@ const DataBlock = ( { children, id, block}:DataBlockProps ) => {
             setActive(false)
         }
     }, [dataCtx.activeBlock, active, id])
-
+    
     return (
         <div className={!active ? classes.wrapper : `${classes.wrapper} ${classes.active}` } onClick={handleClick}>
             {children}

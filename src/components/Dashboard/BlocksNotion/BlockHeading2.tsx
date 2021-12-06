@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import DataContext from '../../../contexts/DataContext';
 import classes from './BlocksNotion.module.css'
 import DataBlock from './DataBlock';
 
@@ -8,6 +9,11 @@ type BlockHeading2Props = {
 }
 
 const BlockHeading2 = (props: BlockHeading2Props) => {
+    const dataCtx = useContext(DataContext);
+
+    useEffect(() => {
+    }, [dataCtx.font])
+    
     return (
         <>
             <div className={classes.heading2Contain}>

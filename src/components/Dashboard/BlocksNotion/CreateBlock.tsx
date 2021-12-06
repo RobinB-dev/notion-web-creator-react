@@ -4,12 +4,15 @@ import BlockHeading1 from "./BlockHeading1";
 import BlockHeading2 from "./BlockHeading2";
 import BlockImage from "./BlockImage";
 import BlockCallout from "./BlockCallout";
+import BlockParagraph from "./BlockParagraph";
 
 const CreateBlockLib = {
-  heading1: BlockHeading1,
-  heading2: BlockHeading2,
-  img: BlockImage,
+  heading_1: BlockHeading1,
+  heading_2: BlockHeading2,
+  heading_3: BlockHeading2,
+  image: BlockImage,
   callout: BlockCallout,
+  paragraph: BlockParagraph,
 };
 
 

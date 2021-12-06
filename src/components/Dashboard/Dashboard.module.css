@@ -282,6 +282,7 @@
   align-items: center;
   height: 100%;
   min-height: inherit;
+  font-size: 0.8rem;
 }
 
 .toolbar ol > li::marker {
@@ -300,7 +301,7 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--accentColor1);
-  font-size: 1.3em;
+  font-size: 1rem;
   content: counter(list-item);
   border: 0.1vmin solid var(--colorBorder);
   width: 4vmin;

@@ -69,7 +69,6 @@
   position: relative;
   display: flex;
   box-sizing: border-box;
-  /* flex-shrink: 1; */
   flex-grow: 0;
 }
 

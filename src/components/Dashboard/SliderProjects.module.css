@@ -88,6 +88,7 @@
   align-items: center;
   padding: 0.5vmin 1vmin;
   border-radius: 1vmin;
+  font-size: 0.8rem;
   margin-top: 1vmin;
   border: 0.1vmin solid var(--colorBorder);
   font-weight: 500;

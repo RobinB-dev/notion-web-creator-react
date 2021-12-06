@@ -24,7 +24,7 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [isLogged, setIsLogged] = useState(Boolean)
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
