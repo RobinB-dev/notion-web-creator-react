@@ -35,9 +35,9 @@ const BlockHeading1 = (props: BlockHeading1Props) => {
             setMyFont (dataCtx.font)
         }
         
-    }, [dataCtx.font])
+    }, [dataCtx.font, BlockId, props.block.id])
 
-
+ 
     return (
         <>
             <div className={classes.heading1Contain}>
