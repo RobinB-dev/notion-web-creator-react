@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import DataContext from '../../../contexts/DataContext';
 import classes from './BlocksNotion.module.css'
 import { testObj } from './CreateBlock';
