@@ -12,6 +12,7 @@ type BlockHeading2Props = {
 const BlockHeading2 = (props: BlockHeading2Props) => {
     const [MyFont, setMyFont] = useState("PP Neue Montreal")
     const dataCtx = useContext(DataContext);
+    const BlockId = testObj(dataCtx.activeBlock, "id")
 
     const BlockId = testObj(dataCtx.activeBlock, "id")
     
@@ -36,6 +37,7 @@ const BlockHeading2 = (props: BlockHeading2Props) => {
         }
         
     }, [dataCtx.font, BlockId, props.block.id])
+
     return (
         <>
             <div className={classes.heading2Contain}>
@@ -48,3 +50,7 @@ const BlockHeading2 = (props: BlockHeading2Props) => {
 };
 
 export default BlockHeading2;
+
+function setMyFont(font: string) {
+    throw new Error('Function not implemented.');
+}
