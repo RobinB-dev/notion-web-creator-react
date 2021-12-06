@@ -34,7 +34,7 @@ const Header = () => {
         <a className={classes.loginLink} href={`${process.env.REACT_APP_BASE_URL}/oauth`}><span className={classes.accentColor}>Start with </span>Notion</a>
         }
         {isLogged && 
-        <div><Link to="/dashboard/">Dashboard</Link>
+        <div><Link to="/dashboard">Dashboard</Link>
         <button className="button-link" onClick={handleLogout}>Log Out</button>
         </div>}
     </header>

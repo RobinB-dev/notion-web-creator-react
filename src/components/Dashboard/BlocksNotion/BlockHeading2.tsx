@@ -12,7 +12,6 @@ type BlockHeading2Props = {
 const BlockHeading2 = (props: BlockHeading2Props) => {
     const [MyFont, setMyFont] = useState("PP Neue Montreal")
     const dataCtx = useContext(DataContext);
-
     const BlockId = testObj(dataCtx.activeBlock, "id")
     
     let newNumber = {id:BlockId, fontFam:dataCtx.font};
@@ -35,7 +34,8 @@ const BlockHeading2 = (props: BlockHeading2Props) => {
             setMyFont (dataCtx.font)
         }
         
-    }, [dataCtx.font])
+    }, [dataCtx.font, BlockId, props.block.id])
+
     return (
         <>
             <div className={classes.heading2Contain}>

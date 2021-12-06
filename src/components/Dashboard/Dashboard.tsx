@@ -30,7 +30,7 @@ export const Dashboard = () => {
 
     try {
       await logout()
-      navigate("/login")
+      navigate("/")
     } catch {
       setError("Failed to log out")
     }
