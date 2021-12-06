@@ -12,9 +12,9 @@
 }
 
 .heading2 {
-  font-size: 4rem;
+  font-size: 3rem;
   color: var(--textColor1);
-  font-weight: 530;
+  font-weight: 500;
 }
 
 .blockImageContain {
@@ -26,6 +26,16 @@
   height: 30vmin;
   width: 100%;
   object-fit: cover;
+}
+
+.blockParagraphContain {
+  margin-bottom: 1rem;
+}
+
+.paragraphContain {
+  font-size: 1rem;
+  color: var(--textColor1);
+  font-weight: 400;
 }
 
 .blockCallout {
