@@ -6,6 +6,7 @@ import RowImgText from "../Block/RowImgText/RowImgText"
 
 import NotionLogo from "../../assets/images/Notion_app_logo.png"
 import ImageCaption from "../Block/ImageCaption/ImageCaption"
+
 import templateImg1 from "../../assets/images/imageTemplate1.svg"
 import templateImg2 from "../../assets/images/imageTemplate2.svg"
 import templateImg3 from "../../assets/images/imageTemplate3.svg"
@@ -19,7 +20,7 @@ import featureImg5 from "../../assets/images/featureImg5.svg"
 import featureImg6 from "../../assets/images/featureImg6.svg"
 
 
-import HeroSectionImg from "../../assets/images/heroSectionImg.png";
+// import HeroSectionImg from "../../assets/images/heroSectionImg.png";
 import imageCaption1 from "../../assets/images/imageCaptionImg.png"
 import imageCaption2 from "../../assets/images/imageCaptionImg2.png"
 import imageCaption3 from "../../assets/images/imageCaptionImg3.png"
