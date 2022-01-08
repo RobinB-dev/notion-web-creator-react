@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import DataContext from '../../../contexts/DataContext';
 import { testObj } from '../BlocksNotion/CreateBlock';
-import FontPicker from '../BlocksNotion/FontPicker';
+import FontPicker from './FontPicker';
 
 type ToolTextProps = {
     bloctype: string | undefined
 }
 
-const ToolText = ({ bloctype }: ToolTextProps ) => {
+const ToolText = ({ bloctype }: ToolTextProps) => {
     const dataCtx = useContext(DataContext);
     const activeObj = testObj(dataCtx.activeBlock, "obj");
-    
+
     return (
         <>
             {((activeObj === "heading_1") || (bloctype === "general")) &&

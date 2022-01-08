@@ -17,21 +17,20 @@ import '../../styles/style.css';
 const App = () => {
   return (
     <div className={classes.App}>
-        <Router>
-          <AuthProvider>
-            <DataProvider>
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path='/dashboard' element={<PrivateRoute/>}>
-                  <Route path='/dashboard' element={<Dashboard/>}>
-                    {/* <Route path='/projects' element={<Tab/>}/> */}
-                    <Route path=':tabType' element={<Tab/>}/>
-                  </Route>
+      <Router>
+        <AuthProvider>
+          <DataProvider>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path='/dashboard' element={<PrivateRoute />}>
+                <Route path='/dashboard' element={<Dashboard />}>
+                  <Route path=':tabType' element={<Tab />} />
                 </Route>
-              </Routes>
-            </DataProvider>
-          </AuthProvider>
-        </Router>
+              </Route>
+            </Routes>
+          </DataProvider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }

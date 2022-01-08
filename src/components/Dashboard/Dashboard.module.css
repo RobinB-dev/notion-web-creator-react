@@ -244,7 +244,18 @@
   height: 100%;
   position: relative;
   padding: 4vmin;
+  overflow-y: scroll;
 }
+
+.toolbar .resizeContent::-webkit-scrollbar {
+  display: none;
+}
+
+.toolbar .resizeContent {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 
 .toolbar:hover .customHandle {
   opacity: 1;
@@ -350,6 +361,16 @@
   font-family: var(--fontFamilyTitle);
 }
 
+.collapsePanel > div:nth-child(1) {
+  display: flex;
+  align-items: center !important;
+}
+
+.collapsePanel > div:nth-child(1) > div:first-child {
+  display: flex;
+  align-items: center;
+}
+
 .collapsePanel > div:nth-child(2) {
   border: none;
   border-top: 0.1vmin solid var(--colorBorder);
@@ -371,5 +392,17 @@
 /********** SELECT **********/
 
 .selectFont {
-  background: red;
+  width: 20vmin;
+}
+
+.ant-select-selector {
+  border-radius: 1vmin;
+}
+
+
+
+.barBlockTypeContainer:not(:first-child){
+  margin-top: 2vmin;
+  border-top: 0.1vmin solid var(--colorBorder);
+  /* background: coral; */
 }

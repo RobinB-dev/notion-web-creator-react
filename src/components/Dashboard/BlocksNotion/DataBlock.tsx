@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import DataContext from '../../../contexts/DataContext';
+import useCustomStyle from '../../../hooks/useCustomStyle';
 import classes from './BlocksNotion.module.css'
 import { testObj } from './CreateBlock';
 
@@ -9,16 +10,30 @@ type DataBlockProps = {
     block: {}
 }
 
-const DataBlock = ( { children, id, block}:DataBlockProps ) => {
+const DataBlock = ({ children, id, block }: DataBlockProps) => {
     const [active, setActive] = useState(false)
     const dataCtx = useContext(DataContext);
 
-    const handleClick = ( e:any ) => {
+    const {
+        borderRadius: imageBorderRadius,
+    } = useCustomStyle(id);
+
+
+    useEffect(() => {
+    }, [dataCtx.borderRadius])
+
+    const resetContext = () => {
+        dataCtx.setFontFamily("")
+        dataCtx.setBorderRadius("")
+    }
+
+    const handleClick = (e: any) => {
         e.stopPropagation();
         setActive(!active)
+        !active && resetContext();
         !active ? dataCtx.setActiveBlock(block) : dataCtx.setActiveBlock({});
     }
-    
+
     useEffect(() => {
         if (testObj(dataCtx.activeBlock, "id") === id && active) {
             setActive(true)
@@ -26,9 +41,11 @@ const DataBlock = ( { children, id, block}:DataBlockProps ) => {
             setActive(false)
         }
     }, [dataCtx.activeBlock, active, id])
-    
+
     return (
-        <div className={!active ? classes.wrapper : `${classes.wrapper} ${classes.active}` } onClick={handleClick}>
+        <div className={!active ? classes.wrapper : `${classes.wrapper} ${classes.active}`}
+            style={{ borderRadius: imageBorderRadius }}
+            onClick={handleClick}>
             {children}
         </div>
     );
