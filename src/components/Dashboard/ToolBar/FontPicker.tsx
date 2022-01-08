@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Select } from 'antd';
 import classes from '../Dashboard.module.css'
 import DataContext from '../../../contexts/DataContext';
+import { testObj } from '../BlocksNotion/CreateBlock';
 // import 'antd/lib/select/style/index.css'
 
 const { Option } = Select;
@@ -18,14 +19,23 @@ const FontList = [
 
 const FontPicker = () => {
     const dataCtx = useContext(DataContext);
+    const acitveBlockId = testObj(dataCtx.activeBlock, "id")
+    const [activeFontFamily, setActiveFontFamily] = useState("default")
+    let obj = dataCtx.styleStore.find((o: { id: string; }) => o.id === acitveBlockId);
 
-    function handleChange(value: string) {
-        dataCtx.setFont(value)
-        console.log(`selected ${value}`);
+    const handleChange = (value: string) => {
+        dataCtx.setFontFamily(value)
+        setActiveFontFamily(value)
     }
+
+    useEffect(() => {
+        if (!obj) { return }
+        setActiveFontFamily(testObj(obj, "fontFamily"))
+    }, [activeFontFamily, obj])
+
     return (
         <div>
-            <Select defaultValue={FontList[0]} className={classes.selectFont} style={{ width: 120 }} onChange={handleChange}>
+            <Select value={activeFontFamily} className={classes.selectFont} onChange={handleChange}>
                 {FontList.map((fontFamily: string, key) => <Option value={fontFamily} key={key}>{fontFamily}</Option>)}
                 {/* <Option value="jack">Jack</Option>
                 <Option value="lucy">Lucy</Option>

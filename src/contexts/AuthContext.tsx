@@ -17,8 +17,8 @@ export const useAuth = () => {
   return useContext(AuthContext)
 }
 
-type AuthProviderProps = { 
-  children: React.ReactNode 
+type AuthProviderProps = {
+  children: React.ReactNode
 }
 
 
@@ -28,14 +28,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLogged, setIsLogged] = useState(Boolean)
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   const login = () => {
     setIsLogged(true)
     console.log(isLogged);
     navigate("/dashboard/projects")
     return;
   }
-  
+
   const logout = () => {
     setIsLogged(false)
     localStorage.clear();
@@ -44,30 +44,33 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   useEffect(() => {
-      const frontT = searchParams.get("frontToken")
+    const frontT = searchParams.get("frontToken")
 
-      if (frontT) {
-        console.log("set token ");
-        localStorage.setItem('frontToken', frontT)
-        // login()
-      } else {
-        console.log("no front token ");
-      }
-      
-      if (localStorage.getItem('frontToken')) {
-        setLoading(false)
-        login()
-      } else {
-        logout()
-      }
+    if (frontT) {
+      console.log("set token ");
+      localStorage.setItem('frontToken', frontT)
+      // login()
+    } else {
+      console.log("no front token ");
+    }
 
-      if (frontT === "temporary fix") {
-        setSearchParams("")
-      }
-    
+    if (localStorage.getItem('frontToken')) {
+      setLoading(false)
+      login()
+    } else {
+      setLoading(false)
+      // login()
+      logout()
+    }
+
+    if (frontT === "temporary fix") {
+      setSearchParams("")
+    }
+
     return;
-   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
+
 
   const value = {
     currentUser,

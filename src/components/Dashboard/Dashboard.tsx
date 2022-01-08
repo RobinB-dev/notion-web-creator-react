@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext } from "react"
 import { useAuth } from "../../contexts/AuthContext"
-import { Outlet, NavLink, useNavigate, useParams, Link } from "react-router-dom"
+import { Outlet, NavLink, useNavigate, useParams, Link, useLocation, matchPath } from "react-router-dom"
 import classes from './Dashboard.module.css'
 import { IconFolder, IconCustom, IconUpload, IconLogout, IconRefresh } from '../Icons/Icons'
-import { ProjectsMain, ProjectsToolBar} from './Projects'
-import { CustomizeMain, CustomizeToolBar} from './Customize'
-import { UploadMain, UploadToolBar} from './Upload'
+import { ProjectsMain, ProjectsToolBar } from './Projects'
+import { CustomizeMain, CustomizeToolBar } from './Customize'
+import { UploadMain, UploadToolBar } from './Upload'
 import ResizePanel from "react-resize-panel-ts";
 import logo_app from "../../assets/images/logo_app_r.svg"
 import DataContext from '../../contexts/DataContext'
+import useDataApi from '../../hooks/useDataApi'
 
-import { getJsonTest } from '../../api/index'
-import { message } from 'antd';
 import 'antd/lib/message/style/index.css'
 import { ColorText } from "../Blocks/Headings"
 
 export const Dashboard = () => {
   const [error, setError] = useState("")
   const { logout } = useAuth()
+  const dataCtx = useContext(DataContext);
   const navigate = useNavigate();
 
   // const location = useLocation();
@@ -29,20 +29,29 @@ export const Dashboard = () => {
     setError("ici")
 
     try {
+      dataCtx.setIsLoading((prevState: any) => ({
+        ...prevState,
+        auth: true
+      }))
       await logout()
       navigate("/")
     } catch {
       setError("Failed to log out")
     }
+    dataCtx.setIsLoading((prevState: any) => ({
+      ...prevState,
+      auth: false
+    }))
+
   }
 
   useEffect(() => {
-    navigate("projects")
+    navigate("/dashboard/customize")
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
+
   // console.log({params.tabType});
-  
+
   // if (location.pathname.slice(-1) === "/") {
   //   location.pathname = location.pathname.slice(0, -1)
   // }
@@ -50,37 +59,37 @@ export const Dashboard = () => {
   // if (location.pathname.slice(- defaultPath.length) === defaultPath) {
   //   navigate("projects")
   // }
-  
+
 
   return (
     <div className={classes.dashboard}>
       <section>
-          {error && <div className="alert-danger">{error}</div>}
-          <nav className={classes.tabs}>
+        {error && <div className="alert-danger">{error}</div>}
+        <nav className={classes.tabs}>
           <Link to="/">
-              <img src={logo_app} className={classes.logoApp} alt="Logo Selfer" />
+            <img src={logo_app} className={classes.logoApp} alt="Logo Selfer" />
           </Link>
-            <ul>
-              <li>
-                <NavLink to='projects'>
-                  <IconFolder colorType="fill" />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='customize'>
-                  <IconCustom colorType="fill" />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='upload'>
-                  <IconUpload colorType="stroke" />
-                </NavLink>
-              </li>
-            </ul>
-            <button onClick={handleLogout}>
-              <IconLogout colorType="fill" />
-            </button>
-          </nav>
+          <ul>
+            <li>
+              <NavLink to='projects'>
+                <IconFolder colorType="fill" />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='customize'>
+                <IconCustom colorType="fill" />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='upload'>
+                <IconUpload colorType="stroke" />
+              </NavLink>
+            </li>
+          </ul>
+          <button onClick={handleLogout}>
+            <IconLogout colorType="fill" />
+          </button>
+        </nav>
       </section>
       <Outlet />
     </div>
@@ -91,65 +100,78 @@ export const Dashboard = () => {
 export const Tab = () => {
   const { tabType } = useParams();
   const dataCtx = useContext(DataContext);
-  const key = 'updatable';
-  const [loading, setLoading] = useState(false)
+  const [reloadPage, setReloadPage] = useState("customize")
+  const { pathname } = useLocation();
 
+  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
+  const [{ data, isLoading, isError }, doFetch] = useDataApi(url, { hits: [] },);
 
-  
+  !isLoading && dataCtx.setNotionData(data[0])
+
   useEffect(() => {
-    const fetchPages = async () => {
-      message.loading({ content: 'Loading...', key });
-      try {
-        setLoading(true)
-        await getJsonTest()
-        const jsondata = await getJsonTest()
-        console.log("site.json ",jsondata[0]);
-        message.success({ content: 'Loaded!', key, duration: 2 });
-        dataCtx.setNotionData(jsondata[0])
-      } catch {
-        console.log("Failed to log out")
-        console.log(loading);
-        
-      }
-      setLoading(false)
-    }
-    fetchPages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    console.log("data : ", data[0]);
+  }, [data])
+
+  useEffect(() => {
+    console.log(reloadPage, "x ", isLoading);
+
+    if (reloadPage !== "") {
+      dataCtx.setIsLoading((prevState: any) => ({
+        ...prevState,
+        [reloadPage]: isLoading
+      }))
+    }
+
+  }, [isLoading, reloadPage])
+
+
+  const handleRefresh = () => {
+    console.log("refreeesh", pathname);
+
+    if (matchPath("dashboard/projects", pathname)) {
+      doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5fRR`)
+      console.log("projects");
+    } else if (matchPath("dashboard/customize", pathname)) {
+      console.log("customize", isLoading);
+      setReloadPage("customize")
+      doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`)
+    } else {
+      console.log("dommage");
+    }
+    // dataCtx.setNotionData(data)
+  }
+
 
 
   return (
     <>
-    {!loading &&
-    <>
       <section className={classes.main}>
         <div className={classes.mainChild}>
-            <header>
-              <button>My cool site</button>
-              <p>Welcome back&nbsp;<ColorText>User</ColorText></p>
-              <button>
-                <IconRefresh colorType={"fill"} />
-                <span>Reload</span>
-              </button>
-            </header>
-            <div className={classes.content}>
-              {tabType === "projects" && <ProjectsMain />}
-              {tabType === "customize" && <CustomizeMain />}
-              {tabType === "upload" && <UploadMain />}
+          <header>
+            <button>My cool site</button>
+            <p>Welcome back&nbsp;<ColorText>User</ColorText></p>
+            <button onClick={handleRefresh}>
+              <IconRefresh colorType={"fill"} />
+              <span>Reload</span>
+            </button>
+          </header>
+          <div className={classes.content}>
+            {tabType === "projects" && <ProjectsMain />}
+            {tabType === "customize" && <CustomizeMain />}
+            {tabType === "upload" && <UploadMain />}
           </div>
         </div>
       </section>
       <section className={classes.toolbar}>
-          <ResizePanel direction="w" handleClass={classes.customHandle}>
-              <div className={classes.resizeContent}>
-                {tabType === "projects" && <ProjectsToolBar />}
-                {tabType === "customize" && <CustomizeToolBar />}
-                {tabType === "upload" && <UploadToolBar />}
-              </div>
-          </ResizePanel>
+        <ResizePanel direction="w" handleClass={classes.customHandle}>
+          <div className={classes.resizeContent}>
+            {tabType === "projects" && <ProjectsToolBar />}
+            {tabType === "customize" && <CustomizeToolBar />}
+            {tabType === "upload" && <UploadToolBar />}
+          </div>
+        </ResizePanel>
       </section>
-      </>
-      }
     </>
   )
 }
