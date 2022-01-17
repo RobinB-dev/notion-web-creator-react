@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Select } from 'antd';
-import classes from '../Dashboard.module.css'
-import DataContext from '../../../contexts/DataContext';
-import { testObj } from '../BlocksNotion/CreateBlock';
+import classes from '../../Dashboard.module.css'
+import DataContext from '../../../../contexts/DataContext';
+import { testObj } from '../../../../decl';
 // import 'antd/lib/select/style/index.css'
 
 const { Option } = Select;
@@ -22,6 +22,8 @@ const FontPicker = () => {
     const acitveBlockId = testObj(dataCtx.activeBlock, "id")
     const [activeFontFamily, setActiveFontFamily] = useState("default")
     let obj = dataCtx.styleStore.find((o: { id: string; }) => o.id === acitveBlockId);
+
+    // console.log(obj);
 
     const handleChange = (value: string) => {
         dataCtx.setFontFamily(value)

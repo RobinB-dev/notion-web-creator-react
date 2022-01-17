@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import DataContext from '../../../contexts/DataContext';
+import { pageObj, testObj } from '../../../decl';
 import useCustomStyle from '../../../hooks/useCustomStyle';
 import classes from './BlocksNotion.module.css'
-import { testObj } from './CreateBlock';
 
 type DataBlockProps = {
     children: React.ReactNode
@@ -25,17 +25,19 @@ const DataBlock = ({ children, id, block }: DataBlockProps) => {
     const resetContext = () => {
         dataCtx.setFontFamily("")
         dataCtx.setBorderRadius("")
+        dataCtx.setTextColor("")
     }
 
     const handleClick = (e: any) => {
         e.stopPropagation();
-        setActive(!active)
         !active && resetContext();
-        !active ? dataCtx.setActiveBlock(block) : dataCtx.setActiveBlock({});
+        !active ? dataCtx.setActiveBlock(block) : dataCtx.setActiveBlock(pageObj);
+        setActive(!active)
     }
 
     useEffect(() => {
         if (testObj(dataCtx.activeBlock, "id") === id && active) {
+            console.log("App");
             setActive(true)
         } else {
             setActive(false)

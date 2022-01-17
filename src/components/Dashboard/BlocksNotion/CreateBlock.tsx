@@ -5,8 +5,9 @@ import BlockHeading2 from "./BlockHeading2";
 import BlockImage from "./BlockImage";
 import BlockCallout from "./BlockCallout";
 import BlockParagraph from "./BlockParagraph";
+import { testObj } from "../../../decl";
 
-export const CreateBlockLib = {
+const CreateBlockLib = {
   heading_1: BlockHeading1,
   heading_2: BlockHeading2,
   heading_3: BlockHeading2,
@@ -16,15 +17,6 @@ export const CreateBlockLib = {
 };
 
 
-export const testObj = (o: object, search: string) => {
-  if (!o) { return }
-
-  for (const [key, value] of Object.entries(o)) {
-    if (key === search) {
-      return value
-    }
-  }
-}
 
 export const CreateBlock = (block: NotionBlock) => {
 

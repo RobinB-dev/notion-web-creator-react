@@ -1,14 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import DataContext from '../../contexts/DataContext';
-import { CreateBlock, testObj } from './BlocksNotion/CreateBlock'
-import ToolText from './ToolBar/ToolText'
-import ToolBlock from './ToolBar/ToolBlock'
+import { CreateBlock } from './BlocksNotion/CreateBlock'
+import ToolText from './ToolBar/Text/ToolText'
+import ToolBlock from './ToolBar/Block/ToolBlock'
+import ToolColor from './ToolBar/Color/ToolColor'
+import { menuToolBar } from '../../decl';
 
 import { NotionBlock } from "../../decl/notionPage.decl";
 import { Collapse } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
 import classes from './Dashboard.module.css'
 import 'antd/lib/collapse/style/index.css'
+import { testObj } from '../../decl';
 
 const { Panel } = Collapse;
 
@@ -46,15 +49,7 @@ export const CustomizeMain = () => {
 };
 
 
-export const menuToolBar = {
-  heading_1: "text",
-  heading_2: "text",
-  heading_3: "text",
-  callout: 'block',
-  image: 'image',
-  paragraph: 'text',
-  general: 'general',
-};
+
 
 export const CustomizeToolBar = () => {
   const dataCtx = useContext(DataContext);
@@ -89,7 +84,7 @@ export const CustomizeToolBar = () => {
         <div className={classes.collapseContainer}>
           <Collapse
             bordered={true}
-            defaultActiveKey={['1']}
+            defaultActiveKey={['1', '2']}
             expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? -90 : 90} />}
             className={classes.myCollapse}
           >
@@ -103,7 +98,7 @@ export const CustomizeToolBar = () => {
             }
             {checkType(BlockType, ["text", "block", "general"]) &&
               <Panel header="Colors" key="3" className={classes.collapsePanel}>
-                <p>{textDrop}</p>
+                <ToolColor bloctype={BlockType} />
               </Panel>
             }
             {checkType(BlockType, ["image", "block", "general"]) &&

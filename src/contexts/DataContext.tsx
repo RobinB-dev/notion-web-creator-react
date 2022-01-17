@@ -13,8 +13,12 @@ type DataContextProps = {
   setFontFamily?: any;
   textColor: string;
   setTextColor?: any;
+  textOpacity: string;
+  setTextOpacity?: any;
   borderRadius: string;
   setBorderRadius?: any;
+  overlayActive: boolean;
+  setOverlayActive?: any;
   updateNotionData?: () => void;
 }
 
@@ -24,8 +28,10 @@ const defaultState = {
   activeBlock: {},
   fontFamily: '',
   borderRadius: "20px",
-  textColor: "",
-  styleStore: [{ id: "dzeiuln", fontFamily: "red" }, { id: "dzeiuln", fontFamily: "red" }],
+  textColor: "000000",
+  textOpacity: "",
+  overlayActive: false,
+  styleStore: [{ id: "a0c1294e-page", fontFamily: "Roboto Mono" }, { id: "dzeiuln", fontFamily: "red" }],
 };
 
 const DataContext = createContext<DataContextProps>(defaultState);
@@ -37,6 +43,8 @@ export const DataProvider: React.FC = ({ children }) => {
   const [fontFamily, setFontFamily] = useState(defaultState.fontFamily);
   const [borderRadius, setBorderRadius] = useState(defaultState.borderRadius);
   const [textColor, setTextColor] = useState(defaultState.textColor);
+  const [textOpacity, setTextOpacity] = useState(defaultState.textOpacity);
+  const [overlayActive, setOverlayActive] = useState(defaultState.overlayActive);
   const [styleStore, setStyleStore] = useState(defaultState.styleStore);
   //   const [data, setData] = useState({
   //     address:{
@@ -44,8 +52,6 @@ export const DataProvider: React.FC = ({ children }) => {
   //       1:{},
   //     }
   //  })
-
-  // console.log('my : ', activeBlock);
 
 
   const updateNotionData = () => {
@@ -68,8 +74,12 @@ export const DataProvider: React.FC = ({ children }) => {
         setStyleStore,
         textColor,
         setTextColor,
+        textOpacity,
+        setTextOpacity,
         isLoading,
-        setIsLoading
+        setIsLoading,
+        overlayActive,
+        setOverlayActive
       }}
     >
       {children}

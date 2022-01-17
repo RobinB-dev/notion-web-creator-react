@@ -82,6 +82,10 @@
   flex-grow: 0;
 }
 
+.wrapper:hover {
+  cursor: pointer;
+}
+
 .wrapper:hover::after {
   content: "";
   position: absolute;

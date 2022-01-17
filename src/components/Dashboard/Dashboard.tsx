@@ -7,12 +7,14 @@ import { ProjectsMain, ProjectsToolBar } from './Projects'
 import { CustomizeMain, CustomizeToolBar } from './Customize'
 import { UploadMain, UploadToolBar } from './Upload'
 import ResizePanel from "react-resize-panel-ts";
+import Tooltip from "../Blocks/Tooltip"
 import logo_app from "../../assets/images/logo_app_r.svg"
 import DataContext from '../../contexts/DataContext'
 import useDataApi from '../../hooks/useDataApi'
 
 import 'antd/lib/message/style/index.css'
 import { ColorText } from "../Blocks/Headings"
+import Overlay from "./ToolBar/Overlay"
 
 export const Dashboard = () => {
   const [error, setError] = useState("")
@@ -50,6 +52,9 @@ export const Dashboard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+  }, [dataCtx.overlayActive])
+
   // console.log({params.tabType});
 
   // if (location.pathname.slice(-1) === "/") {
@@ -63,6 +68,7 @@ export const Dashboard = () => {
 
   return (
     <div className={classes.dashboard}>
+      {dataCtx.overlayActive && <Overlay />}
       <section>
         {error && <div className="alert-danger">{error}</div>}
         <nav className={classes.tabs}>
@@ -71,24 +77,32 @@ export const Dashboard = () => {
           </Link>
           <ul>
             <li>
-              <NavLink to='projects'>
-                <IconFolder colorType="fill" />
-              </NavLink>
+              <Tooltip content="projects" position="right">
+                <NavLink to='projects'>
+                  <IconFolder colorType="fill" />
+                </NavLink>
+              </Tooltip>
             </li>
             <li>
-              <NavLink to='customize'>
-                <IconCustom colorType="fill" />
-              </NavLink>
+              <Tooltip content="customize" position="right">
+                <NavLink to='customize'>
+                  <IconCustom colorType="fill" />
+                </NavLink>
+              </Tooltip>
             </li>
             <li>
-              <NavLink to='upload'>
-                <IconUpload colorType="stroke" />
-              </NavLink>
+              <Tooltip content="upload" position="right">
+                <NavLink to='upload'>
+                  <IconUpload colorType="stroke" />
+                </NavLink>
+              </Tooltip>
             </li>
           </ul>
-          <button onClick={handleLogout}>
-            <IconLogout colorType="fill" />
-          </button>
+          <Tooltip content="logout" position="right">
+            <button onClick={handleLogout}>
+              <IconLogout colorType="fill" />
+            </button>
+          </Tooltip>
         </nav>
       </section>
       <Outlet />
@@ -104,17 +118,17 @@ export const Tab = () => {
   const { pathname } = useLocation();
 
   const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
-  const [{ data, isLoading, isError }, doFetch] = useDataApi(url, { hits: [] },);
+  const [{ data, isLoading }, doFetch] = useDataApi(url, { hits: [] },);
+  // const [{ data, isLoading, isError }, doFetch] = useDataApi(url, { hits: [] },);
 
-  !isLoading && dataCtx.setNotionData(data[0])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log("data : ", data[0]);
   }, [data])
 
   useEffect(() => {
-    console.log(reloadPage, "x ", isLoading);
+    !isLoading && dataCtx.setNotionData(data[0])
+    // console.log(reloadPage, "x ", isLoading);
 
     if (reloadPage !== "") {
       dataCtx.setIsLoading((prevState: any) => ({
@@ -123,17 +137,14 @@ export const Tab = () => {
       }))
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, reloadPage])
 
 
   const handleRefresh = () => {
-    console.log("refreeesh", pathname);
-
     if (matchPath("dashboard/projects", pathname)) {
       doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5fRR`)
-      console.log("projects");
     } else if (matchPath("dashboard/customize", pathname)) {
-      console.log("customize", isLoading);
       setReloadPage("customize")
       doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`)
     } else {
