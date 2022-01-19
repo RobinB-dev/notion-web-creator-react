@@ -1,17 +1,25 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState, useEffect, createContext } from "react"
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { testObj } from "../decl";
+import useDataApi from "../hooks/useDataApi";
 
 
-// type AuthContextProps = {
-//   currentUser: any;
-//   loading: any;
-//   setLoading: any;
-//   isLogged: Boolean;
-//   login: () => void;
-//   logout: () => void;
-// }
+type AuthContextProps = {
+  currentUser: any;
+  isLogged: Boolean;
+  login: () => void;
+  logout: () => any;
+}
 
-const AuthContext = React.createContext<any | null>(null);
+const defaultState = {
+  currentUser: "",
+  isLoading: true,
+  isLogged: false,
+  login: () => { },
+  logout: () => { },
+};
+
+const AuthContext = createContext<AuthContextProps>(defaultState);
 
 export const useAuth = () => {
   return useContext(AuthContext)
@@ -23,16 +31,18 @@ type AuthProviderProps = {
 
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(false)
-  const [isLogged, setIsLogged] = useState(Boolean)
+  const [currentUser, setCurrentUser] = useState(defaultState.currentUser)
+  const [loading, setLoading] = useState(defaultState.isLoading)
+  const [isLogged, setIsLogged] = useState(defaultState.isLogged)
+  const url = `${process.env.REACT_APP_BASE_URL}/user_data?user_id=d8cb62ed-2973-45c1-8f3e-d7ccc9f0f1d1`
+  const [{ data, isLoading }, doFetch] = useDataApi(url, {},);
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const login = () => {
     setIsLogged(true)
     console.log(isLogged);
-    navigate("/dashboard/projects")
+    navigate("/dashboard/projects") // may posibliy be deleted
     return;
   }
 
@@ -42,6 +52,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     navigate("/")
     return;
   }
+
+  useEffect(() => {
+    const userFullName = testObj(data, "name")
+    if (userFullName) {
+      const firstName = userFullName.replace(/ .*/, '');
+      setCurrentUser(firstName)
+    }
+  }, [data])
 
   useEffect(() => {
     const frontT = searchParams.get("frontToken")
@@ -83,7 +101,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {(!isLoading && !loading) && children}
     </AuthContext.Provider>
   )
 }
+
+
+export default AuthContext

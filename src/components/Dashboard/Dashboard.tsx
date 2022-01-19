@@ -10,6 +10,7 @@ import ResizePanel from "react-resize-panel-ts";
 import Tooltip from "../Blocks/Tooltip"
 import logo_app from "../../assets/images/logo_app_r.svg"
 import DataContext from '../../contexts/DataContext'
+import AuthContext from '../../contexts/AuthContext'
 import useDataApi from '../../hooks/useDataApi'
 
 import 'antd/lib/message/style/index.css'
@@ -114,6 +115,7 @@ export const Dashboard = () => {
 export const Tab = () => {
   const { tabType } = useParams();
   const dataCtx = useContext(DataContext);
+  const authCtx = useContext(AuthContext);
   const [reloadPage, setReloadPage] = useState("customize")
   const { pathname } = useLocation();
 
@@ -143,7 +145,7 @@ export const Tab = () => {
 
   const handleRefresh = () => {
     if (matchPath("dashboard/projects", pathname)) {
-      doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5fRR`)
+      doFetch(`${process.env.REACT_APP_BASE_URL}/user_data?user_id=d8cb62ed-2973-45c1-8f3e-d7ccc9f0f1d1`)
     } else if (matchPath("dashboard/customize", pathname)) {
       setReloadPage("customize")
       doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`)
@@ -161,7 +163,7 @@ export const Tab = () => {
         <div className={classes.mainChild}>
           <header>
             <button>My cool site</button>
-            <p>Welcome back&nbsp;<ColorText>User</ColorText></p>
+            <p>Welcome back&nbsp;<ColorText>{authCtx.currentUser}</ColorText></p>
             <button onClick={handleRefresh}>
               <IconRefresh colorType={"fill"} />
               <span>Reload</span>
