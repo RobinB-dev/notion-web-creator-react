@@ -48,3 +48,40 @@ html {
   position: relative;
   display: flex;
 }
+.cardState.loading,
+.cardState.empty {
+  pointer-events: none;
+}
+
+.cardState.loading .image,
+.cardState.empty .image {
+  position: relative;
+}
+
+.cardState.loading .image:after,
+.cardState.empty .image:after {
+  content: "";
+  position: absolute;
+  background-color: coral;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  opacity: .7;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.cardState.ok {
+  /* background-color: rgb(255, 72, 72); */
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--backgroundColor1);
+  }
+  
+  100% {
+    background-color: var(--borderColor1);
+  }
+}

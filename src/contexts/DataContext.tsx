@@ -3,6 +3,8 @@ import React, { useState, createContext } from 'react';
 type DataContextProps = {
   notionData: object;
   setNotionData?: any;
+  notionPage: any;
+  setNotionPage?: any;
   isLoading: any;
   setIsLoading?: any;
   activeBlock: object;
@@ -24,7 +26,8 @@ type DataContextProps = {
 
 const defaultState = {
   notionData: { obj: "ici" },
-  isLoading: { auth: false, projects: false, customize: false },
+  notionPage: [],
+  isLoading: { auth: true, projects: true, customize: true },
   activeBlock: {},
   fontFamily: '',
   borderRadius: "20px",
@@ -38,6 +41,7 @@ const DataContext = createContext<DataContextProps>(defaultState);
 
 export const DataProvider: React.FC = ({ children }) => {
   const [notionData, setNotionData] = useState(defaultState.notionData);
+  const [notionPage, setNotionPage] = useState(defaultState.notionPage);
   const [isLoading, setIsLoading] = useState(defaultState.isLoading);
   const [activeBlock, setActiveBlock] = useState(defaultState.activeBlock);
   const [fontFamily, setFontFamily] = useState(defaultState.fontFamily);
@@ -64,6 +68,8 @@ export const DataProvider: React.FC = ({ children }) => {
         notionData,
         updateNotionData,
         setNotionData,
+        notionPage,
+        setNotionPage,
         activeBlock,
         setActiveBlock,
         fontFamily,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DataContext from '../../contexts/DataContext';
 import { CreateBlock } from './BlocksNotion/CreateBlock'
 import ToolText from './ToolBar/Text/ToolText'
@@ -12,6 +12,7 @@ import { CaretRightOutlined } from '@ant-design/icons';
 import classes from './Dashboard.module.css'
 import 'antd/lib/collapse/style/index.css'
 import { testObj } from '../../decl';
+import useDataApi from '../../hooks/useDataApi';
 
 const { Panel } = Collapse;
 
@@ -24,7 +25,34 @@ it can be found as a welcome guest in many households across the world.
 
 export const CustomizeMain = () => {
   const dataCtx = useContext(DataContext);
-  const isLoading = dataCtx.isLoading.customize
+  // const isLoading = dataCtx.isLoading.customize
+
+  const [isStored, setIsStored] = useState(false);
+  const reloadCustomize = dataCtx.isLoading.customize
+  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
+  const [{ data, isLoading }, doFetch] = useDataApi(url, [false],);
+
+  useEffect(() => {
+    if (reloadCustomize) {
+      doFetch(url)
+    }
+  }, [reloadCustomize])
+
+  useEffect(() => {
+    if (data[0] !== dataCtx.notionData) {
+      dataCtx.setNotionData(data[0])
+      // console.log(dataCtx.notionData, dataCtx.isLoading.customize);
+    }
+    if (data[0]) {
+
+      setIsStored(true)
+      dataCtx.setIsLoading((prevState: any) => ({
+        ...prevState,
+        customize: false
+      }))
+    }
+  }, [data])
+
 
   const DataPage = (o: object) => {
     if (testObj(o, "obj") === "page") {
@@ -34,16 +62,18 @@ export const CustomizeMain = () => {
     }
   }
 
+
   const _dataPage = DataPage(dataCtx.notionData)
 
-  useEffect(() => {
-  }, [dataCtx.notionData, isLoading])
+  // useEffect(() => {
+
+  // }, [dataCtx.notionData, isLoading])
 
   return (
     <div className={classes.notionPage}>
       {isLoading && <>Is loading</>}
-      {(!isLoading && !dataCtx.notionData) && <>No data fetch :(</>}
-      {(!isLoading && dataCtx.notionData) && _dataPage.map((block: NotionBlock) => CreateBlock(block))}
+      {(!isLoading && !isStored) && <>No data fetch :(</>}
+      {(!isLoading && isStored) && _dataPage.map((block: NotionBlock) => CreateBlock(block))}
     </div>
   )
 };
@@ -56,10 +86,7 @@ export const CustomizeToolBar = () => {
   let BlockType: string | undefined = testObj(menuToolBar, testObj(dataCtx.activeBlock, "obj"));
   // const BlockObj = testObj(dataCtx.activeBlock, "obj")
 
-
   (BlockType === undefined) && (BlockType = "general")
-
-
 
   useEffect(() => {
   }, [dataCtx.activeBlock])

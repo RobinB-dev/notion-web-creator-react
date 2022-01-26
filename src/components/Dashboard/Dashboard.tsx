@@ -116,46 +116,60 @@ export const Tab = () => {
   const { tabType } = useParams();
   const dataCtx = useContext(DataContext);
   const authCtx = useContext(AuthContext);
-  const [reloadPage, setReloadPage] = useState("customize")
   const { pathname } = useLocation();
 
-  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
-  const [{ data, isLoading }, doFetch] = useDataApi(url, { hits: [] },);
+  // const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
+  // const [{ data, isLoading }, doFetch] = useDataApi(url, { hits: [] },);
   // const [{ data, isLoading, isError }, doFetch] = useDataApi(url, { hits: [] },);
 
 
-  useEffect(() => {
-    console.log("data : ", data[0]);
-  }, [data])
+  // useEffect(() => {
+  //   console.log("data : ", data[0]);
+  //   if (matchPath("/dashboard/projects", pathname)) {
+  //     console.log("data : ", data);
+  //     console.log("projects2");
+  //     dataCtx.setNotionPage(data)
+  //     dataCtx.setIsLoading((prevState: any) => ({
+  //       ...prevState,
+  //       projects: true
+  //     }))
 
-  useEffect(() => {
-    !isLoading && dataCtx.setNotionData(data[0])
-    // console.log(reloadPage, "x ", isLoading);
+  //   } else if (matchPath("/dashboard/customize", pathname)) {
+  //     dataCtx.setNotionData(data[0])
+  //     console.log("custom2");
+  //     dataCtx.setIsLoading((prevState: any) => ({
+  //       ...prevState,
+  //       customize: isLoading
+  //     }))
 
-    if (reloadPage !== "") {
-      dataCtx.setIsLoading((prevState: any) => ({
-        ...prevState,
-        [reloadPage]: isLoading
-      }))
-    }
+  //   } else {
+  //     console.log("dommage2");
+  //   }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, reloadPage])
+  // }, [data])
+
+  // useEffect(() => {
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isLoading, reloadPage])
 
 
   const handleRefresh = () => {
     if (matchPath("dashboard/projects", pathname)) {
-      doFetch(`${process.env.REACT_APP_BASE_URL}/user_data?user_id=d8cb62ed-2973-45c1-8f3e-d7ccc9f0f1d1`)
+      dataCtx.setIsLoading((prevState: any) => ({
+        ...prevState,
+        projects: true
+      }))
     } else if (matchPath("dashboard/customize", pathname)) {
-      setReloadPage("customize")
-      doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`)
+      dataCtx.setIsLoading((prevState: any) => ({
+        ...prevState,
+        customize: true
+      }))
+      // doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`)
     } else {
       console.log("dommage");
     }
     // dataCtx.setNotionData(data)
   }
-
-
 
   return (
     <>

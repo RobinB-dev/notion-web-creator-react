@@ -143,15 +143,16 @@
   top: 0;
   right: 0;
   left: 0;
-  padding: 2vmin 8vmin 4vmin;
+  padding: 2vmin 8vmin 2vmin;
   z-index: 999;
   /* background: red; */
   /* background: rgb(246, 248, 250); */
-  /* background: linear-gradient(
+  background: linear-gradient(
     180deg,
-    rgba(246, 248, 250, 0.5) 50%,
+    rgba(246, 248, 250, 1) 10%,
+    /* rgba(246, 248, 250, 0.8) 50%, */
     rgba(246, 248, 250, 0) 100%
-  ); */
+  );
 }
 
 .main .content {
