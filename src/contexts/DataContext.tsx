@@ -25,7 +25,7 @@ type DataContextProps = {
 }
 
 const defaultState = {
-  notionData: { obj: "ici" },
+  notionData: {},
   notionPage: [],
   isLoading: { auth: true, projects: true, customize: true },
   activeBlock: {},

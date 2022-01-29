@@ -14,22 +14,27 @@ export const ProjectsMain = () => {
 
     useEffect(() => {
         if (reloadProjects) {
+            console.log("dofetch");
             doFetch(url)
         }
     }, [reloadProjects])
 
-    useEffect(() => {
-        if (data) {
-            dataCtx.setIsLoading((prevState: any) => ({
-                ...prevState,
-                projects: false
-            }))
-            dataCtx.setNotionPage(data)
-            setIsStored(true)
-        }
-    }, [data])
-
     const _dataPage = dataCtx.notionPage
+
+    useEffect(() => {
+        if (data.length !== 0) {
+            if (JSON.stringify(_dataPage) === JSON.stringify(data)) {
+                setIsStored(true)
+                dataCtx.setIsLoading((prevState: any) => ({
+                    ...prevState,
+                    projects: false
+                }))
+            } else {
+                dataCtx.setNotionPage(data)
+            }
+        }
+    }, [dataCtx.notionPage, data])
+
 
     return (
         <>
@@ -44,17 +49,18 @@ export const ProjectsMain = () => {
                 <div className={classes.divider}></div>
             </div>
             <h3 className={classes.colorH3}>Select your project</h3>
+            {isLoading && <>Is loading</>}
             <div className={classes.cardsContainer}>
                 <div className={classes.overflowScroll}>
-                    {isLoading &&
+                    {/* {isLoading &&
                         <ProjectCard
                             state={"loading"}
                             title={"Is loading"}
                             src={""}
                             emoji={"🔄"}
                             date={""} />
-                    }
-                    {(!isLoading && !isStored) &&
+                    } */}
+                    {!isStored &&
                         <ProjectCard
                             state={"empty"}
                             title={"No data fetched"}
@@ -62,7 +68,7 @@ export const ProjectsMain = () => {
                             emoji={"❌"}
                             date={""} />
                     }
-                    {(!isLoading && isStored) && _dataPage.map((block: any) =>
+                    {isStored && _dataPage.map((block: any) =>
                         block.object === "page" &&
                         <ProjectCard
                             key={block.id}

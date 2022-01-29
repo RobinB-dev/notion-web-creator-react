@@ -25,33 +25,10 @@ it can be found as a welcome guest in many households across the world.
 
 export const CustomizeMain = () => {
   const dataCtx = useContext(DataContext);
-  // const isLoading = dataCtx.isLoading.customize
-
   const [isStored, setIsStored] = useState(false);
   const reloadCustomize = dataCtx.isLoading.customize
   const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
-  const [{ data, isLoading }, doFetch] = useDataApi(url, [false],);
-
-  useEffect(() => {
-    if (reloadCustomize) {
-      doFetch(url)
-    }
-  }, [reloadCustomize])
-
-  useEffect(() => {
-    if (data[0] !== dataCtx.notionData) {
-      dataCtx.setNotionData(data[0])
-      // console.log(dataCtx.notionData, dataCtx.isLoading.customize);
-    }
-    if (data[0]) {
-
-      setIsStored(true)
-      dataCtx.setIsLoading((prevState: any) => ({
-        ...prevState,
-        customize: false
-      }))
-    }
-  }, [data])
+  const [{ data, isLoading }, doFetch] = useDataApi(url, dataCtx.notionData,);
 
 
   const DataPage = (o: object) => {
@@ -63,7 +40,33 @@ export const CustomizeMain = () => {
   }
 
 
-  const _dataPage = DataPage(dataCtx.notionData)
+  const _notionData = DataPage(dataCtx.notionData)
+
+
+  useEffect(() => {
+    console.log("dofetch custom", reloadCustomize);
+    if (reloadCustomize) {
+      doFetch(url)
+    }
+  }, [reloadCustomize])
+
+  useEffect(() => {
+    console.log("true", data);
+    if (JSON.stringify(data) !== "{}") {
+      if ((JSON.stringify(dataCtx.notionData) === JSON.stringify(data[0])) ||
+        (JSON.stringify(dataCtx.notionData) === JSON.stringify(data))) {
+        setIsStored(true)
+        dataCtx.setIsLoading((prevState: any) => ({
+          ...prevState,
+          customize: false
+        }))
+      } else if (JSON.stringify(dataCtx.notionData) === "{}") {
+        dataCtx.setNotionData(data[0])
+      } else {
+        console.log("fetch end");
+      }
+    }
+  }, [dataCtx.notionData, data])
 
   // useEffect(() => {
 
@@ -72,8 +75,8 @@ export const CustomizeMain = () => {
   return (
     <div className={classes.notionPage}>
       {isLoading && <>Is loading</>}
-      {(!isLoading && !isStored) && <>No data fetch :(</>}
-      {(!isLoading && isStored) && _dataPage.map((block: NotionBlock) => CreateBlock(block))}
+      {!isStored && <>No data fetch :(</>}
+      {isStored && _notionData.map((block: NotionBlock) => CreateBlock(block))}
     </div>
   )
 };

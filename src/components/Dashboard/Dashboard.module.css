@@ -171,6 +171,11 @@
   align-items: center;
   font-size: 1rem;
   min-height: 4.4vmin;
+  cursor: pointer;
+}
+
+.main button:hover {
+  box-shadow: 0px 0px 5px var(--colorBorder);
 }
 
 .main button svg {
