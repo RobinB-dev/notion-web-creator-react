@@ -12,13 +12,14 @@ const BlockParagraph = (props: BlockParagraphProps) => {
 
     const {
         fontFamily: paragraphFontFamily,
+        textColor: paragraphTextColor,
     } = useCustomStyle(props.block.id);
 
     return (
         <>
             <div className={classes.blockParagraphContain}>
                 <DataBlock id={props.block.id} block={props.block}>
-                    <p className={classes.paragraphContain} style={{ fontFamily: paragraphFontFamily }}>{props.block.content}</p>
+                    <p className={classes.paragraphContain} style={{ fontFamily: paragraphFontFamily, color: `#${paragraphTextColor}` }}>{props.block.content}</p>
                 </DataBlock>
             </div>
         </>

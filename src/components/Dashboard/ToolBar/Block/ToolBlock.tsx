@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import DataContext from '../../../contexts/DataContext';
-import { testObj } from '../BlocksNotion/CreateBlock';
+import DataContext from '../../../../contexts/DataContext';
 import BorderRadius from './BorderRadius';
-import classes from '../Dashboard.module.css'
+import { testObj } from '../../../../decl';
+
+import classes from '../../Dashboard.module.css'
 
 type ToolBlockProps = {
     bloctype: string | undefined

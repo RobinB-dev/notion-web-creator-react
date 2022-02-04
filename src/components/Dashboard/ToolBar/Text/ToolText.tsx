@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import DataContext from '../../../contexts/DataContext';
-import { testObj } from '../BlocksNotion/CreateBlock';
+import DataContext from '../../../../contexts/DataContext';
+import { testObj } from '../../../../decl';
 import FontPicker from './FontPicker';
 
 type ToolTextProps = {

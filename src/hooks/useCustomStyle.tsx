@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import DataContext from '../contexts/DataContext';
-import { testObj } from '../components/Dashboard/BlocksNotion/CreateBlock';
-import { menuToolBar } from '../components/Dashboard/Customize';
+import { menuToolBar } from '../decl'
+import { testObj } from '../decl';
 
 const initialCustomStyleState = {
     fontFamily: 'roboto',
-    textColor: "blue",
+    textColor: "#fefefe",
     fontWeight: "blue",
     fontSize: "12px",
     fontAlign: "left",
@@ -34,25 +34,30 @@ const useCustomStyle = (blockId: string) => {
     }
 
 
-    const updateType = (type: string) => {
-        for (let i = 0; i < testObj(TypeStyle, type).length; i++) {
-            const element = testObj(TypeStyle, type)[i];
-            const elem1 = element[0];
-            // console.log(elem1);
+    const updateType = (_type: string, _id: string) => {
+        const elemType = testObj(TypeStyle, _type)
 
-            if (element[1] === "") { return }
+        for (let i = 0; i < elemType.length; i++) {
+            const styleName = elemType[i][0];
+            const styleCtx = elemType[i][1];
+            // console.log("elemStyle : ", elemStyle, _id);
 
-            let newNumber = { id: acitveBlockId, [elem1]: element[1] };
-            // if a id doesnt exist in styleStore
-            if (obj === undefined) {
-                dataCtx.setStyleStore([...dataCtx.styleStore, newNumber])
-            } else {
-                obj[elem1] = element[1]
+            // if the value is not in the context
+            if (styleCtx !== "") {
+                let newStyle = { id: _id, [styleName]: styleCtx };
+                // if a id doesnt exist in styleStore
+                if (obj === undefined) {
+                    dataCtx.setStyleStore([...dataCtx.styleStore, newStyle])
+                } else {
+                    obj[styleName] = styleCtx
+                }
+                setCustomStyle((prevState) => ({
+                    ...prevState,
+                    [styleName]: styleCtx
+                }))
+
             }
-            setCustomStyle((prevState) => ({
-                ...prevState,
-                [elem1]: element[1]
-            }))
+
         }
     }
 
@@ -61,22 +66,26 @@ const useCustomStyle = (blockId: string) => {
 
 
         const updateStyleStore = () => {
-            if (acitveBlockId !== blockId) { return }
 
-            // console.log('BlockType ', BlockType);
-
-
-            if (BlockType === "text") {
-                updateType("text")
-            } else if (BlockType === "image") {
-                updateType("image")
-            } else {
-                console.log('not text');
+            if (acitveBlockId === 'a0c1294e-page') {
+                // console.log('page ', BlockType);
+                updateType(BlockType, acitveBlockId)
+            } else if (acitveBlockId === blockId) {
+                // console.log('BlockType ', BlockType);
+                if (BlockType === "text" || BlockType === "image") {
+                    updateType(BlockType, acitveBlockId)
+                } else {
+                    console.log('not text');
+                }
             }
+
+
+
             // console.log("refresh ", dataCtx.styleStore);
         }
 
         updateStyleStore()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dataCtx, acitveBlockId, blockId, BlockType])
 
 

@@ -14,16 +14,17 @@ const BlockHeading2 = (props: BlockHeading2Props) => {
 
     const {
         fontFamily: h2FontFamily,
+        textColor: h2TextColor,
     } = useCustomStyle(props.block.id);
 
     useEffect(() => {
-    }, [dataCtx.fontFamily])
+    }, [dataCtx.fontFamily, dataCtx.textColor])
 
     return (
         <>
             <div className={classes.heading2Contain}>
                 <DataBlock id={props.block.id} block={props.block}>
-                    <h2 className={classes.heading2} style={{ fontFamily: h2FontFamily }}>{props.block.content}</h2>
+                    <h2 className={classes.heading2} style={{ fontFamily: h2FontFamily, color: `#${h2TextColor}` }}>{props.block.content}</h2>
                 </DataBlock>
             </div>
         </>

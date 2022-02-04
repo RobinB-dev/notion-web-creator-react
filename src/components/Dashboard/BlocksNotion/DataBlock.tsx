@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import DataContext from '../../../contexts/DataContext';
+import { pageObj, testObj } from '../../../decl';
 import useCustomStyle from '../../../hooks/useCustomStyle';
 import classes from './BlocksNotion.module.css'
-import { testObj } from './CreateBlock';
 
 type DataBlockProps = {
     children: React.ReactNode
@@ -10,37 +10,37 @@ type DataBlockProps = {
     block: {}
 }
 
+// manage the state of each block
 const DataBlock = ({ children, id, block }: DataBlockProps) => {
     const [active, setActive] = useState(false)
     const dataCtx = useContext(DataContext);
 
+    // manage the border radius value of the outline, for estetic purpose
     const {
         borderRadius: imageBorderRadius,
     } = useCustomStyle(id);
 
-
     useEffect(() => {
     }, [dataCtx.borderRadius])
 
+    // reset the context value, to avoid duclication of style 
     const resetContext = () => {
         dataCtx.setFontFamily("")
         dataCtx.setBorderRadius("")
+        dataCtx.setTextColor("")
     }
 
     const handleClick = (e: any) => {
         e.stopPropagation();
-        setActive(!active)
         !active && resetContext();
-        !active ? dataCtx.setActiveBlock(block) : dataCtx.setActiveBlock({});
+        // select the page if no block is selected
+        !active ? dataCtx.setActiveBlock(block) : dataCtx.setActiveBlock(pageObj);
     }
 
+    // set active if the bock id match the active block id
     useEffect(() => {
-        if (testObj(dataCtx.activeBlock, "id") === id && active) {
-            setActive(true)
-        } else {
-            setActive(false)
-        }
-    }, [dataCtx.activeBlock, active, id])
+        testObj(dataCtx.activeBlock, "id") === id ? setActive(true) : setActive(false)
+    }, [dataCtx.activeBlock, id])
 
     return (
         <div className={!active ? classes.wrapper : `${classes.wrapper} ${classes.active}`}

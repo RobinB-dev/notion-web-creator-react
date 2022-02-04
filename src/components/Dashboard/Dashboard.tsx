@@ -7,12 +7,14 @@ import { ProjectsMain, ProjectsToolBar } from './Projects'
 import { CustomizeMain, CustomizeToolBar } from './Customize'
 import { UploadMain, UploadToolBar } from './Upload'
 import ResizePanel from "react-resize-panel-ts";
+import Tooltip from "../Blocks/Tooltip"
 import logo_app from "../../assets/images/logo_app_r.svg"
 import DataContext from '../../contexts/DataContext'
-import useDataApi from '../../hooks/useDataApi'
+import AuthContext from '../../contexts/AuthContext'
 
 import 'antd/lib/message/style/index.css'
 import { ColorText } from "../Blocks/Headings"
+import Overlay from "./ToolBar/Overlay"
 
 export const Dashboard = () => {
   const [error, setError] = useState("")
@@ -24,10 +26,7 @@ export const Dashboard = () => {
   // const defaultPath = "dashboard"
   // let params = useParams();
 
-
   async function handleLogout() {
-    setError("ici")
-
     try {
       dataCtx.setIsLoading((prevState: any) => ({
         ...prevState,
@@ -42,27 +41,28 @@ export const Dashboard = () => {
       ...prevState,
       auth: false
     }))
-
   }
 
+  // redirect to cutomize for the time of developement
   useEffect(() => {
     navigate("/dashboard/customize")
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // console.log({params.tabType});
+  useEffect(() => {
+  }, [dataCtx.overlayActive])
 
+  // console.log({params.tabType});
   // if (location.pathname.slice(-1) === "/") {
   //   location.pathname = location.pathname.slice(0, -1)
   // }
-
   // if (location.pathname.slice(- defaultPath.length) === defaultPath) {
   //   navigate("projects")
   // }
 
-
   return (
     <div className={classes.dashboard}>
+      {dataCtx.overlayActive && <Overlay />}
       <section>
         {error && <div className="alert-danger">{error}</div>}
         <nav className={classes.tabs}>
@@ -71,24 +71,32 @@ export const Dashboard = () => {
           </Link>
           <ul>
             <li>
-              <NavLink to='projects'>
-                <IconFolder colorType="fill" />
-              </NavLink>
+              <Tooltip content="projects" position="right">
+                <NavLink to='projects'>
+                  <IconFolder colorType="fill" />
+                </NavLink>
+              </Tooltip>
             </li>
             <li>
-              <NavLink to='customize'>
-                <IconCustom colorType="fill" />
-              </NavLink>
+              <Tooltip content="customize" position="right">
+                <NavLink to='customize'>
+                  <IconCustom colorType="fill" />
+                </NavLink>
+              </Tooltip>
             </li>
             <li>
-              <NavLink to='upload'>
-                <IconUpload colorType="stroke" />
-              </NavLink>
+              <Tooltip content="upload" position="right">
+                <NavLink to='upload'>
+                  <IconUpload colorType="stroke" />
+                </NavLink>
+              </Tooltip>
             </li>
           </ul>
-          <button onClick={handleLogout}>
-            <IconLogout colorType="fill" />
-          </button>
+          <Tooltip content="logout" position="right">
+            <button onClick={handleLogout}>
+              <IconLogout colorType="fill" />
+            </button>
+          </Tooltip>
         </nav>
       </section>
       <Outlet />
@@ -100,49 +108,25 @@ export const Dashboard = () => {
 export const Tab = () => {
   const { tabType } = useParams();
   const dataCtx = useContext(DataContext);
-  const [reloadPage, setReloadPage] = useState("customize")
+  const authCtx = useContext(AuthContext);
   const { pathname } = useLocation();
 
-  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
-  const [{ data, isLoading, isError }, doFetch] = useDataApi(url, { hits: [] },);
-
-  !isLoading && dataCtx.setNotionData(data[0])
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log("data : ", data[0]);
-  }, [data])
-
-  useEffect(() => {
-    console.log(reloadPage, "x ", isLoading);
-
-    if (reloadPage !== "") {
+  // determine which tab is active when refreshing
+  const handleRefresh = () => {
+    if (matchPath("dashboard/projects", pathname)) {
       dataCtx.setIsLoading((prevState: any) => ({
         ...prevState,
-        [reloadPage]: isLoading
+        projects: true
       }))
-    }
-
-  }, [isLoading, reloadPage])
-
-
-  const handleRefresh = () => {
-    console.log("refreeesh", pathname);
-
-    if (matchPath("dashboard/projects", pathname)) {
-      doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5fRR`)
-      console.log("projects");
     } else if (matchPath("dashboard/customize", pathname)) {
-      console.log("customize", isLoading);
-      setReloadPage("customize")
-      doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`)
+      dataCtx.setIsLoading((prevState: any) => ({
+        ...prevState,
+        customize: true
+      }))
     } else {
-      console.log("dommage");
+      console.log("other");
     }
-    // dataCtx.setNotionData(data)
   }
-
-
 
   return (
     <>
@@ -150,10 +134,10 @@ export const Tab = () => {
         <div className={classes.mainChild}>
           <header>
             <button>My cool site</button>
-            <p>Welcome back&nbsp;<ColorText>User</ColorText></p>
+            <p>Welcome back&nbsp;<ColorText>{authCtx.currentUser}</ColorText></p>
             <button onClick={handleRefresh}>
               <IconRefresh colorType={"fill"} />
-              <span>Reload</span>
+              {dataCtx.isLoading.api ? <span>Is loading</span> : <span>Refresh</span>}
             </button>
           </header>
           <div className={classes.content}>

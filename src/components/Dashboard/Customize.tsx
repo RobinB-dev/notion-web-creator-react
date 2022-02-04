@@ -1,14 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DataContext from '../../contexts/DataContext';
-import { CreateBlock, testObj } from './BlocksNotion/CreateBlock'
-import ToolText from './ToolBar/ToolText'
-import ToolBlock from './ToolBar/ToolBlock'
+import { CreateBlock } from './BlocksNotion/CreateBlock'
+import ToolText from './ToolBar/Text/ToolText'
+import ToolBlock from './ToolBar/Block/ToolBlock'
+import ToolColor from './ToolBar/Color/ToolColor'
+import { menuToolBar } from '../../decl';
 
 import { NotionBlock } from "../../decl/notionPage.decl";
 import { Collapse } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
 import classes from './Dashboard.module.css'
 import 'antd/lib/collapse/style/index.css'
+import { testObj } from '../../decl';
+import useDataApi from '../../hooks/useDataApi';
 
 const { Panel } = Collapse;
 
@@ -21,7 +25,12 @@ it can be found as a welcome guest in many households across the world.
 
 export const CustomizeMain = () => {
   const dataCtx = useContext(DataContext);
-  const isLoading = dataCtx.isLoading.customize
+  const [isStored, setIsStored] = useState(false);
+  const reloadCustomize = dataCtx.isLoading.customize
+  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=${"c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f"}`
+  const { setIsLoading, setNotionData, notionData } = dataCtx;
+  const [{ data, isLoading }, doFetch] = useDataApi(url, notionData,);
+
 
   const DataPage = (o: object) => {
     if (testObj(o, "obj") === "page") {
@@ -31,40 +40,72 @@ export const CustomizeMain = () => {
     }
   }
 
-  const _dataPage = DataPage(dataCtx.notionData)
+
+  const _notionData = DataPage(notionData)
+
 
   useEffect(() => {
-  }, [dataCtx.notionData, isLoading])
+    // console.log(`fetch : ${process.env.REACT_APP_BASE_URL}/notion_data?code=${dataCtx.selectPageId}`);
+    if (reloadCustomize) {
+      doFetch(url)
+    }
+  }, [reloadCustomize, doFetch, url])
+
+  useEffect(() => {
+
+    // will be modified
+    const handleDataChange = () => {
+      if (JSON.stringify(data) === "{}") { return }
+
+      // if data context is empty
+      if (JSON.stringify(notionData) === "{}") {
+        setNotionData(data[0])
+      } else if ((JSON.stringify(notionData) === JSON.stringify(data[0])) ||
+        (JSON.stringify(notionData) === JSON.stringify(data))) {
+        // if data and data context are the same
+        setIsStored(true)
+        setIsLoading((prevState: any) => ({
+          ...prevState,
+          customize: false
+        }))
+      } else {
+        // console.log("fetch end");
+      }
+    }
+    handleDataChange()
+
+  }, [setNotionData, notionData, data, setIsLoading])
+
+  // store the api loading state in the context
+  useEffect(() => {
+    const apiIsLoading = () => {
+      setIsLoading((prevState: any) => ({
+        ...prevState,
+        api: isLoading
+      }))
+    }
+    apiIsLoading()
+
+  }, [isLoading, setIsLoading])
 
   return (
     <div className={classes.notionPage}>
-      {isLoading && <>Is loading</>}
-      {(!isLoading && !dataCtx.notionData) && <>No data fetch :(</>}
-      {(!isLoading && dataCtx.notionData) && _dataPage.map((block: NotionBlock) => CreateBlock(block))}
+      {/* {isLoading && <>Is loading</>} */}
+      {!isStored && <>No data fetch :(</>}
+      {isStored && _notionData.map((block: NotionBlock) => CreateBlock(block))}
     </div>
   )
 };
 
 
-export const menuToolBar = {
-  heading_1: "text",
-  heading_2: "text",
-  heading_3: "text",
-  callout: 'block',
-  image: 'image',
-  paragraph: 'text',
-  general: 'general',
-};
+
 
 export const CustomizeToolBar = () => {
   const dataCtx = useContext(DataContext);
   let BlockType: string | undefined = testObj(menuToolBar, testObj(dataCtx.activeBlock, "obj"));
   // const BlockObj = testObj(dataCtx.activeBlock, "obj")
 
-
   (BlockType === undefined) && (BlockType = "general")
-
-
 
   useEffect(() => {
   }, [dataCtx.activeBlock])
@@ -89,7 +130,7 @@ export const CustomizeToolBar = () => {
         <div className={classes.collapseContainer}>
           <Collapse
             bordered={true}
-            defaultActiveKey={['1']}
+            defaultActiveKey={['1', '2']}
             expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? -90 : 90} />}
             className={classes.myCollapse}
           >
@@ -103,7 +144,7 @@ export const CustomizeToolBar = () => {
             }
             {checkType(BlockType, ["text", "block", "general"]) &&
               <Panel header="Colors" key="3" className={classes.collapsePanel}>
-                <p>{textDrop}</p>
+                <ToolColor bloctype={BlockType} />
               </Panel>
             }
             {checkType(BlockType, ["image", "block", "general"]) &&

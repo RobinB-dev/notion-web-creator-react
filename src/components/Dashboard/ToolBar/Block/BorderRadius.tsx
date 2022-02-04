@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { InputNumber } from 'antd';
-import classes from '../Dashboard.module.css'
-import DataContext from '../../../contexts/DataContext';
-import { testObj } from '../BlocksNotion/CreateBlock';
+import classes from '../../Dashboard.module.css'
+import DataContext from '../../../../contexts/DataContext';
+import { testObj } from '../../../../decl';
 
 
 const BorderRadius = () => {
