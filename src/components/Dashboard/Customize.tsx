@@ -27,8 +27,9 @@ export const CustomizeMain = () => {
   const dataCtx = useContext(DataContext);
   const [isStored, setIsStored] = useState(false);
   const reloadCustomize = dataCtx.isLoading.customize
-  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
-  const [{ data, isLoading }, doFetch] = useDataApi(url, dataCtx.notionData,);
+  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=${"c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f"}`
+  const { setIsLoading, setNotionData, notionData } = dataCtx;
+  const [{ data, isLoading }, doFetch] = useDataApi(url, notionData,);
 
 
   const DataPage = (o: object) => {
@@ -40,41 +41,56 @@ export const CustomizeMain = () => {
   }
 
 
-  const _notionData = DataPage(dataCtx.notionData)
+  const _notionData = DataPage(notionData)
 
 
   useEffect(() => {
-    console.log("dofetch custom", reloadCustomize);
+    // console.log(`fetch : ${process.env.REACT_APP_BASE_URL}/notion_data?code=${dataCtx.selectPageId}`);
     if (reloadCustomize) {
       doFetch(url)
     }
-  }, [reloadCustomize])
+  }, [reloadCustomize, doFetch, url])
 
   useEffect(() => {
-    console.log("true", data);
-    if (JSON.stringify(data) !== "{}") {
-      if ((JSON.stringify(dataCtx.notionData) === JSON.stringify(data[0])) ||
-        (JSON.stringify(dataCtx.notionData) === JSON.stringify(data))) {
+
+    // will be modified
+    const handleDataChange = () => {
+      if (JSON.stringify(data) === "{}") { return }
+
+      // if data context is empty
+      if (JSON.stringify(notionData) === "{}") {
+        setNotionData(data[0])
+      } else if ((JSON.stringify(notionData) === JSON.stringify(data[0])) ||
+        (JSON.stringify(notionData) === JSON.stringify(data))) {
+        // if data and data context are the same
         setIsStored(true)
-        dataCtx.setIsLoading((prevState: any) => ({
+        setIsLoading((prevState: any) => ({
           ...prevState,
           customize: false
         }))
-      } else if (JSON.stringify(dataCtx.notionData) === "{}") {
-        dataCtx.setNotionData(data[0])
       } else {
-        console.log("fetch end");
+        // console.log("fetch end");
       }
     }
-  }, [dataCtx.notionData, data])
+    handleDataChange()
 
-  // useEffect(() => {
+  }, [setNotionData, notionData, data, setIsLoading])
 
-  // }, [dataCtx.notionData, isLoading])
+  // store the api loading state in the context
+  useEffect(() => {
+    const apiIsLoading = () => {
+      setIsLoading((prevState: any) => ({
+        ...prevState,
+        api: isLoading
+      }))
+    }
+    apiIsLoading()
+
+  }, [isLoading, setIsLoading])
 
   return (
     <div className={classes.notionPage}>
-      {isLoading && <>Is loading</>}
+      {/* {isLoading && <>Is loading</>} */}
       {!isStored && <>No data fetch :(</>}
       {isStored && _notionData.map((block: NotionBlock) => CreateBlock(block))}
     </div>

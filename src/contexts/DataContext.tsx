@@ -3,8 +3,10 @@ import React, { useState, createContext } from 'react';
 type DataContextProps = {
   notionData: object;
   setNotionData?: any;
-  notionPage: any;
-  setNotionPage?: any;
+  notionPages: any;
+  setNotionPages?: any;
+  selectPageId: string;
+  setSelectPageId?: any;
   isLoading: any;
   setIsLoading?: any;
   activeBlock: object;
@@ -26,7 +28,8 @@ type DataContextProps = {
 
 const defaultState = {
   notionData: {},
-  notionPage: [],
+  notionPages: [],
+  selectPageId: "",
   isLoading: { auth: true, projects: true, customize: true },
   activeBlock: {},
   fontFamily: '',
@@ -41,7 +44,8 @@ const DataContext = createContext<DataContextProps>(defaultState);
 
 export const DataProvider: React.FC = ({ children }) => {
   const [notionData, setNotionData] = useState(defaultState.notionData);
-  const [notionPage, setNotionPage] = useState(defaultState.notionPage);
+  const [notionPages, setNotionPages] = useState(defaultState.notionPages);
+  const [selectPageId, setSelectPageId] = useState(defaultState.selectPageId);
   const [isLoading, setIsLoading] = useState(defaultState.isLoading);
   const [activeBlock, setActiveBlock] = useState(defaultState.activeBlock);
   const [fontFamily, setFontFamily] = useState(defaultState.fontFamily);
@@ -68,8 +72,10 @@ export const DataProvider: React.FC = ({ children }) => {
         notionData,
         updateNotionData,
         setNotionData,
-        notionPage,
-        setNotionPage,
+        notionPages,
+        setNotionPages,
+        selectPageId,
+        setSelectPageId,
         activeBlock,
         setActiveBlock,
         fontFamily,

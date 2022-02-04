@@ -10,30 +10,44 @@ export const ProjectsMain = () => {
     const [isStored, setIsStored] = useState(false);
     const reloadProjects = dataCtx.isLoading.projects
     const url = `${process.env.REACT_APP_BASE_URL}/workspace_info?code=5d4c18c3-8247-43d6-8c77-1f12411671bc`
-    const [{ data, isLoading }, doFetch] = useDataApi(url, dataCtx.notionPage,);
+    const [{ data, isLoading }, doFetch] = useDataApi(url, dataCtx.notionPages,);
+    const { setIsLoading, setNotionPages, notionPages } = dataCtx;
 
     useEffect(() => {
         if (reloadProjects) {
-            console.log("dofetch");
+            // console.log("dofetch");
             doFetch(url)
         }
-    }, [reloadProjects])
-
-    const _dataPage = dataCtx.notionPage
+    }, [reloadProjects, doFetch, url])
 
     useEffect(() => {
         if (data.length !== 0) {
-            if (JSON.stringify(_dataPage) === JSON.stringify(data)) {
+            if (JSON.stringify(notionPages) === JSON.stringify(data)) {
                 setIsStored(true)
-                dataCtx.setIsLoading((prevState: any) => ({
+                setIsLoading((prevState: any) => ({
                     ...prevState,
                     projects: false
                 }))
             } else {
-                dataCtx.setNotionPage(data)
+                console.log("data: ", data);
+
+                setNotionPages(data)
             }
         }
-    }, [dataCtx.notionPage, data])
+    }, [data, setIsLoading, setNotionPages, notionPages])
+
+    // store the api loading state in the context
+
+    useEffect(() => {
+        const apiIsLoading = () => {
+            setIsLoading((prevState: any) => ({
+                ...prevState,
+                api: isLoading
+            }))
+        }
+        apiIsLoading()
+
+    }, [isLoading, setIsLoading])
 
 
     return (
@@ -49,7 +63,6 @@ export const ProjectsMain = () => {
                 <div className={classes.divider}></div>
             </div>
             <h3 className={classes.colorH3}>Select your project</h3>
-            {isLoading && <>Is loading</>}
             <div className={classes.cardsContainer}>
                 <div className={classes.overflowScroll}>
                     {/* {isLoading &&
@@ -62,30 +75,24 @@ export const ProjectsMain = () => {
                     } */}
                     {!isStored &&
                         <ProjectCard
+                            id={"noData"}
                             state={"empty"}
                             title={"No data fetched"}
                             src={""}
                             emoji={"❌"}
                             date={""} />
                     }
-                    {isStored && _dataPage.map((block: any) =>
+                    {isStored && notionPages.map((block: any) =>
                         block.object === "page" &&
                         <ProjectCard
                             key={block.id}
+                            id={block.id}
                             state={"ok"}
                             title={block.title}
                             src={block.cover}
                             emoji={block.emoji}
                             date={block.last_edited_time} />
                     )}
-                    {/* <ProjectCard
-                        title="My super site"
-                        src="https://picsum.photos/300/300"
-                        date="string" />
-                    <ProjectCard
-                        title="My super site"
-                        src="https://picsum.photos/200/500"
-                        date="string" /> */}
                 </div>
             </div>
         </>

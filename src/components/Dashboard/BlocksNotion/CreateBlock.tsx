@@ -7,6 +7,7 @@ import BlockCallout from "./BlockCallout";
 import BlockParagraph from "./BlockParagraph";
 import { testObj } from "../../../decl";
 
+// associate notion block with react component
 const CreateBlockLib = {
   heading_1: BlockHeading1,
   heading_2: BlockHeading2,
@@ -20,26 +21,26 @@ const CreateBlockLib = {
 
 export const CreateBlock = (block: NotionBlock) => {
 
-
-  // console.log(typeof testObj(CreateBlockLib, block.childrens));
-
-  if (typeof testObj(CreateBlockLib, block.obj) !== "undefined") {
-    if (block.childrens?.length === 0) {
-      return React.createElement(testObj(CreateBlockLib, block.obj), {
-        key: block.id,
-        block: block
-      });
-    } else {
-      return React.createElement(testObj(CreateBlockLib, block.obj), {
-        key: block.id,
-        block: block,
-        childrens: block.childrens
-      });
-    }
+  // if type of block does not exist in CreateBlockLib
+  if (typeof testObj(CreateBlockLib, block.obj) === "undefined") {
+    return React.createElement(
+      () => <div>The obj {block.obj} does not exist.</div>,
+      { key: block.id }
+    );
   }
 
-  return React.createElement(
-    () => <div>The obj {block.obj} has not been created yet.</div>,
-    { key: block.id }
-  );
+  // if block does not have childrens
+  if (block.childrens?.length === 0) {
+    // create a react element with the block
+    return React.createElement(testObj(CreateBlockLib, block.obj), {
+      key: block.id,
+      block: block
+    });
+  } else {
+    return React.createElement(testObj(CreateBlockLib, block.obj), {
+      key: block.id,
+      block: block,
+      childrens: block.childrens
+    });
+  }
 };

@@ -10,7 +10,7 @@ import classes from '../../Dashboard.module.css'
 const ColorBar = () => {
     const dataCtx = useContext(DataContext);
     const [toogleColor, setToogleColor] = useState(false)
-    const [opacity, setOpacity] = useState(100)
+    // const [opacity, setOpacity] = useState(100)
     const [barColor, setBarColor] = useState("000000")
 
     const acitveBlockId = testObj(dataCtx.activeBlock, "id")
@@ -32,7 +32,7 @@ const ColorBar = () => {
     }
 
     function onChange(value: number) {
-        setOpacity(value / 100)
+        // setOpacity(value / 100)
     }
 
     // useEffect(() => {

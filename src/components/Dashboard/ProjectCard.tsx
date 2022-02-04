@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import sliderCss from './SliderProjects.module.css'
 import defaultImage from '../../assets/images/dafault_image_page.png';
+import DataContext from '../../contexts/DataContext';
 
 type ProjectCardProps = {
+    id: string;
     state: string;
     title: string;
     src: string;
@@ -11,6 +13,7 @@ type ProjectCardProps = {
 }
 
 const ProjectCard = (props: ProjectCardProps) => {
+    const dataCtx = useContext(DataContext);
     const [image, setImage] = useState(defaultImage)
 
     const { state } = props;
@@ -18,8 +21,13 @@ const ProjectCard = (props: ProjectCardProps) => {
         (props.src !== "") && setImage(props.src);
     }, [props.src])
 
+    const onClick = () => {
+        dataCtx.setSelectPageId(props.id);
+    }
+
     return (
-        <label className={`${sliderCss.card} ${state} cardState`}>
+        <label className={`${sliderCss.card} ${state} cardState`}
+            onClick={onClick}>
             <input name="plan" className={sliderCss.radio} type="radio" />
             <span className={sliderCss.cardContent}>
                 <span>{props.emoji}</span>

@@ -11,7 +11,6 @@ import Tooltip from "../Blocks/Tooltip"
 import logo_app from "../../assets/images/logo_app_r.svg"
 import DataContext from '../../contexts/DataContext'
 import AuthContext from '../../contexts/AuthContext'
-import useDataApi from '../../hooks/useDataApi'
 
 import 'antd/lib/message/style/index.css'
 import { ColorText } from "../Blocks/Headings"
@@ -27,10 +26,7 @@ export const Dashboard = () => {
   // const defaultPath = "dashboard"
   // let params = useParams();
 
-
   async function handleLogout() {
-    setError("ici")
-
     try {
       dataCtx.setIsLoading((prevState: any) => ({
         ...prevState,
@@ -45,9 +41,9 @@ export const Dashboard = () => {
       ...prevState,
       auth: false
     }))
-
   }
 
+  // redirect to cutomize for the time of developement
   useEffect(() => {
     navigate("/dashboard/customize")
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,15 +53,12 @@ export const Dashboard = () => {
   }, [dataCtx.overlayActive])
 
   // console.log({params.tabType});
-
   // if (location.pathname.slice(-1) === "/") {
   //   location.pathname = location.pathname.slice(0, -1)
   // }
-
   // if (location.pathname.slice(- defaultPath.length) === defaultPath) {
   //   navigate("projects")
   // }
-
 
   return (
     <div className={classes.dashboard}>
@@ -118,41 +111,7 @@ export const Tab = () => {
   const authCtx = useContext(AuthContext);
   const { pathname } = useLocation();
 
-  // const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`
-  // const [{ data, isLoading }, doFetch] = useDataApi(url, { hits: [] },);
-  // const [{ data, isLoading, isError }, doFetch] = useDataApi(url, { hits: [] },);
-
-
-  // useEffect(() => {
-  //   console.log("data : ", data[0]);
-  //   if (matchPath("/dashboard/projects", pathname)) {
-  //     console.log("data : ", data);
-  //     console.log("projects2");
-  //     dataCtx.setNotionPage(data)
-  //     dataCtx.setIsLoading((prevState: any) => ({
-  //       ...prevState,
-  //       projects: true
-  //     }))
-
-  //   } else if (matchPath("/dashboard/customize", pathname)) {
-  //     dataCtx.setNotionData(data[0])
-  //     console.log("custom2");
-  //     dataCtx.setIsLoading((prevState: any) => ({
-  //       ...prevState,
-  //       customize: isLoading
-  //     }))
-
-  //   } else {
-  //     console.log("dommage2");
-  //   }
-
-  // }, [data])
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isLoading, reloadPage])
-
-
+  // determine which tab is active when refreshing
   const handleRefresh = () => {
     if (matchPath("dashboard/projects", pathname)) {
       dataCtx.setIsLoading((prevState: any) => ({
@@ -164,11 +123,9 @@ export const Tab = () => {
         ...prevState,
         customize: true
       }))
-      // doFetch(`${process.env.REACT_APP_BASE_URL}/notion_data?code=c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f`)
     } else {
-      console.log("dommage");
+      console.log("other");
     }
-    // dataCtx.setNotionData(data)
   }
 
   return (
@@ -180,7 +137,7 @@ export const Tab = () => {
             <p>Welcome back&nbsp;<ColorText>{authCtx.currentUser}</ColorText></p>
             <button onClick={handleRefresh}>
               <IconRefresh colorType={"fill"} />
-              <span>Reload</span>
+              {dataCtx.isLoading.api ? <span>Is loading</span> : <span>Refresh</span>}
             </button>
           </header>
           <div className={classes.content}>

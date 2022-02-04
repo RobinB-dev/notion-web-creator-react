@@ -34,26 +34,26 @@ const useCustomStyle = (blockId: string) => {
     }
 
 
-    const updateType = (type: string) => {
+    const updateType = (_type: string, _id: string) => {
+        const elemType = testObj(TypeStyle, _type)
 
-        for (let i = 0; i < testObj(TypeStyle, type).length; i++) {
-            const elemType = testObj(TypeStyle, type)[i];
-            // const elemType[0] = elemType[0];
-            // console.log(elemType);
-            // console.log("elemType : ", elemType, acitveBlockId);
+        for (let i = 0; i < elemType.length; i++) {
+            const styleName = elemType[i][0];
+            const styleCtx = elemType[i][1];
+            // console.log("elemStyle : ", elemStyle, _id);
 
             // if the value is not in the context
-            if (elemType[1] !== "") {
-                let newStyle = { id: acitveBlockId, [elemType[0]]: elemType[1] };
+            if (styleCtx !== "") {
+                let newStyle = { id: _id, [styleName]: styleCtx };
                 // if a id doesnt exist in styleStore
                 if (obj === undefined) {
                     dataCtx.setStyleStore([...dataCtx.styleStore, newStyle])
                 } else {
-                    obj[elemType[0]] = elemType[1]
+                    obj[styleName] = styleCtx
                 }
                 setCustomStyle((prevState) => ({
                     ...prevState,
-                    [elemType[0]]: elemType[1]
+                    [styleName]: styleCtx
                 }))
 
             }
@@ -68,13 +68,12 @@ const useCustomStyle = (blockId: string) => {
         const updateStyleStore = () => {
 
             if (acitveBlockId === 'a0c1294e-page') {
-                console.log("acitvePage");
+                // console.log('page ', BlockType);
+                updateType(BlockType, acitveBlockId)
             } else if (acitveBlockId === blockId) {
-                console.log('BlockType ', BlockType);
-                if (BlockType === "text") {
-                    updateType("text")
-                } else if (BlockType === "image") {
-                    updateType("image")
+                // console.log('BlockType ', BlockType);
+                if (BlockType === "text" || BlockType === "image") {
+                    updateType(BlockType, acitveBlockId)
                 } else {
                     console.log('not text');
                 }

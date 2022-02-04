@@ -6,5 +6,6 @@ export const menuToolBar = {
     image: 'image',
     paragraph: 'text',
     general: 'general',
+    page: 'general',
 };
 

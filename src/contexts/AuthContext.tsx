@@ -35,13 +35,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(defaultState.isLoading)
   const [isLogged, setIsLogged] = useState(defaultState.isLogged)
   const url = `${process.env.REACT_APP_BASE_URL}/user_data?user_id=d8cb62ed-2973-45c1-8f3e-d7ccc9f0f1d1`
-  const [{ data, isLoading }, doFetch] = useDataApi(url, {},);
+  const [{ data, isLoading },] = useDataApi(url, {},);
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const login = () => {
     setIsLogged(true)
-    console.log(isLogged);
+    // console.log(isLogged);
     navigate("/dashboard/projects") // may posibliy be deleted
     return;
   }
