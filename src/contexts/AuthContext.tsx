@@ -73,12 +73,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     if (localStorage.getItem('frontToken')) {
-      setLoading(false)
+      setLoading(true)
       login()
     } else {
       setLoading(false)
-      login()
-      // logout()
+      // login()
+      logout()
     }
 
     if (frontT === "temporary fix") {
