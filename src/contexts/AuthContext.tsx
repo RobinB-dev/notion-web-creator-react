@@ -77,8 +77,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       login()
     } else {
       setLoading(false)
-      login()
-      // logout()
+      // login()
+      logout()
     }
 
     if (frontT === "temporary fix") {
