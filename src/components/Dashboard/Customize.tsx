@@ -27,9 +27,13 @@ export const CustomizeMain = () => {
   const dataCtx = useContext(DataContext);
   const [isStored, setIsStored] = useState(false);
   const reloadCustomize = dataCtx.isLoading.customize
-  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=${"c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f"}`
+  const url = `${process.env.REACT_APP_BASE_URL_API}/notion_data?code=${"c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f"}`
   const { setIsLoading, setNotionData, notionData } = dataCtx;
   const [{ data, isLoading }, doFetch] = useDataApi(url, notionData,);
+
+  console.log(process.env.REACT_APP_BASE_URL_API);
+  console.log(url, notionData);
+
 
 
   const DataPage = (o: object) => {
@@ -45,7 +49,7 @@ export const CustomizeMain = () => {
 
 
   useEffect(() => {
-    // console.log(`fetch : ${process.env.REACT_APP_BASE_URL}/notion_data?code=${dataCtx.selectPageId}`);
+    // console.log(`fetch : ${process.env.REACT_APP_BASE_URL_API}/notion_data?code=${dataCtx.selectPageId}`);
     if (reloadCustomize) {
       doFetch(url)
     }

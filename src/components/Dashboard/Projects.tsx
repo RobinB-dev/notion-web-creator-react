@@ -9,7 +9,7 @@ export const ProjectsMain = () => {
     const dataCtx = useContext(DataContext);
     const [isStored, setIsStored] = useState(false);
     const reloadProjects = dataCtx.isLoading.projects
-    const url = `${process.env.REACT_APP_BASE_URL}/workspace_info?code=5d4c18c3-8247-43d6-8c77-1f12411671bc`
+    const url = `${process.env.REACT_APP_BASE_URL_API}/workspace_info?code=5d4c18c3-8247-43d6-8c77-1f12411671bc`
     const [{ data, isLoading }, doFetch] = useDataApi(url, dataCtx.notionPages,);
     const { setIsLoading, setNotionPages, notionPages } = dataCtx;
 
