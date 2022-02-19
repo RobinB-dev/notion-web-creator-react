@@ -31,11 +31,6 @@ export const CustomizeMain = () => {
   const { setIsLoading, setNotionData, notionData } = dataCtx;
   const [{ data, isLoading }, doFetch] = useDataApi(url, notionData,);
 
-  console.log(process.env.REACT_APP_BASE_URL_API);
-  console.log(url, notionData);
-
-
-
   const DataPage = (o: object) => {
     if (testObj(o, "obj") === "page") {
       // const pageName = testObj(o, "name");

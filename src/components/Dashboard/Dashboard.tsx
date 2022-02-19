@@ -14,7 +14,7 @@ import AuthContext from '../../contexts/AuthContext'
 
 import 'antd/lib/message/style/index.css'
 import { ColorText } from "../Blocks/Headings"
-import Overlay from "./ToolBar/Overlay"
+import { Overlay, InfoModal } from "./Overlay/Overlay"
 
 export const Dashboard = () => {
   const [error, setError] = useState("")
@@ -26,6 +26,7 @@ export const Dashboard = () => {
   // const defaultPath = "dashboard"
   // let params = useParams();
 
+  // this function is called when the user clicks on the logo
   async function handleLogout() {
     try {
       dataCtx.setIsLoading((prevState: any) => ({
@@ -60,8 +61,10 @@ export const Dashboard = () => {
   //   navigate("projects")
   // }
 
+
   return (
     <div className={classes.dashboard}>
+      <InfoModal />
       {dataCtx.overlayActive && <Overlay />}
       <section>
         {error && <div className="alert-danger">{error}</div>}

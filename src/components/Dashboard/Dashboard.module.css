@@ -524,12 +524,3 @@
   border: 0.1rem solid var(--colorBorder);
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99;
-  /* background: #00000015; */
-}
