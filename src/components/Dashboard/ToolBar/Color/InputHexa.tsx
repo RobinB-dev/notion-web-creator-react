@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import classes from '../../Dashboard.module.css'
+import styles from '../ToolBar.module.css'
 
 const InputHexa = (props: any) => {
     const [colorValue, setColorValue] = useState(props.value)
@@ -35,7 +35,7 @@ const InputHexa = (props: any) => {
 
     return (
         <div
-            className={classes.colorInput}
+            className={styles.colorInput}
             data-prefix="#"
             data-suggest={colorSuggest}>
             <input type="text"

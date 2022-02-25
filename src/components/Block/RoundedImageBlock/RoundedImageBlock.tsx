@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from "../../Homepage/Homepage.module.css";
+import styles from "../../Homepage/Homepage.module.css";
 
-type roundedImageProps ={
+type roundedImageProps = {
     img: string
     alt: string
     content: string
@@ -9,8 +9,8 @@ type roundedImageProps ={
 }
 const RoundedImageBlock = (props: roundedImageProps) => {
     return (
-        <div className={classes.RoundedImageBlockContainer}>
-            <img className={classes.roundedBlockImg} src={props.img} alt={props.alt}></img>
+        <div className={styles.RoundedImageBlockContainer}>
+            <img className={styles.roundedBlockImg} src={props.img} alt={props.alt}></img>
             <div>
                 <p>{props.content}</p>
                 <span>{props.name}</span>

@@ -1,4 +1,5 @@
 import React, { useState, createContext } from 'react';
+import { pageObj } from '../decl';
 
 type DataContextProps = {
   notionData: object;
@@ -19,6 +20,8 @@ type DataContextProps = {
   setTextColor?: any;
   textOpacity: string;
   setTextOpacity?: any;
+  theme: string;
+  setTheme?: any;
   borderRadius: string;
   setBorderRadius?: any;
   overlayActive: boolean;
@@ -31,13 +34,14 @@ const defaultState = {
   notionPages: [],
   selectPageId: "",
   isLoading: { auth: true, projects: true, customize: true },
-  activeBlock: {},
+  activeBlock: pageObj,
   fontFamily: '',
-  borderRadius: "20px",
-  textColor: "000000",
+  borderRadius: "",
+  textColor: "",
   textOpacity: "",
+  theme: "",
   overlayActive: false,
-  styleStore: [{ id: "a0c1294e-page", fontFamily: "Roboto Mono" }, { id: "dzeiuln", fontFamily: "red" }],
+  styleStore: [{ id: "dzeiuln", fontFamily: "red" }],
 };
 
 const DataContext = createContext<DataContextProps>(defaultState);
@@ -52,6 +56,7 @@ export const DataProvider: React.FC = ({ children }) => {
   const [borderRadius, setBorderRadius] = useState(defaultState.borderRadius);
   const [textColor, setTextColor] = useState(defaultState.textColor);
   const [textOpacity, setTextOpacity] = useState(defaultState.textOpacity);
+  const [theme, setTheme] = useState(defaultState.theme);
   const [overlayActive, setOverlayActive] = useState(defaultState.overlayActive);
   const [styleStore, setStyleStore] = useState(defaultState.styleStore);
   //   const [data, setData] = useState({
@@ -60,7 +65,6 @@ export const DataProvider: React.FC = ({ children }) => {
   //       1:{},
   //     }
   //  })
-
 
   const updateNotionData = () => {
     setNotionData({ obj: "la" });
@@ -88,6 +92,8 @@ export const DataProvider: React.FC = ({ children }) => {
         setTextColor,
         textOpacity,
         setTextOpacity,
+        theme,
+        setTheme,
         isLoading,
         setIsLoading,
         overlayActive,

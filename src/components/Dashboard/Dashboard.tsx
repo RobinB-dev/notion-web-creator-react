@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 import { Outlet, NavLink, useNavigate, useParams, Link, useLocation, matchPath } from "react-router-dom"
-import classes from './Dashboard.module.css'
+import styles from './Dashboard.module.css'
 import { IconFolder, IconCustom, IconUpload, IconLogout, IconRefresh } from '../Icons/Icons'
 import { ProjectsMain, ProjectsToolBar } from './Projects'
 import { CustomizeMain, CustomizeToolBar } from './Customize'
@@ -63,14 +63,14 @@ export const Dashboard = () => {
 
 
   return (
-    <div className={classes.dashboard}>
+    <div className={styles.dashboard}>
       <InfoModal />
       {dataCtx.overlayActive && <Overlay />}
       <section>
         {error && <div className="alert-danger">{error}</div>}
-        <nav className={classes.tabs}>
+        <nav className={styles.tabs}>
           <Link to="/">
-            <img src={logo_app} className={classes.logoApp} alt="Logo Selfer" />
+            <img src={logo_app} className={styles.logoApp} alt="Logo Selfer" />
           </Link>
           <ul>
             <li>
@@ -133,8 +133,8 @@ export const Tab = () => {
 
   return (
     <>
-      <section className={classes.main}>
-        <div className={classes.mainChild}>
+      <section className={styles.main}>
+        <div className={styles.mainChild}>
           <header>
             <button>My cool site</button>
             <p>Welcome back&nbsp;<ColorText>{authCtx.currentUser}</ColorText></p>
@@ -143,16 +143,16 @@ export const Tab = () => {
               {dataCtx.isLoading.api ? <span>Is loading</span> : <span>Refresh</span>}
             </button>
           </header>
-          <div className={classes.content}>
+          <div className={styles.content}>
             {tabType === "projects" && <ProjectsMain />}
             {tabType === "customize" && <CustomizeMain />}
             {tabType === "upload" && <UploadMain />}
           </div>
         </div>
       </section>
-      <section className={classes.toolbar}>
-        <ResizePanel direction="w" handleClass={classes.customHandle}>
-          <div className={classes.resizeContent}>
+      <section className={styles.toolbar}>
+        <ResizePanel direction="w" handleClass={styles.customHandle}>
+          <div className={styles.resizeContent}>
             {tabType === "projects" && <ProjectsToolBar />}
             {tabType === "customize" && <CustomizeToolBar />}
             {tabType === "upload" && <UploadToolBar />}

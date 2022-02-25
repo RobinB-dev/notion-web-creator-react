@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import classes from "./Header.module.css"
+import styles from "./Header.module.css"
 import logo_app from "../../assets/images/selferLogo.svg"
 
 const Header = () => {
@@ -25,17 +25,17 @@ const Header = () => {
   }, [isLogged])
 
   return (
-    <header className={classes.header}>
+    <header className={styles.header}>
       {error && <div className="danger">{error}</div>}
-        <Link to="/">
-            <img src={logo_app} alt="" />
-        </Link>
-        {!isLogged &&
-        <a className={classes.loginLink} href={`${process.env.REACT_APP_BASE_URL}/oauth`}><span className={classes.accentColor}>Start with </span>Notion</a>
-        }
-        {isLogged && 
+      <Link to="/">
+        <img src={logo_app} alt="" />
+      </Link>
+      {!isLogged &&
+        <a className={styles.loginLink} href={`${process.env.REACT_APP_BASE_URL}/oauth`}><span className={styles.accentColor}>Start with </span>Notion</a>
+      }
+      {isLogged &&
         <div><Link to="/dashboard/projects">Dashboard</Link>
-        <button className="button-link" onClick={handleLogout}>Log Out</button>
+          <button className="button-link" onClick={handleLogout}>Log Out</button>
         </div>}
     </header>
   )

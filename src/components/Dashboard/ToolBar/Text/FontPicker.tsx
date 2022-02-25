@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Select } from 'antd';
-import classes from '../../Dashboard.module.css'
+import styles from '../ToolBar.module.css'
 import DataContext from '../../../../contexts/DataContext';
 import { testObj } from '../../../../decl';
 // import 'antd/lib/select/style/index.css'
@@ -37,7 +37,7 @@ const FontPicker = () => {
 
     return (
         <div>
-            <Select value={activeFontFamily} className={classes.selectFont} onChange={handleChange}>
+            <Select value={activeFontFamily} className={styles.selectFont} onChange={handleChange}>
                 {FontList.map((fontFamily: string, key) => <Option value={fontFamily} key={key}>{fontFamily}</Option>)}
                 {/* <Option value="jack">Jack</Option>
                 <Option value="lucy">Lucy</Option>

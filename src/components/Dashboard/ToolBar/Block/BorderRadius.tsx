@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { InputNumber } from 'antd';
-import classes from '../../Dashboard.module.css'
+import styles from '../ToolBar.module.css'
 import DataContext from '../../../../contexts/DataContext';
 import { testObj } from '../../../../decl';
 
@@ -26,7 +26,7 @@ const BorderRadius = () => {
     }, [inputValue, obj])
 
     return (
-        <div className={classes.borderRadius}>
+        <div className={styles.borderRadius}>
             <h4>Border radius</h4>
             <InputNumber min={1} max={1000} value={inputValue} onChange={handleChange} />
         </div>

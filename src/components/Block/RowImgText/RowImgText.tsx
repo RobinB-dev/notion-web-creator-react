@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "../../Homepage/Homepage.module.css";
+import styles from "../../Homepage/Homepage.module.css";
 
 type rowImgTextProps = {
     img: string
@@ -8,7 +8,7 @@ type rowImgTextProps = {
 }
 const RowImgText = (props: rowImgTextProps) => {
     return (
-        <div className={classes.rowImgTextContainer}>
+        <div className={styles.rowImgTextContainer}>
             <img alt={props.alt} src={props.img}></img>
             <p>{props.content}</p>
         </div>

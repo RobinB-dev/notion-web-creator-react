@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import DataContext from '../../../contexts/DataContext';
 import { pageObj, testObj } from '../../../decl';
 import useCustomStyle from '../../../hooks/useCustomStyle';
-import classes from './BlocksNotion.module.css'
+import styles from './BlocksNotion.module.css'
 
 type DataBlockProps = {
     children: React.ReactNode
@@ -28,6 +28,7 @@ const DataBlock = ({ children, id, block }: DataBlockProps) => {
         dataCtx.setFontFamily("")
         dataCtx.setBorderRadius("")
         dataCtx.setTextColor("")
+        dataCtx.setTheme("")
     }
 
     const handleClick = (e: any) => {
@@ -43,7 +44,7 @@ const DataBlock = ({ children, id, block }: DataBlockProps) => {
     }, [dataCtx.activeBlock, id])
 
     return (
-        <div className={!active ? classes.wrapper : `${classes.wrapper} ${classes.active}`}
+        <div className={!active ? styles.wrapper : `${styles.wrapper} ${styles.active}`}
             style={{ borderRadius: imageBorderRadius }}
             onClick={handleClick}>
             {children}

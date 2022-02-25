@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import DataContext from '../../../../contexts/DataContext';
 import { testObj } from '../../../../decl';
-import classes from '../../Dashboard.module.css'
+import styles from '../ToolBar.module.css'
 import ColorBar from './ColorBar';
 
 type ToolColorProps = {
@@ -15,25 +15,25 @@ const ToolColor = ({ bloctype }: ToolColorProps) => {
     return (
         <>
             {((activeObj === "heading_1") || (bloctype === "general")) &&
-                <div className={classes.barBlockColorContainer}>
+                <div className={styles.barBlockColorContainer}>
                     <h3>H1</h3>
                     <ColorBar />
                 </div>
             }
             {((activeObj === "heading_2") || (bloctype === "general")) &&
-                <div className={classes.barBlockColorContainer}>
+                <div className={styles.barBlockColorContainer}>
                     <h3>H2</h3>
                     <ColorBar />
                 </div>
             }
             {((activeObj === "heading_3") || (bloctype === "general")) &&
-                <div className={classes.barBlockColorContainer}>
+                <div className={styles.barBlockColorContainer}>
                     <h3>H3</h3>
                     <ColorBar />
                 </div>
             }
             {((activeObj === "paragraph") || (bloctype === "general")) &&
-                <div className={classes.barBlockColorContainer}>
+                <div className={styles.barBlockColorContainer}>
                     <h3>Paragraph</h3>
                     <ColorBar />
                 </div>

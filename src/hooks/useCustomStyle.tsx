@@ -4,12 +4,13 @@ import { menuToolBar } from '../decl'
 import { testObj } from '../decl';
 
 const initialCustomStyleState = {
-    fontFamily: 'roboto',
+    fontFamily: 'default',
     textColor: "#fefefe",
     fontWeight: "blue",
     fontSize: "12px",
     fontAlign: "left",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    theme: "default"
 };
 
 const useCustomStyle = (blockId: string) => {
@@ -20,19 +21,22 @@ const useCustomStyle = (blockId: string) => {
 
     let obj = dataCtx.styleStore.find((o: { id: string; }) => o.id === acitveBlockId);
 
+
     const TypeStyle = {
         text: [
             ["fontFamily", dataCtx.fontFamily],
-            ["textColor", dataCtx.textColor]],
+            ["textColor", dataCtx.textColor],
+            ["theme", dataCtx.theme]],
         block: [
             ["borderRadius", dataCtx.borderRadius]],
         image: [
-            ["borderRadius", dataCtx.borderRadius]],
+            ["borderRadius", dataCtx.borderRadius],
+            ["theme", dataCtx.theme]],
         general: [
             ["fontFamily", dataCtx.fontFamily],
-            ["textColor", dataCtx.textColor]]
+            ["textColor", dataCtx.textColor],
+            ["theme", dataCtx.theme]]
     }
-
 
     const updateType = (_type: string, _id: string) => {
         const elemType = testObj(TypeStyle, _type)
@@ -95,7 +99,8 @@ const useCustomStyle = (blockId: string) => {
         fontWeight: customStyle.fontWeight,
         fontSize: customStyle.fontSize,
         fontAlign: customStyle.fontAlign,
-        borderRadius: customStyle.borderRadius
+        borderRadius: customStyle.borderRadius,
+        theme: customStyle.theme
     };
 };
 

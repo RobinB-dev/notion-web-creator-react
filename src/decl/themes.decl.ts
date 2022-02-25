@@ -7,5 +7,5 @@ export const themes = {
 export const pageObj = {
     obj: 'page',
     id: 'a0c1294e-page',
-    style: 'style1',
+    theme: 'default',
 }

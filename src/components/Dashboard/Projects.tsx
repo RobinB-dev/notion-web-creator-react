@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import classes from './Dashboard.module.css'
+import styles from './Dashboard.module.css'
 import { Heading1, ColorText, Subtitle1 } from '../Blocks/Headings'
 import ProjectCard from "./ProjectCard";
 import DataContext from "../../contexts/DataContext";
@@ -52,7 +52,7 @@ export const ProjectsMain = () => {
 
     return (
         <>
-            <div className={classes.textContainer}>
+            <div className={styles.textContainer}>
                 <Heading1>
                     Let’s start editing !
                 </Heading1>
@@ -60,11 +60,11 @@ export const ProjectsMain = () => {
                     You can find your most recent projects here.
                     If you want to start with a new page, follow the instructions on the <ColorText>right panel</ColorText>.
                 </Subtitle1>
-                <div className={classes.divider}></div>
+                <div className={styles.divider}></div>
             </div>
-            <h3 className={classes.colorH3}>Select your project</h3>
-            <div className={classes.cardsContainer}>
-                <div className={classes.overflowScroll}>
+            <h3 className={styles.colorH3}>Select your project</h3>
+            <div className={styles.cardsContainer}>
+                <div className={styles.overflowScroll}>
                     {/* {isLoading &&
                         <ProjectCard
                             state={"loading"}
@@ -102,8 +102,8 @@ export const ProjectsMain = () => {
 export const ProjectsToolBar = () => {
     return (
         <>
-            <h2 className={classes.colorH2}>Need a hand ?</h2>
-            <div className={classes.divider}></div>
+            <h2 className={styles.colorH2}>Need a hand ?</h2>
+            <div className={styles.divider}></div>
             <p>Don’t forget to add pages to your workspace before creating a new project !</p>
             <ol>
                 <li><span>Go to&nbsp;<a href="https://www.notion.so/">Notion</a></span></li>

@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import DataContext from '../../../../contexts/DataContext';
 import BorderRadius from './BorderRadius';
 import { testObj } from '../../../../decl';
-
-import classes from '../../Dashboard.module.css'
+import styles from '../ToolBar.module.css'
 
 type ToolBlockProps = {
     bloctype: string | undefined
@@ -16,13 +15,13 @@ const ToolBlock = ({ bloctype }: ToolBlockProps) => {
     return (
         <>
             {((activeObj === "image") || (bloctype === "general")) &&
-                <div className={classes.barBlockTypeContainer}>
+                <div className={styles.barBlockTypeContainer}>
                     <h3>Image</h3>
                     <BorderRadius />
                 </div>
             }
             {((activeObj === "callout") || (bloctype === "general")) &&
-                <div className={classes.barBlockTypeContainer}>
+                <div className={styles.barBlockTypeContainer}>
                     <h3>Callout</h3>
                     <BorderRadius />
                 </div>

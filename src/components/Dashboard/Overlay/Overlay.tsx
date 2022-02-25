@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import DataContext from '../../../contexts/DataContext';
-import classes from './Overlay.module.css'
+import styles from './Overlay.module.css'
 
 export const Overlay = () => {
     const dataCtx = useContext(DataContext);
@@ -10,7 +10,7 @@ export const Overlay = () => {
     }
 
     return (
-        <div className={classes.overlay}
+        <div className={styles.overlay}
             onClick={onClick}>
         </div>
     );
@@ -37,9 +37,9 @@ export const InfoModal = () => {
     return (
         <>
             {!isDisabled &&
-                <div className={classes.overlay}
+                <div className={styles.overlayModal}
                     onClick={onClick}>
-                    <div className={classes.modal}>
+                    <div className={styles.modal}>
                         <span>🚧</span>Work in progress.<span>🚧</span>
                     </div>
                 </div>

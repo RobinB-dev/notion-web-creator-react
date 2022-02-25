@@ -4,7 +4,7 @@ import DataContext from '../../../../contexts/DataContext';
 import { testObj } from '../../../../decl';
 import InputHexa from './InputHexa'
 import { Input, InputNumber } from 'antd';
-import classes from '../../Dashboard.module.css'
+import styles from '../ToolBar.module.css'
 
 
 const ColorBar = () => {
@@ -12,6 +12,7 @@ const ColorBar = () => {
     const [toogleColor, setToogleColor] = useState(false)
     // const [opacity, setOpacity] = useState(100)
     const [barColor, setBarColor] = useState("000000")
+    // const [barColor, setBarColor] = useState("")
 
     const acitveBlockId = testObj(dataCtx.activeBlock, "id")
     let obj = dataCtx.styleStore.find((o: { id: string; }) => o.id === acitveBlockId);
@@ -59,7 +60,7 @@ const ColorBar = () => {
     return (
         <>
             <Input.Group compact>
-                <button className={classes.colorButton} onClick={onClick}><div style={{ background: "#" + barColor }}></div></button>
+                <button className={styles.colorButton} onClick={onClick}><div style={{ background: "#" + barColor }}></div></button>
                 <InputHexa value={barColor} setValue={changeColor} />
                 <InputNumber
                     defaultValue={100}

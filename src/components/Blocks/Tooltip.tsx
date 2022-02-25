@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "./Tooltip.module.css"
+import styles from "./Tooltip.module.css"
 
 
 type DataBlockProps = {
@@ -11,9 +11,9 @@ type DataBlockProps = {
 
 const Tooltip = ({ children, content, position }: DataBlockProps) => {
     return (
-        <div className={classes.relative}>
+        <div className={styles.relative}>
             {children}
-            <div className={classes.tooltip} style={{ [position]: "-0.8rem" }}>{content}</div>
+            <div className={styles.tooltip} style={{ [position]: "-0.8rem" }}>{content}</div>
         </div>
     );
 };
