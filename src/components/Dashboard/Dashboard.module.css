@@ -354,17 +354,19 @@
 .notionPage.theme2 {
   position: relative;
   /* font-size: clamp(11px, 1.4vmin, 2vmax); */
-  /* background-image: url("../../assets/images/dotCell.svg"); */
+  background-image: linear-gradient(transparent, transparent 0.9px, rgb(255, 255, 255) 0.9px, rgb(255, 255, 255) 5px), linear-gradient(to right, rgb(200, 195, 199), rgb(200, 195, 199) 0.9px, rgb(255, 255, 255) 0.9px, rgb(255, 255, 255) 5px);
+  background-position: 37px 43px;
+  background-size: 10px 10px;
 }
 
-.notionPage.electric::before {
+.notionPage.theme2::before {
   position: absolute;
   content: "";
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../../assets/images/dotCell.svg");
+  /* background-image: url("../../assets/images/dotCell.svg"); */
   opacity: 0.5;
 }
 

@@ -14,11 +14,12 @@ type DataBlockProps = {
 const DataBlock = ({ children, id, block }: DataBlockProps) => {
     const [active, setActive] = useState(false)
     const dataCtx = useContext(DataContext);
+    const obj = testObj(block, "obj")
 
     // manage the border radius value of the outline, for estetic purpose
     const {
         borderRadius: imageBorderRadius,
-    } = useCustomStyle(id);
+    } = useCustomStyle(obj, id);
 
     useEffect(() => {
     }, [dataCtx.borderRadius])
@@ -34,6 +35,7 @@ const DataBlock = ({ children, id, block }: DataBlockProps) => {
     const handleClick = (e: any) => {
         e.stopPropagation();
         !active && resetContext();
+
         // select the page if no block is selected
         !active ? dataCtx.setActiveBlock(block) : dataCtx.setActiveBlock(pageObj);
     }

@@ -16,24 +16,39 @@ const FontList = [
     "Ubuntu",
 ]
 
+type FontPickerProps = {
+    type: string
+}
 
-const FontPicker = () => {
+
+const FontPicker = ({ type }: FontPickerProps) => {
     const dataCtx = useContext(DataContext);
+    const activeObj = testObj(dataCtx.activeBlock, "obj")
     const acitveBlockId = testObj(dataCtx.activeBlock, "id")
     const [activeFontFamily, setActiveFontFamily] = useState("default")
     let obj = dataCtx.styleStore.find((o: { id: string; }) => o.id === acitveBlockId);
 
-    // console.log(obj);
 
     const handleChange = (value: string) => {
-        dataCtx.setFontFamily(value)
+        // dataCtx.setFontFamily(value)
+
+        if (activeObj === "page") {
+            dataCtx.setFontFamily({ [type]: value })
+        } else {
+            dataCtx.setFontFamily({ select: value })
+        }
         setActiveFontFamily(value)
     }
 
     useEffect(() => {
         if (!obj) { return }
-        setActiveFontFamily(testObj(obj, "fontFamily"))
-    }, [activeFontFamily, obj])
+
+        if (activeObj === "page") {
+            setActiveFontFamily(testObj(obj[type], "fontFamily"))
+        } else {
+            setActiveFontFamily(testObj(obj, "fontFamily"))
+        }
+    }, [activeFontFamily, obj, activeObj, type])
 
     return (
         <div>

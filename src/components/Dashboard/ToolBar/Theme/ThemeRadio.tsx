@@ -21,7 +21,7 @@ const ThemeRadio = () => {
         if (!obj) {
             setActiveTheme("default")
         } else {
-            setActiveTheme(testObj(obj, "theme"))
+            // setActiveTheme(testObj(obj, "theme"))
         }
     }, [activeTheme, obj])
 

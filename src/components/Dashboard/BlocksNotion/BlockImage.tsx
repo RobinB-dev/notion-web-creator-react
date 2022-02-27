@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import DataContext from '../../../contexts/DataContext';
 import useCustomStyle from '../../../hooks/useCustomStyle';
 import styles from './BlocksNotion.module.css'
 import DataBlock from './DataBlock';
@@ -8,17 +9,22 @@ type BlockHeading1Props = {
     block: any
 }
 
-const BlockImage = (props: BlockHeading1Props) => {
+const BlockImage = ({ block }: BlockHeading1Props) => {
+    const dataCtx = useContext(DataContext);
 
     const {
         borderRadius: imageBorderRadius,
         theme: imageTheme,
-    } = useCustomStyle(props.block.id);
+    } = useCustomStyle(block.obj, block.id);
+
+    useEffect(() => {
+    }, [dataCtx.theme])
+
 
     const Theme1 = () => {
         return (
             <div className={styles.themeWrapper}>
-                <img className={styles.blockImage} src={props.block.content} alt="" style={{ borderRadius: imageBorderRadius }} />
+                <img className={styles.blockImage} src={block.content} alt="" style={{ borderRadius: imageBorderRadius }} />
             </div>
         );
     }
@@ -26,7 +32,7 @@ const BlockImage = (props: BlockHeading1Props) => {
     const Theme2 = () => {
         return (
             <div className={styles.themeWrapper} style={{ fontFamily: "Roboto Mono" }}>
-                <img className={styles.blockImage} src={props.block.content} alt="" style={{ borderRadius: imageBorderRadius }} />
+                <img className={styles.blockImage} src={block.content} alt="" style={{ borderRadius: imageBorderRadius }} />
                 <div className={styles.imageDotsFrame}></div>
             </div>
         );
@@ -36,7 +42,7 @@ const BlockImage = (props: BlockHeading1Props) => {
     return (
         <>
             <div className={styles.blockImageContain}>
-                <DataBlock id={props.block.id} block={props.block}>
+                <DataBlock id={block.id} block={block}>
                     {imageTheme === "default" && Theme1()}
                     {imageTheme === "theme1" && Theme1()}
                     {imageTheme === "theme2" && Theme2()}

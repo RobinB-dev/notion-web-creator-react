@@ -7,7 +7,11 @@ import { Input, InputNumber } from 'antd';
 import styles from '../ToolBar.module.css'
 
 
-const ColorBar = () => {
+type ColorBarProps = {
+    type: string
+}
+
+const ColorBar = ({ type }: ColorBarProps) => {
     const dataCtx = useContext(DataContext);
     const [toogleColor, setToogleColor] = useState(false)
     // const [opacity, setOpacity] = useState(100)
@@ -24,7 +28,12 @@ const ColorBar = () => {
 
     const changeColor = (color: any) => {
         setBarColor(color)
-        dataCtx.setTextColor(color);
+
+        if (testObj(dataCtx.activeBlock, "obj") === "page") {
+            dataCtx.setTextColor({ [type]: [color] })
+        } else {
+            dataCtx.setTextColor({ select: color })
+        }
     }
 
     function onClick() {
@@ -48,6 +57,7 @@ const ColorBar = () => {
 
     // useEffect(() => {
     //     addAlpha(dataCtx.textColor, opacity)
+    //     // OLD METHOD
     //     dataCtx.setTextOpacity(addAlpha(dataCtx.textColor, opacity))
     // }, [dataCtx.textColor, dataCtx.textOpacity, opacity])
 

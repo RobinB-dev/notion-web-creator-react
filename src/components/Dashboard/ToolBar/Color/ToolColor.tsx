@@ -17,25 +17,25 @@ const ToolColor = ({ bloctype }: ToolColorProps) => {
             {((activeObj === "heading_1") || (bloctype === "general")) &&
                 <div className={styles.barBlockColorContainer}>
                     <h3>H1</h3>
-                    <ColorBar />
+                    <ColorBar type="heading_1" />
                 </div>
             }
             {((activeObj === "heading_2") || (bloctype === "general")) &&
                 <div className={styles.barBlockColorContainer}>
                     <h3>H2</h3>
-                    <ColorBar />
+                    <ColorBar type="heading_2" />
                 </div>
             }
             {((activeObj === "heading_3") || (bloctype === "general")) &&
                 <div className={styles.barBlockColorContainer}>
                     <h3>H3</h3>
-                    <ColorBar />
+                    <ColorBar type="heading_3" />
                 </div>
             }
             {((activeObj === "paragraph") || (bloctype === "general")) &&
                 <div className={styles.barBlockColorContainer}>
                     <h3>Paragraph</h3>
-                    <ColorBar />
+                    <ColorBar type="paragraph" />
                 </div>
             }
         </>

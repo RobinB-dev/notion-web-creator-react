@@ -14,11 +14,11 @@ type DataContextProps = {
   setActiveBlock?: any;
   styleStore: any;
   setStyleStore?: any;
-  fontFamily: string;
+  fontFamily: { select: string, h1: string; h2: string; h3: string; paragraph: string };
   setFontFamily?: any;
-  textColor: string;
+  textColor: { select: string, h1: string; h2: string; h3: string; paragraph: string };
   setTextColor?: any;
-  textOpacity: string;
+  textOpacity: { select: string, h1: string; h2: string; h3: string; paragraph: string };
   setTextOpacity?: any;
   theme: string;
   setTheme?: any;
@@ -35,13 +35,13 @@ const defaultState = {
   selectPageId: "",
   isLoading: { auth: true, projects: true, customize: true },
   activeBlock: pageObj,
-  fontFamily: '',
+  fontFamily: { select: "", h1: "", h2: "", h3: "", paragraph: "" },
   borderRadius: "",
-  textColor: "",
-  textOpacity: "",
+  textColor: { select: "", h1: "", h2: "", h3: "", paragraph: "" },
+  textOpacity: { select: "", h1: "", h2: "", h3: "", paragraph: "" },
   theme: "",
   overlayActive: false,
-  styleStore: [{ id: "dzeiuln", fontFamily: "red" }],
+  styleStore: [],
 };
 
 const DataContext = createContext<DataContextProps>(defaultState);

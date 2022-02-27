@@ -8,18 +8,18 @@ type BlockParagraphProps = {
     block: any
 }
 
-const BlockParagraph = (props: BlockParagraphProps) => {
+const BlockParagraph = ({ block }: BlockParagraphProps) => {
 
     const {
         fontFamily: paragraphFontFamily,
         textColor: paragraphTextColor,
         theme: paragraphTheme
-    } = useCustomStyle(props.block.id);
+    } = useCustomStyle(block.obj, block.id);
 
     const Theme1 = () => {
         return (
             <div className={styles.themeWrapper}>
-                <p className={styles.paragraphContain} style={{ fontFamily: paragraphFontFamily, color: `#${paragraphTextColor}` }}>{props.block.content}</p>
+                <p className={styles.paragraphContain} style={{ fontFamily: paragraphFontFamily, color: `#${paragraphTextColor}` }}>{block.content}</p>
             </div>
         );
     }
@@ -27,7 +27,7 @@ const BlockParagraph = (props: BlockParagraphProps) => {
     const Theme2 = () => {
         return (
             <div className={styles.themeWrapper} style={{ fontFamily: "Roboto Mono" }}>
-                <p className={styles.paragraphContain} style={{ fontFamily: paragraphFontFamily, color: `#${paragraphTextColor}` }}>{props.block.content}</p>
+                <p className={styles.paragraphContain} style={{ fontFamily: paragraphFontFamily, color: `#${paragraphTextColor}` }}>{block.content}</p>
             </div>
         );
     }
@@ -35,7 +35,7 @@ const BlockParagraph = (props: BlockParagraphProps) => {
     return (
         <>
             <div className={styles.blockParagraphContain}>
-                <DataBlock id={props.block.id} block={props.block}>
+                <DataBlock id={block.id} block={block}>
                     {paragraphTheme === "default" && Theme1()}
                     {paragraphTheme === "theme1" && Theme1()}
                     {paragraphTheme === "theme2" && Theme2()}

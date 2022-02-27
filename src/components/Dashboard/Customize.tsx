@@ -95,7 +95,7 @@ export const CustomizeMain = () => {
   // }, [dataCtx.theme])
   const {
     theme: pageTheme,
-  } = useCustomStyle("a0c1294e-page");
+  } = useCustomStyle("page", "a0c1294e-page");
 
   return (
     <div className={`${styles.notionPage} ${styles[pageTheme]}`}>
