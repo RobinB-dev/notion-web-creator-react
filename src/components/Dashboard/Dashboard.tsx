@@ -131,12 +131,17 @@ export const Tab = () => {
     }
   }
 
+  const onClick = () => {
+    console.log(dataCtx.styleStore);
+
+  }
+
   return (
     <>
       <section className={styles.main}>
         <div className={styles.mainChild}>
           <header>
-            <button>My cool site</button>
+            <button onClick={onClick}>My cool site</button>
             <p>Welcome back&nbsp;<ColorText>{authCtx.currentUser}</ColorText></p>
             <button onClick={handleRefresh}>
               <IconRefresh colorType={"fill"} />

@@ -15,6 +15,8 @@ import { testObj } from '../../decl';
 import useDataApi from '../../hooks/useDataApi';
 import ToolTheme from './ToolBar/Theme/ToolTheme';
 import useCustomStyle from '../../hooks/useCustomStyle';
+import { Slide } from './Slide';
+import LoadingIcon from '../Icons/LoadingIcon';
 
 const { Panel } = Collapse;
 
@@ -32,6 +34,7 @@ export const CustomizeMain = () => {
   const url = `${process.env.REACT_APP_BASE_URL_API}/notion_data?code=${"c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f"}`
   const { setIsLoading, setNotionData, notionData } = dataCtx;
   const [{ data, isLoading }, doFetch] = useDataApi(url, notionData,);
+  const [activeAnim, setActiveAnim] = useState(true)
 
   const DataPage = (o: object) => {
     if (testObj(o, "obj") === "page") {
@@ -87,12 +90,12 @@ export const CustomizeMain = () => {
     }
     apiIsLoading()
 
+    if (JSON.stringify(dataCtx.notionData) !== "{}") {
+      setActiveAnim(false)
+    }
   }, [isLoading, setIsLoading])
 
-  // useEffect(() => {
-  //   console.log(dataCtx.theme);
 
-  // }, [dataCtx.theme])
   const {
     theme: pageTheme,
   } = useCustomStyle("page", "a0c1294e-page");
@@ -100,8 +103,10 @@ export const CustomizeMain = () => {
   return (
     <div className={`${styles.notionPage} ${styles[pageTheme]}`}>
       {/* {isLoading && <>Is loading</>} */}
-      {!isStored && <>No data fetch :(</>}
-      {isStored && _notionData.map((block: NotionBlock) => CreateBlock(block))}
+      {/* <LoadingIcon /> */}
+      {/* {!isStored && <>No data fetch :(</>} */}
+      {!isStored && <LoadingIcon />}
+      {isStored && _notionData.map((block: NotionBlock, index: number) => CreateBlock(block, { index, activeAnim }))}
     </div>
   )
 };

@@ -4,6 +4,8 @@ import { Heading1, ColorText, Subtitle1 } from '../Blocks/Headings'
 import ProjectCard from "./ProjectCard";
 import DataContext from "../../contexts/DataContext";
 import useDataApi from "../../hooks/useDataApi";
+import { Slide } from "./Slide";
+import LoadingIcon from "../Icons/LoadingIcon";
 
 export const ProjectsMain = () => {
     const dataCtx = useContext(DataContext);
@@ -12,6 +14,7 @@ export const ProjectsMain = () => {
     const url = `${process.env.REACT_APP_BASE_URL_API}/workspace_info?code=5d4c18c3-8247-43d6-8c77-1f12411671bc`
     const [{ data, isLoading }, doFetch] = useDataApi(url, dataCtx.notionPages,);
     const { setIsLoading, setNotionPages, notionPages } = dataCtx;
+    const [activeAnim, setActiveAnim] = useState(true)
 
     useEffect(() => {
         if (reloadProjects) {
@@ -29,8 +32,6 @@ export const ProjectsMain = () => {
                     projects: false
                 }))
             } else {
-                console.log("data: ", data);
-
                 setNotionPages(data)
             }
         }
@@ -49,6 +50,12 @@ export const ProjectsMain = () => {
 
     }, [isLoading, setIsLoading])
 
+    useEffect(() => {
+        if (!dataCtx.isLoading.projects) {
+            setActiveAnim(false)
+        }
+    }, [dataCtx.isLoading.projects])
+
 
     return (
         <>
@@ -65,33 +72,37 @@ export const ProjectsMain = () => {
             <h3 className={styles.colorH3}>Select your project</h3>
             <div className={styles.cardsContainer}>
                 <div className={styles.overflowScroll}>
-                    {/* {isLoading &&
-                        <ProjectCard
-                            state={"loading"}
-                            title={"Is loading"}
-                            src={""}
-                            emoji={"🔄"}
-                            date={""} />
-                    } */}
                     {!isStored &&
-                        <ProjectCard
-                            id={"noData"}
-                            state={"empty"}
-                            title={"No data fetched"}
-                            src={""}
-                            emoji={"❌"}
-                            date={""} />
+                        <LoadingIcon />
+                        // <Slide isActive={false} direction={-1} axe={"x"} distance={50} index={0}>
+                        //     <ProjectCard
+                        //         id={"noData"}
+                        //         state={"empty"}
+                        //         title={"No data fetched"}
+                        //         src={""}
+                        //         emoji={"❌"}
+                        //         date={""} />
+                        // </Slide>
                     }
-                    {isStored && notionPages.map((block: any) =>
+                    {isStored && notionPages.map((block: any, i: number) =>
                         block.object === "page" &&
-                        <ProjectCard
-                            key={block.id}
-                            id={block.id}
-                            state={"ok"}
-                            title={block.title}
-                            src={block.cover}
-                            emoji={block.emoji}
-                            date={block.last_edited_time} />
+
+                        <Slide isActive={activeAnim}
+                            direction={-1}
+                            axe={"x"}
+                            distance={50}
+                            index={i}
+                            key={i}
+                        >
+                            <ProjectCard
+                                key={block.id}
+                                id={block.id}
+                                state={"ok"}
+                                title={block.title}
+                                src={block.cover}
+                                emoji={block.emoji}
+                                date={block.last_edited_time} />
+                        </Slide>
                     )}
                 </div>
             </div>

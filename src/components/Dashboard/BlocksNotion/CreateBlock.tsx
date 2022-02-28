@@ -6,6 +6,7 @@ import BlockImage from "./BlockImage";
 import BlockCallout from "./BlockCallout";
 import BlockParagraph from "./BlockParagraph";
 import { testObj } from "../../../decl";
+import { Slide } from "../Slide";
 
 // associate notion block with react component
 const CreateBlockLib = {
@@ -17,9 +18,16 @@ const CreateBlockLib = {
   paragraph: BlockParagraph,
 };
 
+type CreateBlockProps = {
+  block: NotionBlock,
+  anim?: { index: number, activeAnim: boolean }
+
+}
 
 
-export const CreateBlock = (block: NotionBlock) => {
+export const CreateBlock = (block: NotionBlock, anim: { index: number, activeAnim: boolean }) => {
+
+  // console.log(anim);
 
   // if type of block does not exist in CreateBlockLib
   if (typeof testObj(CreateBlockLib, block.obj) === "undefined") {
@@ -32,15 +40,24 @@ export const CreateBlock = (block: NotionBlock) => {
   // if block does not have childrens
   if (block.childrens?.length === 0) {
     // create a react element with the block
-    return React.createElement(testObj(CreateBlockLib, block.obj), {
-      key: block.id,
-      block: block
-    });
+    return (
+      <Slide isActive={anim.activeAnim} direction={-1} axe={"y"} distance={50} key={block.id} index={anim.index}>
+        {React.createElement(testObj(CreateBlockLib, block.obj), {
+          key: block.id,
+          block: block,
+          // childrens: block.childrens
+        })}
+      </Slide>
+    )
   } else {
-    return React.createElement(testObj(CreateBlockLib, block.obj), {
-      key: block.id,
-      block: block,
-      childrens: block.childrens
-    });
+    return (
+      <Slide isActive={anim.activeAnim} direction={-1} axe={"y"} distance={50} key={block.id} index={3}>
+        {React.createElement(testObj(CreateBlockLib, block.obj), {
+          key: block.id,
+          block: block,
+          childrens: block.childrens
+        })}
+      </Slide>
+    )
   }
 };

@@ -16,7 +16,7 @@ const BlockCallout = (props: BlockHeading1Props) => {
             <DataBlock id={props.block.id} block={props.block}>
                 <div className={styles.blockCallout}>
                     <div className={styles.emoji}>{props.block.emoji}</div>
-                    {props.block.childrens.map((block: NotionBlock) => CreateBlock(block))}
+                    {props.block.childrens.map((block: NotionBlock) => CreateBlock(block, { index: 0, activeAnim: false }))}
                 </div>
             </DataBlock>
         </>

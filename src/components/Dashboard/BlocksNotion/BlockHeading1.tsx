@@ -12,6 +12,7 @@ type BlockHeading1Props = {
 const BlockHeading1 = ({ block }: BlockHeading1Props) => {
     const dataCtx = useContext(DataContext);
 
+
     const {
         fontFamily: h1FontFamily,
         textColor: h1TextColor,
