@@ -39,55 +39,74 @@ const useCustomStyle = (blockObj: string, blockId: string) => {
             ["theme", dataCtx.theme]]
     }
 
+    const checkIfKeyExist = (obj: String[], key: string) => {
+        for (let i = 0; i < obj.length; i++) {
+            if (testObj(obj[i], key) !== undefined) {
+                return i
+            }
+        }
+        return false
+    }
+
     const updateType = (_type: string, _id: string, _blockObj: string) => {
+
         const elemType = testObj(TypeStyle, _type)
 
         for (let i = 0; i < elemType.length; i++) {
             const styleName = elemType[i][0];
             const styleCtx = elemType[i][1];
-            // console.log("elemStyle : ", elemStyle, _id);
 
-            // console.log(_blockObj, _type);
             // if the value is not in the context
             if (styleCtx !== "") {
-
                 let newStyle = { id: _id, [styleName]: styleCtx[_blockObj] };
                 // if a id doesnt exist in styleStore
 
-
-                let newPageStyle = { id: _id, [_blockObj]: { [styleName]: styleCtx[_blockObj] } };
+                // let newPageStyle = { id: _id, [_blockObj]: { [styleName]: styleCtx[_blockObj] } };
+                let newPageStyle = { id: _id };
                 let newPageStyle2 = { [styleName]: styleCtx[_blockObj] };
                 // handle style of the page
                 if (acitveBlockId === 'a0c1294e-page') {
-                    // store the style in the styleStore
-
-                    // console.log(styleCtx[_blockObj]);
 
                     // select only the good type of block
                     if (styleCtx[_blockObj]) {
 
+                        // store the style in the styleStore
                         if (obj === undefined) {
                             console.log("not stored");
                             dataCtx.setStyleStore([...dataCtx.styleStore, newPageStyle])
-                        } else {
+                        } else if (testObj(obj, _blockObj) === undefined) {
                             console.log("stored");
                             obj[_blockObj] = newPageStyle2
-                        }
+                        } else if (testObj(obj, _blockObj).length === undefined) {
+                            if (testObj(obj, _blockObj)[styleName] === undefined) {
+                                console.log("stored2_new");
+                                obj[_blockObj] = [obj[_blockObj], newPageStyle2]
+                            } else {
+                                console.log("stored2_reset");
+                                obj[_blockObj] = newPageStyle2
+                            }
+                        } else {
+                            console.log("stored_many");
 
-                        // console.log(styleCtx[_blockObj]);
+                            const isExisting = checkIfKeyExist(obj[_blockObj], styleName)
+                            if (isExisting === false) {
+                                console.log(isExisting, styleName);
+                                console.log("stored3_uptzde");
+                                obj[_blockObj] = [...obj[_blockObj], newPageStyle2]
+                            } else {
+                                console.log(isExisting, styleName);
+                                obj[_blockObj][isExisting] = newPageStyle2
+                            }
+                            console.log(testObj(obj, _blockObj), styleName);
+
+                        }
 
                         // update hook state from the styleStore
                         setCustomStyle((prevState) => ({
                             ...prevState,
                             [styleName]: styleCtx[_blockObj]
                         }))
-
                     }
-
-
-
-                    // update hook state from the styleStore
-
 
                 } else { // handle style of one block
 
@@ -105,8 +124,6 @@ const useCustomStyle = (blockObj: string, blockId: string) => {
                     }))
                 }
 
-                // console.log(blockId);
-                // console.log(_blockObj, _type);
                 // console.log(dataCtx);
 
                 // function detect style conflicts

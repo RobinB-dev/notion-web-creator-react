@@ -23,9 +23,9 @@ export const Slide = ({ children, isActive, direction = 1, axe = "y", distance =
                     {children}
                 </motion.div> :
                 <motion.div
-                    initial={{ opacity: 0.8, [axe]: direction * (distance * -0.03) }}
-                    animate={{ opacity: 1, [axe]: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
+                    initial={{ opacity: 0.99, scale: 0.99 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.05, duration: 0.3, type: "tween" }}
                 >
                     {children}
                 </motion.div>

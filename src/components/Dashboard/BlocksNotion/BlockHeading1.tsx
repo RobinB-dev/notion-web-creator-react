@@ -20,7 +20,7 @@ const BlockHeading1 = ({ block }: BlockHeading1Props) => {
     } = useCustomStyle(block.obj, block.id);
 
     useEffect(() => {
-    }, [dataCtx.fontFamily, dataCtx.textColor])
+    }, [dataCtx.fontFamily, dataCtx.textColor, dataCtx.theme])
 
     const Theme1 = () => {
         return (

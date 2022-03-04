@@ -6,15 +6,27 @@ import theme3 from '../../../../assets/images/theme3.svg'
 import DataContext from '../../../../contexts/DataContext';
 import { testObj } from '../../../../decl';
 
-const ThemeRadio = () => {
+type ThemeRadioProps = {
+    type: string
+}
+
+const ThemeRadio = ({ type }: ThemeRadioProps) => {
     const dataCtx = useContext(DataContext);
+    const activeObj = testObj(dataCtx.activeBlock, "obj")
     const acitveBlockId = testObj(dataCtx.activeBlock, "id")
     const [activeTheme, setActiveTheme] = useState("default")
     let obj = dataCtx.styleStore.find((o: { id: string; }) => o.id === acitveBlockId);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dataCtx.setTheme(e.target.value);
-        setActiveTheme(e.target.value)
+        const value = e.target.value
+        // dataCtx.setTheme(e.target.value);
+
+        if (activeObj === "page") {
+            dataCtx.setTheme({ [type]: value })
+        } else {
+            dataCtx.setTheme({ select: value })
+        }
+        setActiveTheme(value)
     }
 
     useEffect(() => {
@@ -22,8 +34,13 @@ const ThemeRadio = () => {
             setActiveTheme("default")
         } else {
             // setActiveTheme(testObj(obj, "theme"))
+            if (activeObj === "page") {
+                setActiveTheme(testObj(obj[type], "theme"))
+            } else {
+                setActiveTheme(testObj(obj, "theme"))
+            }
         }
-    }, [activeTheme, obj])
+    }, [activeTheme, obj, activeObj, type])
 
     return (
         <div className={styles.radioContainer}>

@@ -15,34 +15,38 @@ const ToolTheme = ({ bloctype }: ToolThemeProps) => {
 
     return (
         <>
-            {(bloctype === "general") &&
-                <div className={styles.barBlockThemeContainer}>
-                    <h3>Page</h3>
-                    <ThemeRadio />
-                </div>
-            }
-            {(activeObj === "heading_1") &&
+            <div className={styles.barBlockThemeContainer}>
+                <h3>Page</h3>
+                <ThemeRadio type={"general"} />
+            </div>
+            {((activeObj === "heading_1") || (bloctype === "general")) &&
                 <div className={styles.barBlockThemeContainer}>
                     <h3>H1</h3>
-                    <ThemeRadio />
+                    <ThemeRadio type={"heading_1"} />
                 </div>
             }
-            {(activeObj === "heading_2") &&
+            {((activeObj === "heading_2") || (bloctype === "general")) &&
                 <div className={styles.barBlockThemeContainer}>
                     <h3>H2</h3>
-                    <ThemeRadio />
+                    <ThemeRadio type={"heading_2"} />
                 </div>
             }
             {(activeObj === "heading_3") &&
                 <div className={styles.barBlockThemeContainer}>
                     <h3>H3</h3>
-                    <ThemeRadio />
+                    <ThemeRadio type={"heading_3"} />
                 </div>
             }
             {(activeObj === "paragraph") &&
                 <div className={styles.barBlockThemeContainer}>
                     <h3>Paragraph</h3>
-                    <ThemeRadio />
+                    <ThemeRadio type={"paragraph"} />
+                </div>
+            }
+            {(activeObj === "image") &&
+                <div className={styles.barBlockThemeContainer}>
+                    <h3>Image</h3>
+                    <ThemeRadio type={"image"} />
                 </div>
             }
         </>

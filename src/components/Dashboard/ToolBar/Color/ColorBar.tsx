@@ -30,7 +30,7 @@ const ColorBar = ({ type }: ColorBarProps) => {
         setBarColor(color)
 
         if (testObj(dataCtx.activeBlock, "obj") === "page") {
-            dataCtx.setTextColor({ [type]: [color] })
+            dataCtx.setTextColor({ [type]: color })
         } else {
             dataCtx.setTextColor({ select: color })
         }

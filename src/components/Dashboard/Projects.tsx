@@ -54,7 +54,8 @@ export const ProjectsMain = () => {
         if (!dataCtx.isLoading.projects) {
             setActiveAnim(false)
         }
-    }, [dataCtx.isLoading.projects])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading])
 
 
     return (

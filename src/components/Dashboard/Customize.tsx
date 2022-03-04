@@ -15,7 +15,7 @@ import { testObj } from '../../decl';
 import useDataApi from '../../hooks/useDataApi';
 import ToolTheme from './ToolBar/Theme/ToolTheme';
 import useCustomStyle from '../../hooks/useCustomStyle';
-import { Slide } from './Slide';
+// import { Slide } from './Slide';
 import LoadingIcon from '../Icons/LoadingIcon';
 
 const { Panel } = Collapse;
@@ -93,6 +93,7 @@ export const CustomizeMain = () => {
     if (JSON.stringify(dataCtx.notionData) !== "{}") {
       setActiveAnim(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, setIsLoading])
 
 

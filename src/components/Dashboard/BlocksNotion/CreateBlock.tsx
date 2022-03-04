@@ -18,12 +18,6 @@ const CreateBlockLib = {
   paragraph: BlockParagraph,
 };
 
-type CreateBlockProps = {
-  block: NotionBlock,
-  anim?: { index: number, activeAnim: boolean }
-
-}
-
 
 export const CreateBlock = (block: NotionBlock, anim: { index: number, activeAnim: boolean }) => {
 

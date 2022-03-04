@@ -8,7 +8,7 @@ type DataContextProps = {
   setNotionPages?: any;
   selectPageId: string;
   setSelectPageId?: any;
-  isLoading: any;
+  isLoading: { api: boolean, auth: boolean, projects: boolean, customize: boolean },
   setIsLoading?: any;
   activeBlock: object;
   setActiveBlock?: any;
@@ -20,7 +20,7 @@ type DataContextProps = {
   setTextColor?: any;
   textOpacity: { select: string, h1: string; h2: string; h3: string; paragraph: string };
   setTextOpacity?: any;
-  theme: string;
+  theme: { select: string, page: string, h1: string, h2: string, h3: string, paragraph: string };
   setTheme?: any;
   borderRadius: string;
   setBorderRadius?: any;
@@ -33,13 +33,13 @@ const defaultState = {
   notionData: {},
   notionPages: [],
   selectPageId: "",
-  isLoading: { auth: true, projects: true, customize: true },
+  isLoading: { api: false, auth: true, projects: true, customize: true },
   activeBlock: pageObj,
   fontFamily: { select: "", h1: "", h2: "", h3: "", paragraph: "" },
   borderRadius: "",
   textColor: { select: "", h1: "", h2: "", h3: "", paragraph: "" },
   textOpacity: { select: "", h1: "", h2: "", h3: "", paragraph: "" },
-  theme: "",
+  theme: { select: "", page: "", h1: "", h2: "", h3: "", paragraph: "" },
   overlayActive: false,
   styleStore: [],
 };
