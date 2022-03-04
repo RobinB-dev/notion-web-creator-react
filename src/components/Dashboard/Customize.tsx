@@ -9,28 +9,32 @@ import { menuToolBar } from '../../decl';
 import { NotionBlock } from "../../decl/notionPage.decl";
 import { Collapse } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
-import classes from './Dashboard.module.css'
+import styles from './Dashboard.module.css'
 import 'antd/lib/collapse/style/index.css'
 import { testObj } from '../../decl';
 import useDataApi from '../../hooks/useDataApi';
+import ToolTheme from './ToolBar/Theme/ToolTheme';
+import useCustomStyle from '../../hooks/useCustomStyle';
+// import { Slide } from './Slide';
+import LoadingIcon from '../Icons/LoadingIcon';
 
 const { Panel } = Collapse;
 
-const textDrop = `
-A dog is a type of domesticated animal.
-Known for its loyalty and faithfulness,
-it can be found as a welcome guest in many households across the world.
-`;
+// const textDrop = `
+// A dog is a type of domesticated animal.
+// Known for its loyalty and faithfulness,
+// it can be found as a welcome guest in many households across the world.
+// `;
 
 
 export const CustomizeMain = () => {
   const dataCtx = useContext(DataContext);
   const [isStored, setIsStored] = useState(false);
   const reloadCustomize = dataCtx.isLoading.customize
-  const url = `${process.env.REACT_APP_BASE_URL}/notion_data?code=${"c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f"}`
+  const url = `${process.env.REACT_APP_BASE_URL_API}/notion_data?code=${"c7cc8faa-366c-4c3d-a77d-1a18ed0cac5f"}`
   const { setIsLoading, setNotionData, notionData } = dataCtx;
   const [{ data, isLoading }, doFetch] = useDataApi(url, notionData,);
-
+  const [activeAnim, setActiveAnim] = useState(true)
 
   const DataPage = (o: object) => {
     if (testObj(o, "obj") === "page") {
@@ -45,7 +49,7 @@ export const CustomizeMain = () => {
 
 
   useEffect(() => {
-    // console.log(`fetch : ${process.env.REACT_APP_BASE_URL}/notion_data?code=${dataCtx.selectPageId}`);
+    // console.log(`fetch : ${process.env.REACT_APP_BASE_URL_API}/notion_data?code=${dataCtx.selectPageId}`);
     if (reloadCustomize) {
       doFetch(url)
     }
@@ -86,13 +90,24 @@ export const CustomizeMain = () => {
     }
     apiIsLoading()
 
+    if (JSON.stringify(dataCtx.notionData) !== "{}") {
+      setActiveAnim(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, setIsLoading])
 
+
+  const {
+    theme: pageTheme,
+  } = useCustomStyle("page", "a0c1294e-page");
+
   return (
-    <div className={classes.notionPage}>
+    <div className={`${styles.notionPage} ${styles[pageTheme]}`}>
       {/* {isLoading && <>Is loading</>} */}
-      {!isStored && <>No data fetch :(</>}
-      {isStored && _notionData.map((block: NotionBlock) => CreateBlock(block))}
+      {/* <LoadingIcon /> */}
+      {/* {!isStored && <>No data fetch :(</>} */}
+      {!isStored && <LoadingIcon />}
+      {isStored && _notionData.map((block: NotionBlock, index: number) => CreateBlock(block, { index, activeAnim }))}
     </div>
   )
 };
@@ -121,34 +136,34 @@ export const CustomizeToolBar = () => {
 
   return (
     <>
-      <h2 className={classes.colorH2}>Customization</h2>
-      <div className={classes.divider}></div>
+      <h2 className={styles.colorH2}>Customization</h2>
+      <div className={styles.divider}></div>
       <p>You can edit the looks of your page here ! <br></br>Click on a category to open it, change the values and see how your page will look in real time !</p>
       <p>{BlockType}</p>
 
       {dataCtx.notionData &&
-        <div className={classes.collapseContainer}>
+        <div className={styles.collapseContainer}>
           <Collapse
             bordered={true}
             defaultActiveKey={['1', '2']}
             expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? -90 : 90} />}
-            className={classes.myCollapse}
+            className={styles.myCollapse}
           >
-            <Panel header="Theme" key="1" className={classes.collapsePanel}>
-              <p>{textDrop}</p>
+            <Panel header="Theme" key="1" className={styles.collapsePanel}>
+              <ToolTheme bloctype={BlockType} />
             </Panel>
             {checkType(BlockType, ["text", "general"]) &&
-              <Panel header="Text" key="2" className={classes.collapsePanel}>
+              <Panel header="Text" key="2" className={styles.collapsePanel}>
                 <ToolText bloctype={BlockType} />
               </Panel>
             }
             {checkType(BlockType, ["text", "block", "general"]) &&
-              <Panel header="Colors" key="3" className={classes.collapsePanel}>
+              <Panel header="Colors" key="3" className={styles.collapsePanel}>
                 <ToolColor bloctype={BlockType} />
               </Panel>
             }
             {checkType(BlockType, ["image", "block", "general"]) &&
-              <Panel header="Block" key="4" className={classes.collapsePanel}>
+              <Panel header="Block" key="4" className={styles.collapsePanel}>
                 <ToolBlock bloctype={BlockType} />
               </Panel>
             }

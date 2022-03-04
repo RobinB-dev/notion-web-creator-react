@@ -1,8 +1,14 @@
+.themeWrapper {
+  display: flex;
+  width: 100%;
+}
+
+
 .heading1Contain {
   margin-bottom: 1.3rem;
 }
 .heading1 {
-  font-size: 5rem;
+  font-size: 5em;
   color: var(--accentColor1);
   font-weight: 500;
 }
@@ -12,9 +18,26 @@
 }
 
 .heading2 {
-  font-size: 3rem;
+  font-size: 3em;
   color: var(--textColor1);
   font-weight: 500;
+}
+
+.heading1line, .heading2line {
+  /* width: 100%; */
+  flex-grow: 1;
+  margin-top: auto;
+  border-bottom: 0.1rem dashed black;
+  margin-bottom: 0.2rem;
+  margin-left: 1rem;
+}
+
+.heading1line {
+  border-color: var(--accentColor1);
+}
+
+.heading2line {
+  border-color: var(--textColor1);
 }
 
 .blockImageContain {
@@ -28,12 +51,22 @@
   object-fit: cover;
 }
 
+.imageDotsFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 0.1rem dashed var(--textColor1);
+}
+
 .blockParagraphContain {
   margin-bottom: 1rem;
 }
 
 .paragraphContain {
-  font-size: 1rem;
+  font-size: 1em;
   color: var(--textColor1);
   font-weight: 400;
 }
@@ -72,7 +105,7 @@
 }
 
 .blockCallout .emoji {
-  font-size: 5rem;
+  font-size: 5em;
 }
 
 .wrapper {

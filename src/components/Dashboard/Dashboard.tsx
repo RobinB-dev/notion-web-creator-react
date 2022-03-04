@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 import { Outlet, NavLink, useNavigate, useParams, Link, useLocation, matchPath } from "react-router-dom"
-import classes from './Dashboard.module.css'
+import styles from './Dashboard.module.css'
 import { IconFolder, IconCustom, IconUpload, IconLogout, IconRefresh } from '../Icons/Icons'
 import { ProjectsMain, ProjectsToolBar } from './Projects'
 import { CustomizeMain, CustomizeToolBar } from './Customize'
@@ -14,7 +14,7 @@ import AuthContext from '../../contexts/AuthContext'
 
 import 'antd/lib/message/style/index.css'
 import { ColorText } from "../Blocks/Headings"
-import Overlay from "./ToolBar/Overlay"
+import { Overlay, InfoModal } from "./Overlay/Overlay"
 
 export const Dashboard = () => {
   const [error, setError] = useState("")
@@ -26,6 +26,7 @@ export const Dashboard = () => {
   // const defaultPath = "dashboard"
   // let params = useParams();
 
+  // this function is called when the user clicks on the logo
   async function handleLogout() {
     try {
       dataCtx.setIsLoading((prevState: any) => ({
@@ -60,14 +61,16 @@ export const Dashboard = () => {
   //   navigate("projects")
   // }
 
+
   return (
-    <div className={classes.dashboard}>
+    <div className={styles.dashboard}>
+      <InfoModal />
       {dataCtx.overlayActive && <Overlay />}
       <section>
         {error && <div className="alert-danger">{error}</div>}
-        <nav className={classes.tabs}>
+        <nav className={styles.tabs}>
           <Link to="/">
-            <img src={logo_app} className={classes.logoApp} alt="Logo Selfer" />
+            <img src={logo_app} className={styles.logoApp} alt="Logo Selfer" />
           </Link>
           <ul>
             <li>
@@ -128,28 +131,33 @@ export const Tab = () => {
     }
   }
 
+  const onClick = () => {
+    console.log(dataCtx.styleStore);
+
+  }
+
   return (
     <>
-      <section className={classes.main}>
-        <div className={classes.mainChild}>
+      <section className={styles.main}>
+        <div className={styles.mainChild}>
           <header>
-            <button>My cool site</button>
+            <button onClick={onClick}>My cool site</button>
             <p>Welcome back&nbsp;<ColorText>{authCtx.currentUser}</ColorText></p>
             <button onClick={handleRefresh}>
               <IconRefresh colorType={"fill"} />
               {dataCtx.isLoading.api ? <span>Is loading</span> : <span>Refresh</span>}
             </button>
           </header>
-          <div className={classes.content}>
+          <div className={styles.content}>
             {tabType === "projects" && <ProjectsMain />}
             {tabType === "customize" && <CustomizeMain />}
             {tabType === "upload" && <UploadMain />}
           </div>
         </div>
       </section>
-      <section className={classes.toolbar}>
-        <ResizePanel direction="w" handleClass={classes.customHandle}>
-          <div className={classes.resizeContent}>
+      <section className={styles.toolbar}>
+        <ResizePanel direction="w" handleClass={styles.customHandle}>
+          <div className={styles.resizeContent}>
             {tabType === "projects" && <ProjectsToolBar />}
             {tabType === "customize" && <CustomizeToolBar />}
             {tabType === "upload" && <UploadToolBar />}

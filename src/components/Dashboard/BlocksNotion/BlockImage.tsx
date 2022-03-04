@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import DataContext from '../../../contexts/DataContext';
 import useCustomStyle from '../../../hooks/useCustomStyle';
-import classes from './BlocksNotion.module.css'
+import styles from './BlocksNotion.module.css'
 import DataBlock from './DataBlock';
 
 type BlockHeading1Props = {
@@ -9,24 +9,43 @@ type BlockHeading1Props = {
     block: any
 }
 
-const BlockImage = (props: BlockHeading1Props) => {
+const BlockImage = ({ block }: BlockHeading1Props) => {
     const dataCtx = useContext(DataContext);
 
     const {
         borderRadius: imageBorderRadius,
-    } = useCustomStyle(props.block.id);
-
+        theme: imageTheme,
+    } = useCustomStyle(block.obj, block.id);
 
     useEffect(() => {
-    }, [dataCtx.borderRadius])
+    }, [dataCtx.theme])
 
+
+    const Theme1 = () => {
+        return (
+            <div className={styles.themeWrapper}>
+                <img className={styles.blockImage} src={block.content} alt="" style={{ borderRadius: imageBorderRadius }} />
+            </div>
+        );
+    }
+
+    const Theme2 = () => {
+        return (
+            <div className={styles.themeWrapper} style={{ fontFamily: "Roboto Mono" }}>
+                <img className={styles.blockImage} src={block.content} alt="" style={{ borderRadius: imageBorderRadius }} />
+                <div className={styles.imageDotsFrame}></div>
+            </div>
+        );
+    }
 
 
     return (
         <>
-            <div className={classes.blockImageContain}>
-                <DataBlock id={props.block.id} block={props.block}>
-                    <img className={classes.blockImage} src={props.block.content} alt="" style={{ borderRadius: imageBorderRadius }} />
+            <div className={styles.blockImageContain}>
+                <DataBlock id={block.id} block={block}>
+                    {imageTheme === "default" && Theme1()}
+                    {imageTheme === "theme1" && Theme1()}
+                    {imageTheme === "theme2" && Theme2()}
                 </DataBlock>
             </div>
         </>

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import PrivateRoute from "../PrivateRoute"
 import { Dashboard, Tab } from '../Dashboard/Dashboard'
 import Homepage from '../Homepage/Homepage'
-import classes from './App.module.css'
+import styles from './App.module.css'
 
 import '../../styles/reset.css';
 import 'antd/dist/antd.css';
@@ -16,7 +16,7 @@ import '../../styles/style.css';
 
 const App = () => {
   return (
-    <div className={classes.App}>
+    <div className={styles.App}>
       <Router>
         <AuthProvider>
           <DataProvider>

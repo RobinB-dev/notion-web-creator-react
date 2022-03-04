@@ -213,6 +213,7 @@
   position: absolute;
   /* top: 0; */
   /* bottom: 0; */
+  min-height: calc(var(--image-size));
   left: 0;
   right: 0;
   overflow-x: scroll;
@@ -338,14 +339,36 @@
 /********** CUSTOMIZE **********/
 
 .notionPage {
+  font-family: Roboto;
   width: 100%;
   min-height: 100vh;
   padding: 3rem;
+  /* font-size: 16px; */
+  font-size: clamp(11px, 1.6vmin, 2vmax);
   background: var(--backgroundColor2);
 }
 
 .notionPage img {
   width: 100%;
+}
+
+.notionPage.theme2 {
+  position: relative;
+  /* font-size: clamp(11px, 1.4vmin, 2vmax); */
+  background-image: linear-gradient(transparent, transparent 0.9px, rgb(255, 255, 255) 0.9px, rgb(255, 255, 255) 5px), linear-gradient(to right, rgb(200, 195, 199), rgb(200, 195, 199) 0.9px, rgb(255, 255, 255) 0.9px, rgb(255, 255, 255) 5px);
+  background-position: 37px 43px;
+  background-size: 10px 10px;
+}
+
+.notionPage.theme2::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-image: url("../../assets/images/dotCell.svg"); */
+  opacity: 0.5;
 }
 
 .collapseContainer {
@@ -398,138 +421,42 @@
   color: var(--accentColor1) !important;
 }
 
-/********** SELECT **********/
-
-.selectFont {
-  width: 20vmin;
-}
-
-.ant-select-selector {
-  border-radius: 1vmin;
-}
-
-
-
-.barBlockTypeContainer:not(:first-child){
-  margin-top: 2vmin;
-  border-top: 0.1vmin solid var(--colorBorder);
-}
-
-.barBlockColorContainer:not(:first-child){
-  margin-top: 2vmin;
-  border-top: 0.1vmin solid var(--colorBorder);
-}
-
-.barBlockColorContainer > div {
-  position: absolute;
-  margin-top: 1vmin;
-  padding: 1vmin;
-  margin-right: 0;
-  transform: scale(0.6);
-  transform-origin: top left;
-  z-index: 100;
-  border-radius: 5px;
-  background: var(--backgroundColor2);
-  border: 2px solid #d9d9d9;
-
-}
-
-.barBlockColorContainer > div > div:first-child {
-  border-radius: 5px 5px 0 0;
-}
-.barBlockColorContainer > div > div:last-child {
-  border-radius: 0 0 5px 5px;
-}
-
-.colorButton {
-  max-height: 100%;
-  max-width: 4vmin;
-  position: relative;
-  display: flex;
-  flex-grow: 1;
-  width: 20px;
-  background: none;
-  cursor: pointer;
-  border: 1px solid #d9d9d9;
-  transition: border 0.3s;
-}
-
-
-.colorButton:hover {
-  transition: border 0.3s;
-  border: 1px solid #40a9ff;
-  border-right-width: 1px !important;
-  z-index: 1;
-}
-
-
-.colorButton > div {
-  /* content: ''; */
-  position: absolute;
-  top: 0.5vmin;
-  right: 0.5vmin;
-  bottom: 0.5vmin;
-  left: 0.5vmin;
-  /* background: coral; */
-  border-radius: 0.4vmin;
-  pointer-events: none;
-  will-change: transform;
-  transition: transform 0.2s;
-}
-
-.colorButton:hover > div {
-  transition: transform 0.2s;
-  transform: scale(1.05);
-}
-
-.colorInput {
-  position: relative;
-  width: 30%;
-}
-
-.colorInput::before {
-  content: attr(data-prefix);
-  position: absolute;
-  top: 50%;
-  left: 0.4rem;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  opacity: 50%;
-  z-index: 1;
-}
-
-.colorInput::after {
-  content: attr(data-suggest);
-  position: absolute;
-  /* top: calc(50% + 0.1rem); */
-  top: 50%;
-  /* padding-left: 1rem; */
-  /* background: crimson; */
-  /* width: 50%; */
-  left: 1.1rem;
-  /* left: 0.1rem; */
-  transform: translateY(calc(-50% + 0.1rem));
-  font-size: 1rem;
-  opacity: 50%;
-}
-
-.colorInput input{
-  /* position: absolute;
-  top: 50%;
-  transform: translateY(-50%); */
-  font-size: 1rem;
-  padding-left: 1rem;
-  width: 100%;
-  height: 100%;
-  border: 0.1rem solid var(--colorBorder);
-}
-
-.overlay {
+.loadingContainer {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  z-index: 99;
-  /* background: #00000015; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.relative {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.loadingBackground {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  
+}
+
+.loadingBackground div{
+  background: var(--accentColor1);
+  width: 6vmin;
+  height: 6vmin;
+  
+}
+
+.loadingIcon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 1vmin;
+  width: 6vmin !important;
+  height: 6vmin;
+  z-index: 199;
 }

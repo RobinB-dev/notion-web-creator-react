@@ -21,6 +21,7 @@ const ProjectCard = (props: ProjectCardProps) => {
         (props.src !== "") && setImage(props.src);
     }, [props.src])
 
+
     const onClick = () => {
         dataCtx.setSelectPageId(props.id);
     }
