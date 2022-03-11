@@ -42,14 +42,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = () => {
     setIsLogged(true)
     // console.log(isLogged);
-    navigate("/dashboard/projects") // may posibliy be deleted
+    navigate("/projects") // may posibliy be deleted
     return;
   }
 
   const logout = () => {
     setIsLogged(false)
     localStorage.clear();
-    navigate("/")
+    navigate("/home")
     return;
   }
 

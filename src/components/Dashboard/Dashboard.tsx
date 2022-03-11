@@ -34,7 +34,7 @@ export const Dashboard = () => {
         auth: true
       }))
       await logout()
-      navigate("/")
+      navigate("/home")
     } catch {
       setError("Failed to log out")
     }
@@ -46,7 +46,7 @@ export const Dashboard = () => {
 
   // redirect to cutomize for the time of developement
   useEffect(() => {
-    navigate("/dashboard/customize")
+    navigate("/customize")
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -64,7 +64,7 @@ export const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      <InfoModal />
+      <InfoModal emoji={"🚧"}>Work in progress.</InfoModal>
       {dataCtx.overlayActive && <Overlay />}
       <section>
         {error && <div className="alert-danger">{error}</div>}

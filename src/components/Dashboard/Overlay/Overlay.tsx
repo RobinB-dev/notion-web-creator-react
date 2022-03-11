@@ -16,7 +16,12 @@ export const Overlay = () => {
     );
 };
 
-export const InfoModal = () => {
+type InfoModalProps = {
+    emoji: string,
+    children: React.ReactNode
+}
+
+export const InfoModal = ({ emoji = "ℹ️", children }: InfoModalProps) => {
     const [isDisabled, setIsDisabled] = useState(false);
     localStorage.clear();
 
@@ -40,10 +45,13 @@ export const InfoModal = () => {
                 <div className={styles.overlayModal}
                     onClick={onClick}>
                     <div className={styles.modal}>
-                        <span>🚧</span>Work in progress.<span>🚧</span>
+                        <span>{emoji}</span>
+                        <div className={styles.modalContent}>{children}</div>
+                        <span>{emoji}</span>
                     </div>
                 </div>
             }
         </>
     );
 };
+

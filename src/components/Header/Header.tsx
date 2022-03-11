@@ -14,7 +14,7 @@ const Header = () => {
 
     try {
       await logout()
-      navigate("/")
+      navigate("/home")
     } catch {
       setError("Failed to log out")
     }

@@ -27,12 +27,16 @@ import imageCaption3 from "../../assets/images/imageCaptionImg3.png"
 import imageTesti1 from "../../assets/images/testiImg.png"
 import imageTesti2 from "../../assets/images/testiImg2.png"
 import imageTesti3 from "../../assets/images/testiImg3.png"
+import { InfoModal } from "../Dashboard/Overlay/Overlay"
 
 const Homepage = () => {
+  console.log(`redirect to ${process.env.REACT_APP_BASE_URL_SITE}`);
+
 
   return (
     <>
       <Header />
+      <InfoModal emoji={"🔗"}>Go to <a href='https://www.selfer.fr'>selfer.fr</a></InfoModal>
       <div className={styles.bodyContainer}>
         <section>
           <div className={styles.megaContainer}>
