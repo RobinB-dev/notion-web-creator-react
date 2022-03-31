@@ -1,8 +1,8 @@
 .relative {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* .tooltip::before {
@@ -16,25 +16,25 @@
     z-index: -1;
 } */
 .tooltip {
-    position: absolute;
-    right: -1rem;
-    font-size: 1rem;
-    top: 50%;
-    padding: 0.3rem 1rem;
-    transform: translate(100%, -50%);
-    background: var(--backgroundIconHover);
-    background: var(--backgroundColor2);
-    border-radius: 5px;
-    color: black;
-    box-shadow: 0 0 0.5vmin var(--backgroundIconHover),
-                0 0 0.9vmin var(--backgroundIconHover);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    z-index: 10;
+  position: absolute;
+  right: -1rem;
+  font-size: 1rem;
+  top: 50%;
+  padding: 0.3rem 1rem;
+  transform: translate(100%, -50%);
+  background: var(--backgroundIconHover);
+  background: var(--backgroundColor2);
+  border-radius: 5px;
+  color: black;
+  box-shadow: 0 0 0.5vmin var(--backgroundIconHover),
+    0 0 0.9vmin var(--backgroundIconHover);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
 }
 
 .relative:hover .tooltip {
-    opacity: 1;
-    transition: opacity 0.2s 0.6s ease;
+  opacity: 1;
+  transition: opacity 0.2s 0.6s ease;
 }

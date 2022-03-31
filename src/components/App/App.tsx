@@ -21,12 +21,12 @@ const App = () => {
         <AuthProvider>
           <DataProvider>
             <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path='/dashboard' element={<PrivateRoute />}>
-                <Route path='/dashboard' element={<Dashboard />}>
+              <Route path='/' element={<PrivateRoute />}>
+                <Route path='/' element={<Dashboard />}>
                   <Route path=':tabType' element={<Tab />} />
                 </Route>
               </Route>
+              <Route path="/home" element={<Homepage />} />
             </Routes>
           </DataProvider>
         </AuthProvider>

@@ -9,6 +9,11 @@
 
 .overlayModal {
     background: #00000015;
+    margin: 0 auto;
+}
+
+.overlayModal a:hover{
+    text-decoration: underline;
 }
 
 .modal {
