@@ -69,7 +69,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     } else {
       console.log("no front token ");
     }
-
     if (localStorage.getItem("frontToken")) {
       setLoading(false);
       login();
