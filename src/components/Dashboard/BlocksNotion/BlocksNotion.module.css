@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-
 .heading1Contain {
   margin-bottom: 1.3rem;
 }
@@ -23,7 +22,8 @@
   font-weight: 500;
 }
 
-.heading1line, .heading2line {
+.heading1line,
+.heading2line {
   /* width: 100%; */
   flex-grow: 1;
   margin-top: auto;
@@ -105,7 +105,7 @@
 }
 
 .blockCallout .emoji {
-  font-size: 5em;
+  font-size: 3em;
 }
 
 .wrapper {
@@ -135,4 +135,3 @@
   /* border-radius: 0.4rem; */
   box-shadow: 0 0 1vmin rgba(var(--accentColor1RGB), 0.6);
 }
-
